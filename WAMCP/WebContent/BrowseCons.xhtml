@@ -1,0 +1,194 @@
+<!--
+   Copyright 2013 Bibliotheca Alexandrina
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:c="http://java.sun.com/jstl/core">
+
+THIS PAGE USES FACELETS AND ALL THAT IS OUTSIDE COMPOSITION >>>> WILL BE
+IGNORED
+
+<ui:composition template="templates/layout.xhtml">
+	<ui:param name="reqBBean" value="#{uiActionListener}" />
+	<ui:define name="content">
+
+		<!--<ice:outputStyle href="/xmlhttp/css/rime/rime.css"/>-->
+
+		<div class="area">
+
+		<div class="inner-upper-part">
+			<img src="images/Inner-UpperLeft.png" align="left"/>
+            <img src="images/Inner-UpperRight.png" align="right"/>
+		</div>
+		<div class="content" style="min-height: 450px;">
+		<h3 class="Search-Results">Browsing manuscript descriptions</h3>
+		<div style="margin: 2px 0pt 10px 35px; line-height: 20px;" class="areaText">
+		Last modified here doesn't refer to local modification done while the manuscript is Locked, but rather to the modifications the are made to the SVN version upon Unlocking the manuscript. <br/>
+		
+		<span style="font-family:georgia;font-size:12px;padding-left:10px">
+		<em>Hint: 'Click any manuscript to open it in its stage of development'</em></span><br/>
+		
+		<!-- ************ FACETS ********************** -->
+<ui:include src="templates/wamcp/solrfacets.xhtml" />
+<!-- ************ END FACETS ********************** -->
+		
+		
+		
+		<!-- ************* local Sort *********************** -->
+		<br/><span style="color:#CB6E1E"><b>Sort this page on: </b></span><br/>
+		<ui:repeat value="#{browseConsBBean.columnsList}" var="colName">
+		<div style="display: inline;">
+		
+		<!-- If the data is sorted on this column --> 
+		<ice:panelGroup style="display: inline " rendered="#{browseConsBBean.localSortColumnName == colName}">
+		
+		<!-- Sorting is ascending: displays and arrow up -->
+		<ice:commandLink actionListener="#{browseConsBBean.toggleLocalAscending}"  style="background:url(images/Asc-order.png) no-repeat right 50%; padding-right:10px; display: inline;color:#333;font-size:12px;font-weight:bold" rendered="#{browseConsBBean.localSortAscending}" value="#{colName}"/>
+		
+		
+		<!-- Sorting is descending: dispalys and arrow down -->
+		<ice:commandLink actionListener="#{browseConsBBean.toggleLocalAscending}"  style="background:url(images/Desc-order.png) no-repeat right 50%; padding-right:10px; display: inline;color:#333;font-size:12px;font-weight:bold" rendered="#{!browseConsBBean.localSortAscending}" value="#{colName}" />
+		<span style="color:#45719D">|</span>
+		</ice:panelGroup>
+		<!--  End if data is sorted -->
+		
+		<!-- If the data is NOT sorted on this column -->
+		<ice:panelGroup style="display: inline" rendered="#{browseConsBBean.localSortColumnName != colName}" >
+			<ice:commandLink actionListener="#{browseConsBBean.localSortOnColumn}" value="#{colName}">
+				<f:attribute name="PARAM_COLNAME" value="#{colName}" />
+			</ice:commandLink>
+			<span style="color:#45719D">|</span>
+		</ice:panelGroup>
+		<!-- End If the data is NOT sorted on this column -->
+		</div>
+		</ui:repeat> 
+		<!-- ************ local Sort ******************** -->
+		
+		
+		</div>
+		
+		<div style="margin-left: 35px;">
+		
+		<ui:include src="templates/wamcp/pagingSummary.xhtml" />
+    	
+    	<!--  The reults repeater -->
+    	<!-- 25 -->
+	    	<ice:panelSeries id="resultsSeries" var="msDesc" value="#{browseConsBBean.msDescs}">
+			
+					<table style="margin: 5px 20px">
+						<tr>
+							<td valign="top">
+								<div class="file-name" style="margin-bottom: 2px; margin-left: 0px;">
+									<ice:commandLink style="font-weight:bold;font-family:Georgia;color:#CB6E1E" value="#{msDesc.name}" actionListener="#{uiActionListener.openFile}">
+										<f:attribute name="PARAM_MSDESC_FILENAME" value="#{msDesc.name}" />
+										<f:attribute name="PARAM_OPEN_STEP" value="#{msDesc.workflowStage}" />
+									</ice:commandLink>
+								</div>
+							</td>
+							<td valign="top" align="right">
+								<ice:outputText styleClass="locked" rendered="#{msDesc.lockHolder != null}" value="Locked by #{msDesc.lockHolder}" />
+								<ice:outputText styleClass="unlocked" rendered="#{msDesc.lockHolder == null}" value="Not locked" />
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2" class="file-info">
+							<ice:outputText styleClass="showAllText" value="Stage of Development:" />
+								<b><ice:outputText styleClass="showAllText" value="#{msDesc.workflowStage}," /></b>
+								<em><ice:outputText styleClass="showAllText" value="Revision:#{msDesc.revision}," /></em>
+								<ice:outputText styleClass="showAllText" value="Last Modified By #{msDesc.lastModifiedBy}" />
+								<ice:outputText styleClass="showAllText" style="font-size:11px!important" value="'#{msDesc.lastModifiedDate}'" />
+							</td>
+						</tr>
+						<tr>
+							<td rowspan="2" valign="top" width="30%" style="padding-top:5px">
+								<center>
+									<ice:commandLink actionListener="#{uiActionListener.openFile}">
+										<f:attribute name="PARAM_MSDESC_FILENAME" value="#{msDesc.name}" />
+										<f:attribute name="PARAM_OPEN_STEP" value="#{msDesc.workflowStage}" />
+										<ice:graphicImage url="#{msDesc.thumb.imageUrlStr}" style="width:150px;" />
+										<div class="active-title">
+											<ice:outputText value="#{msDesc.thumb.caption}" />
+										</div>
+										<div class="active-title">
+											<ice:commandLink actionListener="#{uiActionListener.openFileReadOnly}">
+												<f:attribute name="PARAM_MSDESC_FILENAME" value="#{msDesc.name}" />
+												<f:attribute name="PARAM_OPEN_STEP" value="#{msDesc.workflowStage}" />
+												<ice:outputText value="Read Only" />
+											</ice:commandLink>
+										</div>
+										<div class="request" style="margin-top:5px">
+											<ice:panelGroup rendered="#{!msDesc.isDeleteRequested}">
+												<ice:commandLink renderedOnUserRole="ROLE_DELETER" actionListener="#{uiActionListener.requestDelete}" value="Request Delete">
+													<f:attribute name="PARAM_MSDESC_FILENAME" value="#{msDesc.name}" />
+												</ice:commandLink><br/>
+											</ice:panelGroup>
+											<ice:panelGroup rendered="#{msDesc.isDeleteRequested}">
+												<ice:commandLink renderedOnUserRole="ROLE_DELETER,ROLE_ADMIN" actionListener="#{uiActionListener.unrequestDelete}" value="Cancel Request">
+													<f:attribute name="PARAM_MSDESC_FILENAME" value="#{msDesc.name}" />
+												</ice:commandLink><br/>
+												<ice:commandLink renderedOnUserRole="ROLE_ADMIN" actionListener="#{uiActionListener.delete}" value="Do Delete">
+													<f:attribute name="PARAM_MSDESC_FILENAME" value="#{msDesc.name}" />
+												</ice:commandLink>
+											</ice:panelGroup>
+										</div>
+									</ice:commandLink>
+								</center>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2" valign="top" align="left">
+<!--  TODO align instead of inline display.. the problem is that panelGrid sees the ui:repeat as one child, ui:repeat doesnot report the status correctly, and c:forEach is not rendered at all  -->	
+									<table cellpadding="2" cellspacing="0" style="font-family:arial;font-size:12px">
+										<ui:repeat value="#{msDesc.summaryKeys}" var="sKey" varStatus="sKeyStat">
+										<tr>
+											<td align="right">
+												<b><ice:outputText value="#{sKey}"/>:</b>
+											</td>
+											<td>
+												<ice:outputText style="font-family:OldArabic;" value="#{msDesc.summaryValues[sKey]}"/>
+											</td>
+										</tr>
+										</ui:repeat>
+									</table>	
+							</td>
+						</tr>
+					</table>
+					<hr style="background:url(images/separator.jpg) repeat-x;margin:10px 20px"/>
+				
+			</ice:panelSeries> 
+		<!-- end results -->
+		
+		
+		<!--****************************************-->
+		<ui:include src="templates/wamcp/pagingLinks.xhtml" />
+		</div>
+		</div>
+		<div class="inner-lower-part">
+			<img src="images/Inner-LowerLeft.png" align="left"/>
+            <img src="images/Inner-LowerRight.png" align="right"/>
+		</div>
+		</div>
+
+
+
+	</ui:define>
+</ui:composition>
+</html>

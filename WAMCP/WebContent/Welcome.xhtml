@@ -1,0 +1,67 @@
+<!--
+   Copyright 2013 Bibliotheca Alexandrina
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+	
+	THIS PAGE USES FACELETS AND ALL THAT IS OUTSIDE COMPOSITION 
+	 >>>> WILL BE IGNORED 
+	
+<ui:composition template="templates/layout.xhtml">
+<ui:define name="content">
+
+                <div class="area">
+                	<div class="inner-upper-part">
+						<img src="images/Inner-UpperLeft.png" align="left"/>
+                		<img src="images/Inner-UpperRight.png" align="right"/>
+					</div>
+                    <div class="content" style="min-height:330px;">
+                        <h3 class="welcome">Welcome, 
+<!--                        <span style="color:#cb6e1e">USER</span>-->
+							<ice:outputText style="color:#cb6e1e" value=' #{sessionBBean.userName} '/>
+                        </h3>
+                        <div style="margin-bottom:10px; font-size: small;" class="areaText">
+                        	Select what you want to do, and always keep an eye for messages that appear above for instructions<br/>
+                        	For account management tasks such as changing your password, go to: 
+                       		 &nbsp;<a href="AccountMgmt.iface">Account Management</a>
+                        </div>
+                        <div style="margin-bottom:5px;font-size:small" class="areaText"><b>You can do the following using this application:</b></div>
+                        <ul class="home-list">
+                        <ice:panelGroup renderedOnUserRole="ROLE_CREATOR">
+                        	<li><a href="New_SelectAlbum.iface">Create or import a manuscript description.</a></li>
+                        </ice:panelGroup>
+                        <ice:panelGroup renderedOnUserRole="ROLE_READER">
+                        	<li><a href="BrowseCons.iface">Browse manuscript descriptions.</a></li>
+                        	</ice:panelGroup>
+                            <li><a href="GalleryExplorer.iface">Explore manuscripts in image storage.</a></li>
+                        </ul>
+                        <br/>
+                    </div>
+					<div class="inner-lower-part">
+						<img src="images/Inner-LowerLeft.png" align="left"/>
+                		<img src="images/Inner-LowerRight.png" align="right"/>
+					</div>
+                </div>                
+
+
+</ui:define>
+</ui:composition>
+</html>

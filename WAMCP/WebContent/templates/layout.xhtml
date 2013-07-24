@@ -1,0 +1,180 @@
+<!--
+   Copyright 2013 Bibliotheca Alexandrina
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+<head>
+
+<meta http-equiv="X-UA-Compatible" content="IE=7" />
+
+<title><ui:insert name="title">Wellcome Arabic Manuscripts Cataloging Project</ui:insert></title>
+<ice:outputStyle href="Application.css" />
+<ice:outputStyle href="css-icefaces/rime/rime_datatable.css" />
+<ice:outputStyle href="css-icefaces/xp/xp_tabs.css" />
+
+<ice:outputStyle href="font/OldArabicFamily.css" />
+
+
+
+<script type="text/javascript"
+	src="JS/VirtKB/vk_popup.js?vk_skin=flat_gray"></script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+
+<f:view id="WAMCPView">
+	<ice:form id="WAMCPForm">
+
+		<div class="header">
+			<div>
+				<div style="float:left">
+					<img src="images/logo-large.jpg" /> 
+				</div>
+				<div style="float: right; margin-right: 20px; margin-top: 30px;">
+					<div style="float: left;">
+						<ice:inputText id="searchCriteria" onfocus="; PopupVirtualKeyboard.attachInput(this); " actionListener="#{uiActionListener.search}" styleClass="search" style="font-family:OldArabic; padding:0 0 0 5px;border:none" value="#{searchBBean.criteria}" />
+					</div>
+					<div style="float: left">
+						<ice:commandLink id="searchGo" actionListener="#{uiActionListener.search}" >
+							<img src="images/Search-button.png" border="0" />
+						</ice:commandLink>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="clear"></div>
+			</div>
+	
+			<div class="main-menu">
+				<ui:insert name="menu" />
+					<ul class="home-sk">
+						<li>
+							<ice:commandLink styleClass="home" value="Home"  actionListener="#{uiActionListener.goHome}" />
+						</li>
+						<li><!-- style="width:125px">--> 
+							<ice:commandLink styleClass="SK" onclick="; PopupVirtualKeyboard.toggle('WAMCPForm:searchCriteria','pnlVirtKB');" value="VKB" />
+						</li>
+						<!-- style="position:relative;width=60px"  -->
+						<li>
+							<!-- replace help button with img hyperlink
+							<ice:commandLink styleClass="help" actionListener="#{uiActionListener.help}" value="Help" />
+							-->
+							<a href="images/WAMCP_Cataloguing_Tool_Manual.pdf" target="_blank" class="help">
+							 Help
+								</a>
+							
+						</li>
+						<li class="logoutBtn">
+							<ice:commandLink styleClass="log-out" actionListener="#{uiActionListener.logout}" value="Log Out" />
+						</li>
+					</ul>
+	
+					<!--<span style="float: right"><img src="images/main-menu-right.jpg" /></span>-->
+			</div>
+			
+			<div class="clear" />
+		</div>
+
+		<div class="wrapper">
+		
+		<!--	Fix the position of the messages				-->
+<div id="pnlMessagesParent_UNIQUE_ID" style="display:none;">
+<ice:panelPopup modal="false" draggable="true" clientOnly="true" 
+			autoPosition="300,35" styleClass="toolbar" rendered="#{!empty reqBBean}" visible="#{!reqBBean.headerMsgIsEmpty}">
+						
+						
+			<f:facet name="body">
+				
+				<ice:panelGrid style="padding: 0px; background-color: transparent;">
+				
+				<table cellpadding="0" cellspacing="0">
+                     
+                      <tr>
+                      	<td height="9" align="left" valign="top">
+                        	<img src="images/c1.png" width="8" height="9" align="bottom" />
+                       	</td>
+                        <td valign="bottom"><div class="Side-01"></div></td>
+                        <td  height="9">
+                        	<img src="images/c2.png" width="15" height="9" align="bottom"/></td>
+                      </tr>
+                      
+                      <tr>
+                        <td class="Side-04"><div></div></td>
+                        <td class="Side-Menu-down">
+                        
+                        	<ice:outputText escape="false"
+							styleClass="#{reqBBean.headerMsgStyle}"
+							value="#{reqBBean.headerMsgText}" />
+							<div style="margin-left:15px; padding-bottom: 5px; display: inline;">
+							<a href="javascript:void;" style="color: #CB6E1E!important; text-decoration: none!important;" onclick="document.getElementById('pnlMessagesParent_UNIQUE_ID').style.display='none';" >x</a>
+							</div>
+							<div style="float:clear;"/>
+							
+                        </td>
+                        <td class="Side-02"></td>
+                      </tr>
+                      
+                      <tr>
+                        <td valign="top" align="right" height="7">
+                        	<img src="images/c4.png" align="top" width="8" height="7" />
+                       	</td>
+                        <td height="7" class="Side-03" valign="top"></td>
+                        <td height="7" valign="top" align="left">
+                        	<img src="images/c3.png" align="top" width="15" height="7" />
+                       	</td>
+                      </tr>
+                      
+                    </table>
+				</ice:panelGrid>
+			</f:facet>
+		</ice:panelPopup>
+
+</div>
+<!--					<div class="text-description"-->
+<!--						style="display: block; height: 16px; padding-top: 10px"><c:if-->
+<!--						test="#{!empty reqBBean}">-->
+<!--						-->
+<!--						<ice:outputText escape="false"-->
+<!--							styleClass="#{reqBBean.headerMsgStyle}"-->
+<!--							value="#{reqBBean.headerMsgText}" />-->
+<!--					</c:if></div>-->
+<!-- Done Position of Messages			-->
+			
+			<div class="main-content">
+				<div class="upper-part">
+					<img src="images/Outer-UpperLeft-part.png" align="left"/>
+					<img src="images/Outer-UpperRight-part.png" align="right"/>
+				</div>
+				<div class="main-content-BG">
+					<ui:insert name="content" />
+				</div>
+				<div class="lower-part">
+					<img src="images/Outer-LowerLeft-part.png" align="left"/>
+					<img src="images/Outer-LowerRight-part.png" align="right"/>
+				</div>
+			</div>
+		</div>
+
+	</ice:form>
+</f:view>
+</body>
+</html>

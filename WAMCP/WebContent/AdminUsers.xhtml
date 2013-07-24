@@ -1,0 +1,177 @@
+<!--
+   Copyright 2013 Bibliotheca Alexandrina
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+	
+	THIS PAGE USES FACELETS AND ALL THAT IS OUTSIDE COMPOSITION 
+	 >>>> WILL BE IGNORED 
+	
+<ui:composition template="templates/layout.xhtml">
+<ui:define name="content">
+<!--<ice:outputStyle href="/xmlhttp/css/rime/rime.css"/>-->
+
+<div class="area">
+	<div class="inner-upper-part">
+		<img src="images/Inner-UpperLeft.png" align="left"/>
+		<img src="images/Inner-UpperRight.png" align="right"/>
+	</div>
+                    
+    <div class="content" style="min-height:450px;padding-bottom:1px">
+    	<h3 class="all-users">All Users View<span style="color: rgb(213, 161, 25);"/></h3>
+		<div class="areaText" style="margin-bottom: 5px;">Create/Delete users and change privileges from this page.</div>
+		<div class="areaText">'<em>hint:</em>To change a users password he/she must do it from his account'</div>
+
+		<!-- ************************************  -->
+
+		<div style="margin: 10px 35px;" class="subtitle">Existing Users</div>
+		
+		<center>
+    		
+	   		<ice:dataTable style="width:90%" value="#{usersAdminBBean.users}" var="user">
+			    
+			    <ice:column>
+			        <f:facet name="header">
+			            <ice:outputText value="Username" styleClass="showAllTitle"/>
+			        </f:facet>
+			        <ice:outputText  styleClass="showAllText" value="#{user.username}"/>
+				</ice:column>
+		
+				<ice:column>
+			        <f:facet name="header">
+			            <ice:outputText value="Enabled" styleClass="showAllTitle"/>
+			        </f:facet>
+			        
+			        <center>
+			        	<ice:selectBooleanCheckbox styleClass="showAllText" value="#{user.enabled}"/>
+			        </center>
+				</ice:column>
+		
+				<ice:column>
+					<f:facet name="header">
+						<ice:outputText value="Privileges" styleClass="showAllTitle"/>
+					</f:facet>
+					
+					<span style="font-family:arial;font-size:small">
+<!--					converter="#{usersAdminBBean.rolesConterver}" -->
+						<ice:selectManyCheckbox layout="pageDirection" value="#{user.roles}">
+			        		<f:selectItems value="#{usersAdminBBean.rolesItems}"/>
+				     	</ice:selectManyCheckbox>
+			     	</span>
+			     	
+				</ice:column>    
+	
+				<ice:column>
+					<f:facet name="header">
+						<ice:outputText value="Delete" styleClass="showAllTitle"/>
+					</f:facet>
+					
+					<center>
+						<ice:selectBooleanCheckbox styleClass="showAllText dt-check-box" value="#{user.markedForDeletion}"/>
+					</center>
+				</ice:column>    
+	
+				<ice:column>
+					<f:facet name="header">
+						<ice:outputText value="Reset Password" styleClass="showAllTitle"/>
+					</f:facet>
+					
+			      	<center>
+						<ice:commandLink value="Reset Password" onclick="; if(!confirm('Reset password for user: #{user.username}?')) return false;" actionListener="#{usersAdminBBean.resetPassword}">
+							<f:attribute name="PARAM_USERNAME" value="#{user.username}"/>
+						</ice:commandLink>
+					</center>
+				</ice:column>		   
+	
+	    </ice:dataTable>
+    
+	</center>
+	
+	<div style="display:block;">
+		<div style="float:right; padding-bottom:10px; margin-right:35px" class="btnLink">
+			<ice:commandLink value="Save" actionListener="#{usersAdminBBean.save}"/>
+		</div>
+	
+		<div style="float:right; padding-bottom:10px" class="btnLink">
+			<ice:commandLink value="Refresh" actionListener="#{usersAdminBBean.refresh}"/>
+		</div>
+		
+		<div style="clear:both;"/>
+	</div>
+
+	<div style="margin: 10px 35px;" class="subtitle">Add New User</div>
+	
+	<table style="margin-left: 26px; font-family: Arial,Helvetica,sans-serif; font-size: small;">
+		<tbody>
+			<tr>
+             	<td align="right" width="80">
+                	<b>Username:</b>                          
+               	</td>
+                
+                <td colspan="3"> 
+                	<ice:inputText styleClass="xsaTextField" value="#{usersAdminBBean.userNew.username}"/>
+				</td>
+			</tr>
+			<tr>
+				<td align="right" height="29">
+					<b>Enabled:</b>                      
+				</td>
+                         
+                <td colspan="3">
+ 					<ice:selectBooleanCheckbox styleClass="showAllText" value="#{usersAdminBBean.userNew.enabled}"/>                         	
+				</td>
+			</tr>
+			<tr>
+				<td align="right" height="28">
+					<b>Privileges:</b>                       
+				</td>
+                         
+				<td>
+<!--				converter="#{usersAdminBBean.rolesConterver}"-->
+					<ice:selectManyCheckbox layout="pageDirection"  value="#{usersAdminBBean.userNew.roles}">
+       					<f:selectItems value="#{usersAdminBBean.rolesItems}"/>
+					</ice:selectManyCheckbox>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+   
+	<ice:messages/>
+		<div style="display:block;">
+			<div style="float:right; padding-bottom:10px; margin-right:35px;" class="btnLink">
+				<ice:commandLink value="Add" style="width:110px" actionListener="#{usersAdminBBean.addUser}"/>
+			</div>
+			<div style="clear:both;"/>
+		</div>   
+
+	</div>               
+
+	<div class="inner-lower-part">
+	    <img src="images/Inner-LowerLeft.png" align="left"/>
+	    <img src="images/Inner-LowerRight.png" align="right"/>
+    </div>
+</div>                
+
+
+
+</ui:define>
+</ui:composition>
+</html>

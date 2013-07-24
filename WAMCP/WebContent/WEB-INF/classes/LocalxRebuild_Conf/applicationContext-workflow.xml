@@ -1,0 +1,391 @@
+<!--
+   Copyright 2013 Bibliotheca Alexandrina
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns:sec="http://www.springframework.org/schema/security"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.2.xsd
+						http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+						http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd
+						http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+						http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+
+
+	<bean id="aclSecurityUtil" class="org.bibalex.workflow.SpringSecurityAclUtils"
+		p:mutableAclService-ref="aclService" />
+
+	<!--  ************* Workflow via method security ********* -->
+
+	<bean id="aclLookupStrategy"
+		class="org.springframework.security.acls.jdbc.BasicLookupStrategy">
+		<constructor-arg ref="wamcpAppDataSource" />
+		<constructor-arg ref="aclCache" />
+		<constructor-arg ref="aclAuthorizationStrategy" />
+		<constructor-arg>
+			<bean class="org.springframework.security.acls.domain.ConsoleAuditLogger" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="aclCache"
+		class="org.springframework.security.acls.jdbc.EhCacheBasedAclCache">
+		<constructor-arg>
+			<bean class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+				<property name="cacheManager">
+					<bean class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" />
+				</property>
+				<property name="cacheName" value="aclCache" />
+			</bean>
+		</constructor-arg>
+	</bean>
+
+	<!--
+		TODONOT use enum contsants from the WAMCPRoles enum instead of ROLE_ADMIN
+	-->
+	<bean id="aclAuthorizationStrategy"
+		class="org.springframework.security.acls.domain.AclAuthorizationStrategyImpl">
+		<constructor-arg>
+			<list>
+				<!--				 Authority needed to change ownership -->
+				<bean class="org.springframework.security.GrantedAuthorityImpl">
+					<constructor-arg value="ROLE_AUTHENTICATED" />
+				</bean>
+				<!--				 Authority needed to modify auditing details -->
+				<bean class="org.springframework.security.GrantedAuthorityImpl">
+					<constructor-arg value="ROLE_AUTHENTICATED" />
+				</bean>
+				<!--				 Authority needed to modify other ACL and ACE details -->
+				<bean class="org.springframework.security.GrantedAuthorityImpl">
+					<constructor-arg value="ROLE_AUTHENTICATED" />
+				</bean>
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean id="aclService"
+		class="org.springframework.security.acls.jdbc.JdbcMutableAclService">
+		<constructor-arg ref="wamcpAppDataSource" />
+		<constructor-arg ref="aclLookupStrategy" />
+		<constructor-arg ref="aclCache" />
+		<property name="classIdentityQuery" value=" SELECT LAST_INSERT_ID() " />
+		<property name="sidIdentityQuery" value=" SELECT LAST_INSERT_ID() " />
+	</bean>
+
+
+
+	<!--
+		Decision manager uses two voter types: one is role-based, another is
+		ACL-based
+	-->
+	<bean id="wfaclDecisionManager" class="org.springframework.security.vote.UnanimousBased">
+		<property name="allowIfAllAbstainDecisions" value="false" />
+		<property name="decisionVoters">
+			<list>
+				<bean id="roleVoter" class="org.springframework.security.vote.RoleVoter" />
+				<ref local="wfaclCREATEVoter" />
+				<ref local="wfaclEDITVoter" />
+				<ref local="wfaclREVIEW1Voter" />
+				<ref local="wfaclREVIEW2Voter" />
+				<ref local="wfaclDELETEVoter" />
+<!--				<ref local="wfaclREJECTVoter" />-->
+			</list>
+		</property>
+	</bean>
+
+
+	<!--
+		An access decision voter that reads WFACL_CREATE configuration
+		settings
+	-->
+	<bean id="wfaclCREATEVoter" class="org.springframework.security.vote.AclEntryVoter">
+		<constructor-arg ref="aclService" />
+		<constructor-arg value="WFACL_CREATE" />
+		<constructor-arg>
+			<list>
+				<util:constant
+					static-field="org.bibalex.workflow.storage.WFSVNClientPermission.WFACL_CREATE" />
+			</list>
+		</constructor-arg>
+		<property name="processDomainObjectClass" value="org.bibalex.workflow.storage.SVNFileCreationProtectionArtifact"/>
+	</bean>
+
+	<!--
+		An access decision voter that reads WFACL_EDIT configuration settings
+	-->
+	<bean id="wfaclEDITVoter" class="org.springframework.security.vote.AclEntryVoter">
+		<constructor-arg ref="aclService" />
+		<constructor-arg value="WFACL_EDIT" />
+		<constructor-arg>
+			<list>
+				<util:constant
+					static-field="org.bibalex.workflow.storage.WFSVNClientPermission.WFACL_EDIT" />
+			</list>
+		</constructor-arg>
+		<property name="processDomainObjectClass" value="org.bibalex.workflow.IWFArtifact"/>
+	</bean>
+
+	<!--
+		An access decision voter that reads WFACL_REVIEW1configuration
+		settings
+	-->
+	<bean id="wfaclREVIEW1Voter" class="org.springframework.security.vote.AclEntryVoter">
+		<constructor-arg ref="aclService" />
+		<constructor-arg value="WFACL_REVIEW1" />
+		<constructor-arg>
+			<list>
+				<util:constant
+					static-field="org.bibalex.workflow.storage.WFSVNClientPermission.WFACL_REVIEW1" />
+			</list>
+		</constructor-arg>
+		<property name="processDomainObjectClass" value="org.bibalex.workflow.IWFArtifact"/>
+	</bean>
+	<!--
+		An access decision voter that reads WFACL_REVIEW2configuration
+		settings
+	-->
+	<bean id="wfaclREVIEW2Voter" class="org.springframework.security.vote.AclEntryVoter">
+		<constructor-arg ref="aclService" />
+		<constructor-arg value="WFACL_REVIEW2" />
+		<constructor-arg>
+			<list>
+				<util:constant
+					static-field="org.bibalex.workflow.storage.WFSVNClientPermission.WFACL_REVIEW2" />
+			</list>
+		</constructor-arg>
+		<property name="processDomainObjectClass" value="org.bibalex.workflow.IWFArtifact"/>
+	</bean>
+
+	<!--
+		An access decision voter that reads WFACL_DELETE configuration
+		settings
+	-->
+	<bean id="wfaclDELETEVoter" class="org.springframework.security.vote.AclEntryVoter">
+		<constructor-arg ref="aclService" />
+		<constructor-arg value="WFACL_DELETE" />
+		<constructor-arg>
+			<list>
+				<util:constant
+					static-field="org.bibalex.workflow.storage.WFSVNClientPermission.WFACL_DELETE" />
+			</list>
+		</constructor-arg>
+		<property name="processDomainObjectClass" value="org.bibalex.workflow.IWFArtifact"/>
+	</bean>
+
+	<!--
+		****** Workflow Definition ******
+	-->
+	<bean id="wfStepCREATE" class="org.bibalex.workflow.WFInitiationStep"
+		lazy-init="true">
+
+		<property name="creationProtectionClass"
+			value="org.bibalex.workflow.storage.SVNFileCreationProtectionArtifact" />
+
+		<property name="stepPermission">
+			<util:constant
+				static-field="org.bibalex.workflow.storage.WFSVNClientPermission.WFACL_CREATE" />
+		</property>
+		<property name="stepRole" value="ROLE_CREATOR" />
+
+		<property name="nextStepMap">
+			<map>
+				<entry key="PROCEED" value="EDIT" />
+			</map>
+
+		</property>
+<!--  DON'T DO IT! -->	
+<!--		<sec:intercept-methods-->
+<!--			access-decision-manager-ref="wfaclDecisionManager">-->
+<!--			<sec:protect-->
+<!--				method="complete"-->
+<!--				access="ROLE_CREATOR,WFACL_CREATE" />-->
+<!--		</sec:intercept-methods>-->
+	</bean>
+
+	<bean id="wfStepEDIT" class="org.bibalex.workflow.WFStep"
+		lazy-init="true">
+		<property name="stepPermission">
+			<util:constant
+				static-field="org.bibalex.workflow.storage.WFSVNClientPermission.WFACL_EDIT" />
+		</property>
+		<property name="stepRole" value="ROLE_EDITOR" />
+
+		<property name="nextStepMap">
+			<map>
+				<entry key="PROCEED" value="REVIEW1" />
+			</map>
+		</property>
+	
+		<sec:intercept-methods
+			access-decision-manager-ref="wfaclDecisionManager">
+			<sec:protect
+				method="complete"
+				access="ROLE_EDITOR,WFACL_EDIT" />
+		</sec:intercept-methods>
+	</bean>
+	
+	<bean id="wfStepREVIEW1" class="org.bibalex.workflow.WFStep"
+		lazy-init="true">
+		<property name="stepPermission">
+			<util:constant
+				static-field="org.bibalex.workflow.storage.WFSVNClientPermission.WFACL_REVIEW1" />
+		</property>
+		<property name="stepRole" value="ROLE_REVIEWER1" />
+
+		<property name="nextStepMap">
+			<map>
+				<entry key="ACCEPT" value="REVIEW2" />
+				<entry key="REJECT" value="EDIT" />
+			</map>
+		</property>
+		<sec:intercept-methods
+			access-decision-manager-ref="wfaclDecisionManager">
+			<sec:protect
+				method="complete"
+				access="ROLE_REVIEWER1,WFACL_REVIEW1" /> <!--  Should we have a separate permissin for Releasing (Publishing)? WFACL_RELEASE" /> -->
+		</sec:intercept-methods>
+	</bean>
+	<bean id="wfStepREVIEW2" class="org.bibalex.workflow.WFStep"
+		lazy-init="true">
+		<property name="stepPermission">
+			<util:constant
+				static-field="org.bibalex.workflow.storage.WFSVNClientPermission.WFACL_REVIEW2" />
+		</property>
+		<property name="stepRole" value="ROLE_REVIEWER2" />
+
+		<property name="nextStepMap">
+			<map>
+				<entry key="ACCEPT" value="DONE" />
+				<entry key="REJECT" value="EDIT" />
+			</map>
+		</property>
+		<sec:intercept-methods
+			access-decision-manager-ref="wfaclDecisionManager">
+			<sec:protect
+				method="complete"
+				access="ROLE_REVIEWER2,WFACL_REVIEW2" /> <!--  Should we have a separate permissin for Releasing (Publishing)? WFACL_RELEASE" /> -->
+		</sec:intercept-methods>
+	</bean>
+
+	<bean id="wfStepDONE" class="org.bibalex.workflow.WFTerminationStep"
+		lazy-init="true">
+		<property name="nextStepMap">
+			<map>
+				<entry key="REOPEN" value="EDIT" />
+			</map>
+		</property>
+	</bean>
+
+
+
+	<!--  ********  WFProcessObject *******  -->
+	<bean id="wamcpWFProcess" class="org.bibalex.workflow.WFProcess"
+		lazy-init="true">
+		<constructor-arg ref="aclService" /> <!--  <property name="aclSvc" ref="aclService"/> -->
+		<constructor-arg ref="wamcpAppDataSource" /> <!-- <property name="datasource" ref="wamcpAppDataSource" /> -->
+		<constructor-arg ref="aclSecurityUtil" />
+		<property name="steps">
+			<map>
+				<entry key="INIT" value-ref="wfStepCREATE" />
+				<entry key="EDIT" value-ref="wfStepEDIT" />
+				<entry key="REVIEW1" value-ref="wfStepREVIEW1" />
+				<entry key="REVIEW2" value-ref="wfStepREVIEW2" />
+				<entry key="DONE" value-ref="wfStepDONE" />
+			</map>
+		</property>
+	</bean>
+
+	<!-- ****************** enforcing the workflow ***************** -->
+
+	<!--  This didn't work.. neither the annotations or the pointcuts :D -->
+	<!-- LOOOOOOOOOOOOOL -->	
+	<!--	<sec:global-method-security-->
+	<!--		secured-annotations="enabled"-->
+	<!--		access-decision-manager-ref="wfaclDecisionManager" >-->
+<!---->
+	<!--		<sec:protect-pointcut -->
+	<!--			access="ROLE_CREATOR, WFACL_CREATE" -->
+	<!--
+		expression="execution(*
+		org.bibalex.wamcp.application.WAMCPStorage.add(..))"/>
+	-->
+	<!--	</sec:global-method-security>-->
+
+	<bean class="org.bibalex.workflow.storage.WFSVNClient" id="wfsvnClient"
+		scope="session" lazy-init="true">
+		
+		<aop:scoped-proxy proxy-target-class="false"/>
+	
+		<property name="URL_SVN_ROOT"  
+			value="http://${IP_SVN_Server}:${Port}/WellcomeTrust/WAMCPStorage/" />
+		<property name="svnUsername" value="${username}" />
+		<property name="svnPassword" value="${password}" />
+		
+		<property name="wfProcess" ref="wamcpWFProcess" />
+		
+		
+		<sec:intercept-methods
+			access-decision-manager-ref="wfaclDecisionManager">
+			<sec:protect
+				method="svn*"
+				access="ROLE_READER"/>
+			<sec:protect
+				method="add"
+				access="ROLE_CREATOR,WFACL_CREATE" />
+			<sec:protect
+				method="openWrite"
+				access="ROLE_WRITER" />
+				
+			<!-- openWrite can be done in other stages than edit
+				,WFACL_EDIT" />  -->
+				
+			<sec:protect
+				method="openRead"
+				access="ROLE_READER" />
+			<sec:protect
+				method="svnCommit"
+				access="ROLE_WRITER" />
+				<!-- commit can be done in other stages than edit
+				,WFACL_EDIT" />  -->
+			<sec:protect
+				method="svnRevert"
+				access="ROLE_READER" />
+			<!--revert can be done in other stages than edit
+				,WFACL_EDIT" />  -->
+				
+<!--			<sec:protect-->
+<!--				method="permitDelete"-->
+<!--				access="ROLE_ADMIN" />-->
+			<sec:protect
+				method="delete"
+				access="ROLE_ADMIN,WFACL_DELETE" />
+			<sec:protect
+				method="requestDelete"
+				access="ROLE_DELETER" />
+			<sec:protect
+				method="unrequestDelete"
+				access="ROLE_DELETER" />
+		</sec:intercept-methods>
+		
+<!--		<property name="proxiedThis" ref="wfsvnClient" />-->
+		
+	</bean>
+
+
+</beans>

@@ -1,0 +1,102 @@
+<!--
+   Copyright 2013 Bibliotheca Alexandrina
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+	
+	THIS PAGE USES FACELETS AND ALL THAT IS OUTSIDE COMPOSITION 
+	 >>>> WILL BE IGNORED 
+	
+<ui:composition template="templates/layout.xhtml">
+	<ui:param name="reqBBean" value="#{accountMgmtBBean}"/>
+<ui:define name="content">
+	<div class="area">
+    	<div class="inner-upper-part">
+			<img src="images/Inner-UpperLeft.png" align="left"/>
+            <img src="images/Inner-UpperRight.png" align="right"/>
+		</div>
+        
+        <div class="content" style="min-height:330px;">
+        	<h3 class="New-file">Change Password<span style="color: rgb(213, 161, 25);"/></h3>
+                 <table style="margin-left: 45px; font-family: Arial,Helvetica,sans-serif; font-size: 14px;">
+                 	<tbody>
+                 		<tr>
+                     		<td>
+                         		Old Password:
+                         	</td>
+                        	<td>
+                         		<ice:inputSecret styleClass="xsaTextField" id="inOldPwd" value="#{accountMgmtBBean.oldPwd}" binding="#{accountMgmtBBean.compOldPwd}"  actionListener="#{accountMgmtBBean.changePassword}"/>
+                         		<ice:message id="msgOldPwd" for="inOldPwd"/>
+                        	</td>
+                     	</tr>
+                     	
+                     	<tr><td colspan="2"></td></tr>
+                     
+                        <tr>
+	                     	<td>
+	                         	New Password:
+	                        </td>
+	                        <td>
+	                         	<ice:inputSecret styleClass="xsaTextField" id="inNewPwd" value="#{accountMgmtBBean.newPwd}" binding="#{accountMgmtBBean.compNewPwd}" actionListener="#{accountMgmtBBean.changePassword}"/>
+	                         	<ice:message id="msgNewPwd" for="inNewPwd"/>
+	                        </td>
+                     	</tr>
+                     
+                     	<tr><td colspan="2"></td></tr>
+                     
+                        <tr>
+	                     	<td>
+	                         	Confirm Password:
+	                        </td>
+                         	<td>
+                         		<ice:inputSecret styleClass="xsaTextField" id="inNewPwdConf" value="#{accountMgmtBBean.newPwdConfirm}" binding="#{accountMgmtBBean.compNewPwdConfirm}" actionListener="#{accountMgmtBBean.changePassword}"/>
+                         		<ice:message id="msgNewPwdConf" for="inNewPwdConf"/>
+                        	</td>
+                     	</tr>
+                     	
+                     	<tr><td colspan="2"></td></tr>
+                     	
+                     	<tr>
+                     		<td height="40"></td>
+                     		<td align="left" style="padding-left:50px">
+                     		
+                     			<div class="btnLink">
+									<ice:commandLink id="cmdCancel" value="Cancel" actionListener="#{uiActionListener.goHome}"/>
+								</div>
+								
+								<div class="btnLink">
+                         			<ice:commandLink value="Apply" actionListener="#{accountMgmtBBean.changePassword}"/>
+								</div>
+								
+                         	</td>
+                 		</tr>
+                    </tbody>
+              	 </table>
+                 
+                 </div>
+                    <div class="inner-lower-part">
+						<img src="images/Inner-LowerLeft.png" align="left"/>
+                		<img src="images/Inner-LowerRight.png" align="right"/>
+					</div>
+                 </div>
+</ui:define>
+</ui:composition>
+</html>

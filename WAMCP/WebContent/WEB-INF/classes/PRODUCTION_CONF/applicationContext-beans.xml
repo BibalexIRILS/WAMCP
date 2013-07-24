@@ -1,0 +1,221 @@
+<!--
+   Copyright 2013 Bibliotheca Alexandrina
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns:sec="http://www.springframework.org/schema/security"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.2.xsd
+						http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+						http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd
+						http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+						http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+
+
+	<!-- *********************************** -->
+	<!--	Application Beans -->
+	<bean class="org.bibalex.sdxe.binding.SDXEMediatorBean" id="sdxeMediatorBean"
+		scope="session" >
+		<property name="configMinOccEnf" value="false" />
+		<property name="configMaxOccEnf" value="false" />
+		<property name="configTwoPhaseCommit" value="false" />
+	</bean>
+
+
+
+	<bean class="org.bibalex.wamcp.application.WAMCPSessionBackingBean"
+		id="sessionBBean" scope="session" lazy-init="true">
+		<property name="wfProcess" ref="wamcpWFProcess" />
+		<!--
+			This causes an unresolvable circular dependency: <property
+			name="searchBBean" ref="searchBBean" />
+		-->
+	</bean>
+
+
+	<bean class="org.bibalex.wamcp.pagebeans.UsersAdminBBean" id="usersAdminBBean"
+		scope="request">
+		
+<!--	CGLib didn't like this.. <aop:scoped-proxy/>-->
+		<property name="dataSource" ref="wamcpAppDataSource" />
+		<property name="passwordEncoder" ref="passwordEncoder" />
+		<property name="saltSource" ref="saltSource" />
+	</bean>
+
+	<bean class="org.bibalex.wamcp.pagebeans.AccountMgmtBBean" id="accountMgmtBBean"
+		scope="request">
+		
+		<!--	CGLib didn't like this.. <aop:scoped-proxy/>-->
+		
+		<property name="dataSource" ref="wamcpAppDataSource" />
+		<property name="passwordEncoder" ref="passwordEncoder" />
+		<property name="saltSource" ref="saltSource" />
+		<property name="sessionBBean" ref="sessionBBean" />
+	</bean>
+
+	<bean class="org.bibalex.wamcp.storage.WAMCPIndexedStorage" id="storageBean"
+		scope="session" lazy-init="true">
+		
+		<constructor-arg value="http://${IP_BAGallery_Server}/BAG-API/rest/"/>
+		
+		<constructor-arg value="/Schema/enrich-wamcp.xsd"/>
+		<constructor-arg value="TEI"/>
+		<constructor-arg value="http://www.tei-c.org/ns/1.0"/>
+
+		<constructor-arg ref="sdxeMediatorBean" />
+
+		<constructor-arg value="http://${IP_Solr_Server}:${Port}/WAMCPSolrArEnBackend"/>
+		
+		<constructor-arg value="http://${IP_Solr_Server}:${Port}/WAMCPSolrArEn"/>
+		
+		<property name="sessionBBean" ref="sessionBBean" />
+		<property name="svnClient" ref="wfsvnClient" />
+		
+		<property name="galleryBean" ref="galleryBeanOnSVN" />
+	</bean>
+
+	<bean class="org.bibalex.wamcp.pagebeans.SearchBBean" id="searchBBean"
+		scope="session" lazy-init="true">
+		<property name="storage" ref="storageBean" />
+		<property name="wfProcess" ref="wamcpWFProcess" />
+		<property name="galleryBBean" ref="galleryBeanOnSVN" />
+		<property name="rows" value="10" />
+	</bean>
+
+	<bean class="org.bibalex.wamcp.storage.WAMCPGalleryBeanSVNStoredMetaGallery" id="galleryBeanOnSVN"
+		scope="session" lazy-init="true">
+		<constructor-arg value="http://${IP_Djatoka_Server}:${Port}/adore-djatoka/resolver"/>
+		<constructor-arg value="http://${username}:${password}@${IP_BAGallery_Server}:${Port}/WAMCPGallery"/>
+		<constructor-arg value="file://${PathToBAGalleryRoot}/WAMCPGalleryReal"/>
+		<constructor-arg value="ImageCache"/>
+<!--		<constructor-arg value="8020" />-->
+		<constructor-arg ref="wfsvnClient" />
+		<constructor-arg ref="sessionBBean" />
+	</bean>
+	
+	
+	<bean class="org.bibalex.gallery.icefaces.BAGGalleryBean" id="galleryBeanOnImageSrv"
+		scope="session" lazy-init="true">
+		<constructor-arg value="http://${IP_Djatoka_Server}:${Port}/adore-djatoka/resolver"/>
+		<constructor-arg value="http://${username}:${password}@${IP_BAGallery_Server}:${Port}/WAMCPGallery"/>
+		<constructor-arg value="file://${PathToBAGalleryRoot}/WAMCPGalleryReal"/>
+		<constructor-arg value="ImageCache"/>
+<!--		<constructor-arg value="8020" />-->
+	</bean>
+	
+	
+
+	<bean class="org.bibalex.gallery.icefaces.BAGAlbumBBean" id="albumBBean"
+		scope="session" lazy-init="true" >
+		<property name="headerHeight" value="31"/>
+		<property name="toolbarHeight" value="45"/>
+	</bean>
+
+	<bean class="org.bibalex.sdxe.suggest.SugtnTreeBuilderCache" id="sugtnTreeBuilderCache"
+		scope="singleton" lazy-init="true" />
+
+	<bean class="org.bibalex.wamcp.application.WAMCPUiActionListener"
+		id="uiActionListener" scope="request" lazy-init="true">
+		
+		<constructor-arg value="/Schema/enrich-wamcp.xsd"/>
+		<constructor-arg value="TEI"/>
+		<constructor-arg value="http://www.tei-c.org/ns/1.0"/>
+		
+		<constructor-arg ref="sessionBBean" />
+		<constructor-arg ref="albumBBean" />
+		
+		
+		<property name="sdxeMediator" ref="sdxeMediatorBean" />
+		<property name="bindersBean" ref="xsaBindersBean" />
+		<property name="uiGenDomListener" ref="uiGenListener" />
+		<property name="searchBBean" ref="searchBBean" />
+		<property name="storage" ref="storageBean" />
+		<property name="galleryBean" ref="galleryBeanOnSVN" />
+		
+		<property name="jumpXMLTreeBBean" ref="jumpXMLTreeBBean"/>
+		
+		<property name="validateAgainst" value="rnc"/>
+	</bean>
+
+	<bean class="org.bibalex.wamcp.uigen.WAMCPUiGendomListener"
+		id="uiGenListener" scope="session" lazy-init="true">
+		<constructor-arg value="/Schema/enrich-wamcp.xsd"/>
+		<property name="sdxeMediator" ref="sdxeMediatorBean" />
+		<property name="bindersBean" ref="xsaBindersBean" />
+	</bean>
+	
+
+
+	<bean class="org.bibalex.sdxe.xsa.uigen.icefaces.XSAUiBindersBean"
+		id="xsaBindersBean" scope="session" lazy-init="true" />
+
+	<bean class="org.bibalex.sdxe.xsa.model.XSADocCache" id="xsaDocCache"
+		scope="singleton" lazy-init="true" />
+		
+	<bean class="org.bibalex.sdxe.xsa.model.XSAInstanceCache" id="xsaInstanceCache"
+		scope="session" lazy-init="true" >
+		<property name="allowWAMCPSpecific" value="true" />
+	</bean>		
+
+	<bean class="org.bibalex.wamcp.pagebeans.CreateNewBBean" id="createNewBBean"
+		scope="session" lazy-init="true">
+		<constructor-arg value="/XML/msDescBlank.xml"/>
+		<property name="galleryBean" ref="galleryBeanOnSVN" />
+		<property name="importXMLTreeBBean" ref="importXMLTreeBBean" />
+		<property name="importBBean" ref="importBBean" />
+		<property name="storage" ref="storageBean" />
+	</bean>
+
+	<bean class="org.bibalex.wamcp.pagebeans.LoginBBean" id="loginBBean"
+		scope="request" lazy-init="true" />
+
+	<!--  This doesn't do caching any more.. it is just a factory -->
+	<bean class="org.bibalex.sdxe.controller.SugtnTreeContollerCache"
+		id="sugtnTreeContollerCache" scope="singleton" lazy-init="true" />
+
+
+	<bean class="org.bibalex.icefaces.jdomtree.IDTBBean" id="importXMLTreeBBean"
+		scope="session" lazy-init="true" />
+
+	<bean class="org.bibalex.icefaces.jdomtree.IDTBBean" id="jumpXMLTreeBBean"
+		scope="session" lazy-init="true" />
+
+
+	<bean class="org.bibalex.wamcp.pagebeans.ImportBBean" id="importBBean"
+		scope="session" lazy-init="true">
+		<constructor-arg value="/Schema/enrich-wamcp.xsd"/>
+		<property name="storage" ref="storageBean" />
+	</bean>
+	
+	<bean class="org.bibalex.wamcp.pagebeans.GalleryExplorerBBean" id="galleryExplorerBBean"
+		scope="request" lazy-init="true">
+		<property name="albumBBean" ref="albumBBean"/>
+		<property name="galleryBean" ref="galleryBeanOnImageSrv"/>
+	</bean>
+		
+	<bean class="org.bibalex.wamcp.pagebeans.BrowseConsBBean" id="browseConsBBean"
+		scope="session" lazy-init="true">
+		<constructor-arg ref="searchBBean" />
+		<constructor-arg ref="storageBean" />
+	</bean>
+	<!-- *********************************** -->
+
+
+</beans>

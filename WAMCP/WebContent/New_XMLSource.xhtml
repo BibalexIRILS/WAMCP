@@ -1,0 +1,81 @@
+<!--
+   Copyright 2013 Bibliotheca Alexandrina
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+	
+	THIS PAGE USES FACELETS AND ALL THAT IS OUTSIDE COMPOSITION 
+	 >>>> WILL BE IGNORED 
+	
+<ui:composition template="templates/layout.xhtml">
+<ui:param name="reqBBean" value="#{createNewBBean}"/>
+<ui:define name="content" style="min-height:330px;">
+
+<div class="area">
+	<div class="inner-upper-part">
+		<img src="images/Inner-UpperLeft.png" align="left"/>
+	    <img src="images/Inner-UpperRight.png" align="right"/>
+	</div>
+	
+    <div class="content">
+    	<h3 class="New-file">
+    		New manuscript description
+   		</h3>
+
+        <div style="font-family:Arial,Helvetica,sans-serif;font-size:small;margin-left:45px;">
+	    	Shelf Mark:
+	       	<ice:inputText styleClass="xsaTextField" style="margin-left:5px;margin-bottom:5px" id="inShelfMark" value="#{createNewBBean.shelfMark}" required="true"/>
+	       	<ice:message id="msginShelfMark" for="inShelfMark"/><br/>
+		   <div style="margin-left:70px">                	
+		    "Will be used to generate the filename and the msDesc id"</div> 
+	    </div>           
+        <h3 class="Import">
+        	Import existing manuscript description
+       	</h3>
+       	<div id="upload" style="margin-left:45px">
+	       	<ice:inputFile id="inputFileComponent" actionListener="#{createNewBBean.uploadActionListener}" progressListener="#{createNewBBean.progressListener}" fileNamePattern=".+\.xml" partialSubmit="false"/><br/>
+	        <ice:message for="inputFileComponent" /><br/>
+	        <ice:outputProgress labelComplete="#{createNewBBean.currentFile.fileName}" value="#{createNewBBean.fileProgress}" />
+         </div>                  
+        <h3 class="New-file">
+        	Create a new blank manuscript description
+       	</h3>
+       	<div style="margin-left:220px">
+		    <div class="btnLink">
+				<ice:commandLink id="cmdCancel" value="Cancel" actionListener="#{uiActionListener.goHome}" partialSubmit="false"/>
+			</div>
+			<div class="btnLink">
+		        <ice:commandLink id="cmdCreateMsDesc" value="Create" actionListener="#{createNewBBean.newBlank}" partialSubmit="false" /> 
+			</div>
+			<div class="clear"></div>
+    	</div>
+    </div>
+    
+    <div class="inner-lower-part">
+    	<img src="images/Inner-LowerLeft.png" align="left"/>
+	    <img src="images/Inner-LowerRight.png" align="right"/>
+    </div>
+</div>
+
+		
+</ui:define>
+</ui:composition>
+</html>

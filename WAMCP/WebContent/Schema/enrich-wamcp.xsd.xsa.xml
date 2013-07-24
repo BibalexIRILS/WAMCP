@@ -1,0 +1,3642 @@
+<!--
+   Copyright 2013 Bibliotheca Alexandrina
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<?xml version="1.0" encoding="UTF-8"?>
+<xsa:xsa xmlns:xsa="http://www.bibalex.org/xsa"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-xsa:instance"
+	xsi:schemaLocation="http://www.bibalex.org/xsa xsa.xsd http://www.w3.org/XML/1998/namespace xml.xsd">
+
+	<xsa:authListDef xml:id="alWellcomeCollections"> Haddad | Iskandar</xsa:authListDef>
+	<xsa:authListDef xml:id="alAltIdentifier"> former | internal | other | partial</xsa:authListDef> 
+	<xsa:authListDef xml:id="alTextLang"> Arabic in Arabic script = ara-Arab | Arabic in Latin script = ara-Latn | English in Latin script = eng-Latn | Latin in Latin script = lat-Latn | Greek in Greek script = grc-Grek | Hebrew in Hebrew script = heb-Hebr | Hebrew in Arabic script = heb-Arab</xsa:authListDef>
+	<xsa:authListDef xml:id="alMaterial"> chart | mixed | perg | unknown</xsa:authListDef>
+	<xsa:authListDef xml:id="alSpine"> flush | moulded</xsa:authListDef>
+	<xsa:authListDef xml:id="alCalendars"> Gregorian | Julian | AM | Hijri-shamsi | Hijri-qamari | Coptic-EoM | Alexandrian | Iranian-Yazdigird | Iranian-Jalali | Spanish | Ilahi | Hindu | unknown | other</xsa:authListDef>
+	<xsa:authListDef xml:id="alScript"> muhaqqaq | rayhani | naskh | maghribi | bihari | nasta_liq | thuluth | tawqi_ | riqa_ | ghubar | ta_liq | diwani | ruq_ah | siyaqah</xsa:authListDef>
+	<xsa:authListDef xml:id="alBlank">  Present = "WAMCPPresenceIndicator" | None = "" </xsa:authListDef>
+	<xsa:authListDef xml:id="alFlap">  Yes = "flap" | No = "" </xsa:authListDef>
+	<xsa:authListDef xml:id="alNumColumns"> 1 | 2 | 3 | 4 </xsa:authListDef>
+	
+
+	<xsa:authListDef xml:id="alDefective">false | inapplicable | true | unknown</xsa:authListDef>
+	<xsa:authListDef xml:id="alYesNo">Yes | No</xsa:authListDef>
+		<xsa:authListDef xml:id="alBurnished">burnished | unburnished</xsa:authListDef>
+	<xsa:authListDef xml:id="alGathering">folded | single | both</xsa:authListDef>
+	<xsa:authListDef xml:id="alSupportedOrNot">supported | unsupported</xsa:authListDef>
+	<xsa:authListDef xml:id="alSupportKind">cord | alum-tawed skin | parchment | tanned skin | tapes</xsa:authListDef>
+	<xsa:authListDef xml:id="alBookmark">textile ribbon | other</xsa:authListDef>
+	<xsa:authListDef xml:id="alBoardMaterial">paper | parchment | wood | rope</xsa:authListDef>
+	<xsa:authListDef xml:id="alAttached">attached | unattached</xsa:authListDef>
+	<xsa:authListDef xml:id="alCoverMaterial">leather | paper | cloth | textile | leather / paper | leather / cloth | leather / textile | paper / cloth | paper / textile | cloth / textile</xsa:authListDef>
+	<!-- <xsa:authListDef xml:id="alCoverMaterial1">leather | paper</xsa:authListDef> 
+		<xsa:authListDef xml:id="alCoverMaterial2">cloth | textile</xsa:authListDef> -->
+	<xsa:authListDef xml:id="alSatchel">leather | paper</xsa:authListDef>
+	<xsa:authListDef xml:id="alTooling">gold | blind</xsa:authListDef>
+	<!-- <xsa:authListDef xml:id="alAddItemType">marginalia | kabikaj</xsa:authListDef> -->
+	<xsa:authListDef xml:id="alCustEvType">check | conservation | description | exhibition | loan | photography | other</xsa:authListDef>
+	<xsa:authListDef xml:id="alAvailStatus">unknown | restricted | free</xsa:authListDef>
+	<xsa:authListDef xml:id="alCondition">sound | deteriorated</xsa:authListDef>
+	<xsa:authListDef xml:id="alMistara"> Yes = "mistara" | No = "" </xsa:authListDef>
+
+	<xsa:annotator eltName="locus" text="yes">
+		<xsa:messages>
+			<xsa:help>Input a page or folio number or range of numbers.
+   Example output of this annotator: &lt;locus&gt;123r-123v&lt;/locus&gt;</xsa:help>
+			<xsa:label>Folio</xsa:label>
+		</xsa:messages>
+	</xsa:annotator>
+
+	<xsa:annotator eltName="lb" text="no">
+		<xsa:messages>
+			<xsa:help>Use this annotator to indicate a line break in the manuscript text.
+   Only use in fields that transcribe text from the manuscript, such
+   as "incipit" or "explicit", etc.
+   This is an empty element, i. e. it does not require any text input.
+   Example: text&lt;lb/&gt;text</xsa:help>
+			<xsa:label>line break</xsa:label>
+		</xsa:messages>
+	</xsa:annotator>
+
+	<xsa:annotator eltName="p" text="yes">
+		<xsa:messages>
+			<xsa:help>Use this annotator to structure text into paragraphs. Input the
+   text for a paragraph in the text input field.
+   Only use in fields that accept descriptive text. Do not use in
+   fields that transcribe text from the manuscript, such as "incipit"
+   or "explicit", etc.
+   Example: text &lt;p&gt;text within a paragraph&lt;/p&gt; text</xsa:help>
+			<xsa:label>paragraph</xsa:label>
+		</xsa:messages>
+	</xsa:annotator>
+
+	<xsa:annotator eltName="pb" text="no">
+		<xsa:messages>
+			<xsa:help>Use this annotator to indicate a page break in the manuscript text.
+   Only use in fields that transcribe text from the manuscript, such
+   as "incipit" or "explicit", etc.
+   This is an empty element, i. e. it does not require any text input.
+   Example: text&lt;pb/&gt;text</xsa:help>
+			<xsa:label>page break</xsa:label>
+		</xsa:messages>
+	</xsa:annotator>
+
+	<xsa:annotator eltName="hi" text="yes">
+		<xsa:messages>
+			<xsa:help>Use this annotator to indicate emphasized (i. e. overlined) text in
+   Arabic manuscript text (text in Arabic script).
+   Only use in fields that transcribe text from the manuscript, such
+   as "incipit" or "explicit", etc.
+   Example: text &lt;hi rend="overline"&gt;text&lt;/hi&gt; text</xsa:help>
+			<xsa:label>overline</xsa:label>
+		</xsa:messages>
+
+
+		<xsa:attribute name="rend" value="overline" />
+	</xsa:annotator>
+
+	<xsa:annotator eltName="gap" text="no">
+		<xsa:messages>
+			<xsa:help>Use this annotator to indicate omitted text portions. Use this
+   annotator instead of three dots ("...").
+   This is an empty element, i. e. it does not require any text input.
+   Example: text &lt;gap reason="omitted"/&gt; text</xsa:help>
+			<xsa:label>ellipsis</xsa:label>
+		</xsa:messages>
+
+
+		<xsa:attribute name="reason" value="omitted" />
+	</xsa:annotator>
+	<xsa:annotator eltName="sic" text="yes">
+		<xsa:messages>
+			<xsa:help>Use this annotator in all cases where you would use "sic", for
+   example to indicate that an incorrect spelling that you transcribe
+   is found in the manuscript and not a typing error by you.
+   Example: text &lt;sic&gt;text&lt;/sic&gt; text</xsa:help>
+			<xsa:label>sic</xsa:label>
+		</xsa:messages>
+	</xsa:annotator>
+
+	<xsa:annotator eltName="label" text="yes">
+		<xsa:messages>
+			<xsa:help>Use this annotator only in the "additions" input field to indicate the
+   type of addition you are describing, such as "marginalia" or
+   "kabikaj".
+   Example: &lt;label&gt;marginalia&lt;/label&gt;text text</xsa:help>
+			<xsa:label>label</xsa:label>
+		</xsa:messages>
+	</xsa:annotator>
+
+	<xsa:annotator eltName="note" text="yes">
+		<xsa:messages>
+			<xsa:help>Use this annotator in any textual input field to input any
+   additional remarks relating to the context. Please use sparingly.
+   Example: text text &lt;note&gt;text of note&lt;/note&gt;</xsa:help>
+			<xsa:label>note</xsa:label>
+		</xsa:messages>
+	</xsa:annotator>
+
+	<xsa:annotator eltName="ref" text="yes">
+		<xsa:messages>
+			<xsa:help>Use this annotator for references to another location in the
+   manuscript or for bibliographical references.
+   Example: text text &lt;ref&gt;Serikoff (2001)&lt;/ref&gt; text</xsa:help>
+			<xsa:label>reference</xsa:label>
+		</xsa:messages>
+	</xsa:annotator>
+
+	<xsa:annotator eltName="q" text="yes">
+		<xsa:messages>
+			<xsa:help>Use this annotator for quoted text, i. e. in all cases where you
+   would normally use double quotes or single quotes.
+   Example: text &lt;q&gt;text text&lt;/q&gt; text</xsa:help>
+			<xsa:label>quote</xsa:label>
+		</xsa:messages>
+	</xsa:annotator>
+
+	<xsa:annotator eltName="milestone" text="no">
+		<xsa:messages>
+			<xsa:help>Use this annotator to indicate dividers that appear in the
+   manuscript text, such as red dots.
+   Only use in fields that transcribe text from the manuscript, such
+   as "incipit" or "explicit", etc.
+   This is an empty element, i. e. it does not require any text input.
+   Example: text &lt;milestone unit="section"&gt; text</xsa:help>
+			<xsa:label>divider</xsa:label>
+		</xsa:messages>
+
+		<xsa:attribute name="unit" value="section" />
+	</xsa:annotator>
+
+
+
+	<xsa:dataHolder>
+		<xsa:instance mixed="no" repeat="no" xml:id="areaLibInfo"
+			under="site">
+			<xsa:ui>area</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Library Information</xsa:label>
+				<xsa:help>Information about the library that holds the manuscript in question.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msIdentifier/collection/collection">
+		<xsa:instance mixed="no" repeat="no" under="areaLibInfo"
+			group="grpLibrary" authorityList="alWellcomeCollections">
+			
+			<xsa:ui>field</xsa:ui>
+			
+			<xsa:attribute name="type" value="sub" />
+			
+			<xsa:messages>
+				<xsa:label>Subcollection</xsa:label>
+				<xsa:help>If the manuscript belongs to a subcollection, select it here.</xsa:help>
+			</xsa:messages>
+			<xsa:writeAccess>ROLE_WL_ED</xsa:writeAccess>
+			<!--<xsa:readAccess>ROLE_WL_ED</xsa:readAccess> -->
+			<xsa:responsible required="false" />
+			
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder locator="/TEI/text/body/div/msDesc/msIdentifier/idno">
+		<xsa:dataType>string</xsa:dataType>
+		<xsa:instance mixed="no" repeat="no" under="areaLibInfo"
+			group="grpLibrary">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Shelfmark</xsa:label>
+			</xsa:messages>
+			<xsa:responsible required="true" />
+			<!-- No dynamic field for textExactEN, only textExact solrType="textExactEN" -->
+			<!-- facet="string", the alphabetical list uses the Sortable.Shelfmark -->
+			<xsa:indexed summary="yes" key="yes" solrType="textExact">Shelfmark</xsa:indexed>
+			<!-- FIRST ENCODER -->
+			<xsa:writeAccess>ROLE_XMLTEMPLATE_EDITOR</xsa:writeAccess>
+			<xsa:readAccess>ROLE_XMLTEMPLATE_VIEWER</xsa:readAccess>
+			
+		</xsa:instance>
+	</xsa:dataHolder>
+
+	<xsa:dataHolder locator="/TEI/text/body/div/msDesc/msIdentifier/altIdentifier">
+
+		<xsa:instance mixed="no" repeat="yes" under="areaLibInfo"
+			group="grpLibrary" xml:id="cntAltId">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Alternative shelfmark</xsa:label>
+				<xsa:help>Contains an alternative or former structured identifier used for a manuscript, such as a former catalogue number.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msIdentifier/altIdentifier/idno">
+
+		<xsa:instance mixed="no" repeat="no" under="cntAltId">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Shelfmark</xsa:label>
+				<xsa:help>Contains an alternative or former structured identifier used for a manuscript, such as a former catalogue number.</xsa:help>
+			</xsa:messages>
+			<xsa:responsible required="true" />
+			<!-- No dynamic field for textExactEN, only textExact solrType="textExactEN" -->
+			<xsa:indexed summary="yes" solrType="textExact">Alternative.Shelfmark</xsa:indexed>
+			
+		</xsa:instance>
+	</xsa:dataHolder>
+
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msIdentifier/altIdentifier/@type">
+		<xsa:instance mixed="no" repeat="no" under="cntAltId"
+			authorityList="alAltIdentifier">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Type</xsa:label>
+				<xsa:help>Contains an alternative or former structured identifier used for a manuscript, such as a former catalogue number.</xsa:help>
+			</xsa:messages>
+			<xsa:responsible required="true" />
+			
+		</xsa:instance>
+	</xsa:dataHolder>
+
+
+	<xsa:dataHolder locator="/TEI/text/body/div/msDesc/@xml:id">
+		<xsa:instance mixed="no" repeat="no" under="areaLibInfo"
+			group="grpLibrary">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Unique ID for ms. desc</xsa:label>
+			</xsa:messages>
+			<xsa:responsible required="true" />
+			<xsa:writeAccess>ROLE_NOBODY</xsa:writeAccess>
+			<xsa:readAccess>ROLE_XMLTEMPLATE_VIEWER</xsa:readAccess>
+			
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder locator="/TEI/text/body/div/msDesc/@xml:lang">
+		<xsa:instance mixed="no" repeat="no" under="areaLibInfo"
+			group="grpLibrary">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Language of ms. desc.</xsa:label>
+			</xsa:messages>
+			<xsa:defaultVal>en</xsa:defaultVal>
+			<xsa:responsible required="true" />
+			<xsa:writeAccess>ROLE_XMLTEMPLATE_EDITOR</xsa:writeAccess>
+			<xsa:readAccess>ROLE_XMLTEMPLATE_VIEWER</xsa:readAccess>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder locator="/TEI/text/body/div/msDesc/msIdentifier/country">
+		<xsa:instance mixed="no" repeat="no" under="areaLibInfo"
+			group="grpLibrary">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Country</xsa:label>
+			</xsa:messages>
+			<xsa:defaultVal>UK</xsa:defaultVal>
+			<xsa:responsible required="true" />
+			<xsa:writeAccess>ROLE_XMLTEMPLATE_EDITOR</xsa:writeAccess>
+			<xsa:readAccess>ROLE_XMLTEMPLATE_VIEWER</xsa:readAccess>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder locator="/TEI/text/body/div/msDesc/msIdentifier/settlement">
+		<xsa:instance mixed="no" repeat="no" under="areaLibInfo"
+			group="grpLibrary">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>City</xsa:label>
+			</xsa:messages>
+			<xsa:defaultVal>London</xsa:defaultVal>
+			<xsa:responsible required="true" />
+			<xsa:writeAccess>ROLE_XMLTEMPLATE_EDITOR</xsa:writeAccess>
+			<xsa:readAccess>ROLE_XMLTEMPLATE_VIEWER</xsa:readAccess>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder locator="/TEI/text/body/div/msDesc/msIdentifier/institution">
+		<xsa:instance mixed="no" repeat="no" under="areaLibInfo"
+			group="grpLibrary">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Institution</xsa:label>
+			</xsa:messages>
+			<xsa:defaultVal>Wellcome Trust</xsa:defaultVal>
+			<xsa:responsible required="true" />
+			<xsa:writeAccess>ROLE_XMLTEMPLATE_EDITOR</xsa:writeAccess>
+			<xsa:readAccess>ROLE_XMLTEMPLATE_VIEWER</xsa:readAccess>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder locator="/TEI/text/body/div/msDesc/msIdentifier/repository">
+		<xsa:instance mixed="no" repeat="no" under="areaLibInfo"
+			group="grpLibrary">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Name</xsa:label>
+			</xsa:messages>
+			<xsa:responsible required="true" />
+			<xsa:defaultVal>Wellcome Library</xsa:defaultVal>
+			<xsa:writeAccess>ROLE_XMLTEMPLATE_EDITOR</xsa:writeAccess>
+			<xsa:readAccess>ROLE_XMLTEMPLATE_VIEWER</xsa:readAccess>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder locator="/TEI/text/body/div/msDesc/msIdentifier/collection">
+		<xsa:instance mixed="no" repeat="no" under="areaLibInfo"
+			group="grpLibrary">
+			<xsa:attribute name="type" value="main" />
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Collection</xsa:label>
+			</xsa:messages>
+			<xsa:defaultVal>Oriental manuscripts</xsa:defaultVal>
+			<xsa:responsible required="true" />
+			<xsa:writeAccess>ROLE_XMLTEMPLATE_EDITOR</xsa:writeAccess>
+			<xsa:readAccess>ROLE_XMLTEMPLATE_VIEWER</xsa:readAccess>
+		</xsa:instance>
+	</xsa:dataHolder>
+
+	<xsa:dataHolder locator="/TEI/teiHeader/fileDesc/titleStmt/title">
+		<xsa:instance mixed="no" repeat="no" under="areaLibInfo"
+			group="grpTEI">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Library title</xsa:label>
+			</xsa:messages>
+			<xsa:responsible required="true" />
+			<!-- FIRST ENCODER -->
+			<xsa:writeAccess>ROLE_XMLTEMPLATE_EDITOR</xsa:writeAccess>
+			<xsa:readAccess>ROLE_XMLTEMPLATE_VIEWER</xsa:readAccess>
+			
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder locator="/TEI/teiHeader/fileDesc/publicationStmt/p">
+		<xsa:instance mixed="no" repeat="no" under="areaLibInfo"
+			group="grpTEI">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Institution</xsa:label>
+			</xsa:messages>
+			<xsa:defaultVal>King's College London</xsa:defaultVal>
+			<xsa:responsible required="true" />
+			<xsa:writeAccess>ROLE_XMLTEMPLATE_EDITOR</xsa:writeAccess>
+			<xsa:readAccess>ROLE_XMLTEMPLATE_VIEWER</xsa:readAccess>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder locator="/TEI/teiHeader/fileDesc/sourceDesc/p">
+		<xsa:instance mixed="no" repeat="no" under="areaLibInfo"
+			group="grpTEI">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Desc. of source</xsa:label>
+			</xsa:messages>
+			<xsa:defaultVal>Born Digital</xsa:defaultVal>
+			<xsa:responsible required="true" />
+			<xsa:writeAccess>ROLE_XMLTEMPLATE_EDITOR</xsa:writeAccess>
+			<xsa:readAccess>ROLE_XMLTEMPLATE_VIEWER</xsa:readAccess>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder locator="/TEI/teiHeader/encodingDesc/classDecl/taxonomy/bibl">
+		<xsa:instance mixed="yes" repeat="no" under="areaLibInfo">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>LOC subject headings</xsa:label>
+			</xsa:messages>
+			<xsa:responsible required="true" />
+			<xsa:writeAccess>ROLE_NOBODY</xsa:writeAccess>
+			<xsa:readAccess>ROLE_XMLTEMPLATE_VIEWER</xsa:readAccess>
+			
+			
+		</xsa:instance>
+	</xsa:dataHolder>
+
+	<xsa:dataHolder>
+		<!-- locator="/TEI/text/body/div/msDesc/msPart/msContents"> -->
+		<xsa:instance mixed="no" xml:id="areaIntelPart" under="site">
+			<xsa:ui>area</xsa:ui>
+			<xsa:baseShift
+				pattern="/TEI/text/body/div/msDesc/msPart[?Manuscript Part]/msContents/msItem[?Manuscript Item]" />
+			<xsa:messages>
+				<xsa:label>Intellectual part</xsa:label>
+				<xsa:help>Information about the textual content of a work contained in the manuscript (e. g.: author, title, incipit, explicit).</xsa:help>
+			</xsa:messages>
+			<xsa:writeAccess>ROLE_BA_ED</xsa:writeAccess>
+			<!--<xsa:readAccess>ROLE_BA_ED</xsa:readAccess> -->
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder locator="/TEI/text/body/div/msDesc/msPart/altIdentifier/idno">
+		<xsa:instance mixed="no" repeat="no" under="site">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>THIS SHOULDNT APPEAR</xsa:label>
+			</xsa:messages>
+			<xsa:writeAccess>ROLE_NOBODY</xsa:writeAccess>
+			<xsa:readAccess>ROLE_NOBODY</xsa:readAccess>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder>
+		<xsa:instance mixed="no" xml:id="secAuthTitle" under="areaIntelPart">
+			<xsa:ui>section</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Author / title</xsa:label>
+			</xsa:messages>
+		</xsa:instance>
+		<xsa:instance mixed="no" xml:id="secInitia" under="areaIntelPart">
+			<xsa:ui>section</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Initia</xsa:label>
+			</xsa:messages>
+		</xsa:instance>
+		<xsa:instance mixed="no" xml:id="secDesinia" under="areaIntelPart">
+			<xsa:ui>section</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Desinia</xsa:label>
+			</xsa:messages>
+		</xsa:instance>
+		<xsa:instance mixed="no" xml:id="secTOC" under="areaIntelPart">
+			<xsa:ui>section</xsa:ui>
+			<xsa:messages>
+				<xsa:label>TOC</xsa:label>
+			</xsa:messages>
+		</xsa:instance>
+		<xsa:instance mixed="no" xml:id="secNote" under="areaIntelPart">
+			<xsa:ui>section</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Note</xsa:label>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+
+
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/msContents/msItem/locus">
+				<xsa:instance mixed="no" repeat="no" under="secAuthTitle">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Extent</xsa:label>
+				<xsa:help>Enter the extent of the work, i. e. the folios where the work starts and ends (e. g. "123r - 134v).</xsa:help>
+			</xsa:messages>
+			<xsa:responsible required="false" />
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/msContents/msItem/@class">
+		<!--TODO when the alLOCSubjHeads is enumerated in full, uncomment its ref authorityList="alLOCSubjHeads" 
+			and the list=true -->
+		<!-- <xsa:dataType list="true" /> -->
+		<xsa:instance mixed="no" under="secAuthTitle" >
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>LOC subject headings (text)</xsa:label>
+				<xsa:help>Select appropriate subject headings for the "work". Type in LOC ids for entries that are not in the list.</xsa:help>
+			</xsa:messages>
+			<xsa:indexed solrType="string">LOCSH</xsa:indexed>
+			<xsa:writeAccess>ROLE_REVIEWER2</xsa:writeAccess>
+			<xsa:readAccess>ROLE_REVIEWER2</xsa:readAccess>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/msContents/msItem/@defective">
+		<xsa:dataType list="true" />
+		<xsa:instance mixed="no" repeat="no" under="secAuthTitle"
+			authorityList="alDefective">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Text defective</xsa:label>
+				<xsa:help>Indicate if the text is defective. The default setting is "false", i. e. the text is not defective.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder locator="/TEI">
+		<xsa:instance mixed="no" repeat="no" xml:id="site">
+			<xsa:ui>site</xsa:ui>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/msContents/msItem/textLang/@mainLang">
+		<xsa:instance mixed="no" repeat="no" authorityList="alTextLang"
+			under="secAuthTitle">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Main language of text</xsa:label>
+				<xsa:help>Select one combination of language and script that is most represented.</xsa:help>
+			</xsa:messages>
+			<xsa:indexed solrType="string">Language.Of.Text</xsa:indexed>
+			<xsa:responsible required="true" />
+			
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/msContents/msItem/author">
+		<xsa:instance mixed="no" repeat="yes" under="secAuthTitle"
+			xml:id="contAuthor">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Author</xsa:label>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/msContents/msItem/author/persName">
+		<xsa:instance mixed="no" repeat="yes" under="contAuthor">
+			<xsa:ui>field</xsa:ui>
+			<xsa:attribute name="lang"
+				nsuri="http://www.w3.org/XML/1998/namespace" value="eng-Latn" />
+			<xsa:attribute name="type" value="standard" />
+			<xsa:messages>
+				<xsa:label>Author in English</xsa:label>
+				<xsa:help>If there is a known or widely used English transcription of the name, enter it here.</xsa:help>
+			</xsa:messages>
+			<xsa:indexed summary="yes" facet="string">Author.English</xsa:indexed>
+		</xsa:instance>
+		
+		<!-- Brokelmann Arabic -->
+		<xsa:instance mixed="no" repeat="yes" under="contAuthor">
+			<xsa:ui>field</xsa:ui>
+			<xsa:attribute name="lang"
+				nsuri="http://www.w3.org/XML/1998/namespace" value="ara-Arab" />
+			<xsa:attribute name="type" value="normalised" />
+			<xsa:messages>
+				<xsa:label>Normalised (AR)</xsa:label>
+				<xsa:help>Normalised author name according to Brockelmann "Geschichte der arabischen Litteratur".</xsa:help>
+			</xsa:messages>
+			<xsa:indexed summary="no" facet="string">Author.Normalised.AR</xsa:indexed>
+		</xsa:instance>
+		
+		<xsa:instance mixed="no" group="grpArName" repeat="yes"
+			xml:id="contAuthorAr" under="contAuthor">
+			<xsa:ui>container</xsa:ui>
+			<xsa:attribute name="lang"
+				nsuri="http://www.w3.org/XML/1998/namespace" value="ara-Arab" />
+			<xsa:attribute name="type" value="standard" />
+			<xsa:messages>
+				<xsa:label>Standard</xsa:label>
+			</xsa:messages>
+		</xsa:instance>
+		<xsa:instance mixed="no" group="grpArName" repeat="no"
+			under="contAuthor">
+			<xsa:ui>field</xsa:ui>
+			<xsa:attribute name="lang"
+				nsuri="http://www.w3.org/XML/1998/namespace" value="ara-Arab" />
+			<xsa:attribute name="type" value="original" />
+			<xsa:messages>
+				<xsa:label>Original</xsa:label>
+				<xsa:help>Name of the author of the work as written in the manuscript.</xsa:help>
+			</xsa:messages>
+			<xsa:indexed summary="yes">Author.Original</xsa:indexed>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/msContents/msItem/author/persName/surname">
+		<xsa:instance mixed="no" under="contAuthorAr" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Patronymic</xsa:label>
+				<xsa:help>Enter the patronymic component of the name.</xsa:help>
+			</xsa:messages>
+			<xsa:indexed>Author.Patronymic</xsa:indexed>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/msContents/msItem/author/persName/forename">
+		<xsa:instance mixed="no" under="contAuthorAr" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Ism</xsa:label>
+				<xsa:help>Enter the "ism" part of the name.</xsa:help>
+			</xsa:messages>
+			<xsa:indexed>Author.Ism</xsa:indexed>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/msContents/msItem/author/persName/addName">
+		<xsa:instance mixed="no" under="contAuthorAr" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:attribute name="type" value="laqab" />
+			<xsa:messages>
+				<xsa:label>Laqab</xsa:label>
+				<xsa:help>Enter the "laqab" component of the name.</xsa:help>
+			</xsa:messages>
+			<xsa:indexed>Author.Laqab</xsa:indexed>
+		</xsa:instance>
+		<xsa:instance mixed="no" under="contAuthorAr" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:attribute name="type" value="kunyah" />
+			<xsa:messages>
+				<xsa:label>Kunya</xsa:label>
+				<xsa:help>Enter the "kunya" component of the name.</xsa:help>
+			</xsa:messages>
+			<xsa:indexed>Author.Kunyah</xsa:indexed>
+		</xsa:instance>
+		<xsa:instance mixed="no" under="contAuthorAr" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:attribute name="type" value="khitab" />
+			<xsa:messages>
+				<xsa:label>Ḥiṭāb</xsa:label>
+				<xsa:help>Enter the "ẖiṭāb" component of the name, i. e. how the person is addressed.</xsa:help>
+			</xsa:messages>
+			<xsa:indexed>Author.Khitab</xsa:indexed>
+		</xsa:instance>
+		<xsa:instance mixed="no" under="contAuthorAr" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:attribute name="type" value="nisbah" />
+			<xsa:messages>
+				<xsa:label>Nisbah</xsa:label>
+				<xsa:help>Enter the "nisbah" component of the name.</xsa:help>
+			</xsa:messages>
+			<xsa:indexed>Author.Nisbah</xsa:indexed>
+		</xsa:instance>
+	</xsa:dataHolder>
+
+	<xsa:dataHolder locator="/TEI/text/body/div/msDesc/msPart/msContents/msItem/title/locus"> 
+		<xsa:dataType>string</xsa:dataType> 
+		<xsa:instance mixed="no" repeat="yes" under="cntTitleOrig">
+		 <xsa:ui>field</xsa:ui> 
+		 <xsa:messages>
+		 	 <xsa:label>Folio</xsa:label> 
+		</xsa:messages> 
+		<xsa:responsible required="true"/> 
+		</xsa:instance> 
+		<!--<xsa:instance 
+		mixed="no" repeat="yes" under="cntTitleNorm"> <xsa:ui>field</xsa:ui> <xsa:messages> 
+		<xsa:label>Folio</xsa:label> </xsa:messages> <xsa:responsible required="true"/> 
+		</xsa:instance>  -->
+		</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/msContents/msItem/title"> 
+		<xsa:instance mixed="yes" repeat="no" under="secAuthTitle" xml:id="cntTitleOrig"
+			group="grpTitle">
+			<xsa:ui>container</xsa:ui>
+			<xsa:attribute name="type" value="original" />
+			<xsa:messages>
+				<xsa:label>Original</xsa:label>
+				<xsa:help>Title of the work as written in the manuscript.</xsa:help>
+			</xsa:messages>
+			<xsa:responsible required="false" />
+			<xsa:indexed summary="yes">Original.Title</xsa:indexed>
+			
+		</xsa:instance>
+		
+		<!-- xml:id="cntTitleNorm" -->
+		<xsa:instance mixed="no" repeat="no" under="secAuthTitle" 
+			group="grpTitle">
+			<xsa:ui>field</xsa:ui>
+			<xsa:attribute name="type" value="normalised" />
+			<xsa:messages>
+				<xsa:label>Normalised (EN)</xsa:label>
+				<xsa:help>Standard title of the work, i. e. the title under which the work is usually known.</xsa:help>
+			</xsa:messages>
+			<xsa:responsible required="true" />
+			<xsa:indexed summary="yes" facet="string">Normalised.Title</xsa:indexed>
+			
+		</xsa:instance>
+		
+<!-- 		Brokelmann Arabic xml:id="cntTitleNormAr -->
+<!-- 		<xsa:instance mixed="no" repeat="no" under="secAuthTitle"  -->
+<!-- 			group="grpTitle"> -->
+<!-- 			<xsa:ui>field</xsa:ui> -->
+<!-- 			<xsa:attribute name="type" value="normalised" /> -->
+<!-- 			<xsa:attribute name="lang" -->
+<!-- 				nsuri="http://www.w3.org/XML/1998/namespace" value="ara-Arab" /> -->
+<!-- 			<xsa:messages> -->
+<!-- 				<xsa:label>Normalised (AR)</xsa:label> -->
+<!-- 				<xsa:help>Normalised title of the work according to Brockelmann "Geschichte der arabischen Litteratur"</xsa:help> -->
+<!-- 			</xsa:messages> -->
+<!-- 			<xsa:responsible required="false" /> -->
+<!-- 			<xsa:indexed summary="yes" facet="string">Title.Normalised.AR</xsa:indexed> -->
+<!-- 		</xsa:instance> -->
+		
+		<xsa:instance mixed="yes" repeat="yes" under="secAuthTitle"
+			group="grpTitle" xml:id="cntOtherTitle">
+			<xsa:ui>container</xsa:ui>
+			<xsa:attribute name="type" value="other" />
+			<xsa:messages>
+				<xsa:label>Other title</xsa:label>
+				<xsa:help>Translation of the title of this text. Title of this text in Greek or Latin (if it is a standard text and has a well known Greek or Latin title).</xsa:help>
+			</xsa:messages>
+			<xsa:indexed summary="yes">Other.Title</xsa:indexed>
+		</xsa:instance>
+	</xsa:dataHolder>
+
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/msContents/msItem/title/@xml:lang">
+		<xsa:instance mixed="no" repeat="no" authorityList="alTextLang"
+			under="cntOtherTitle">
+			<xsa:ui>field</xsa:ui>
+			<xsa:responsible required="true" />
+			<xsa:messages>
+				<xsa:label>Language</xsa:label>
+				<xsa:help>Language of other title</xsa:help>
+			</xsa:messages>
+			
+		</xsa:instance>
+	</xsa:dataHolder>
+
+
+
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/msContents/msItem/incipit">
+
+		<xsa:instance mixed="yes" repeat="yes" under="secInitia">
+			<xsa:ui>field</xsa:ui>
+			<xsa:attribute name="type" value="basmala" />
+			<xsa:messages>
+				<xsa:label>Basmala</xsa:label>
+				<xsa:help>Transcribe in full the basmala.</xsa:help>
+			</xsa:messages>
+			<xsa:responsible required="false" />
+			<xsa:indexed>Basmala</xsa:indexed>
+		</xsa:instance>
+		<xsa:instance mixed="yes" repeat="yes" under="secInitia">
+			<xsa:ui>field</xsa:ui>
+			<xsa:attribute name="type" value="tahmid" />
+			<xsa:messages>
+				<xsa:label>Taḥmīd</xsa:label>
+				<xsa:help>Transcribe the ta?m?d in full, or in significant length. Include the number of �Almighty� mentioned in the ta?m?d.</xsa:help>
+			</xsa:messages>
+			<xsa:responsible required="false" />
+			<xsa:indexed facet="string">Tahmid</xsa:indexed>
+		</xsa:instance>
+		<xsa:instance mixed="yes" repeat="yes" under="secInitia">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Incipit</xsa:label>
+				<xsa:help>Incipit of the work (in significant length).</xsa:help>
+			</xsa:messages>
+			<xsa:responsible required="false" />
+			<xsa:indexed advancedSearch="textExactAR">Incipit</xsa:indexed>
+		</xsa:instance>
+		<xsa:instance mixed="yes" repeat="yes" under="secInitia">
+			<xsa:ui>field</xsa:ui>
+			<xsa:attribute name="type" value="beginning" />
+			<xsa:messages>
+				<xsa:label>Beginning</xsa:label>
+				<xsa:help>Beginning of the text if the actual incipit is missing, or if there is any text near the beginning that is considered significant.</xsa:help>
+			</xsa:messages>
+			<xsa:responsible required="false" />
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/msContents/msItem/explicit">
+		<xsa:instance mixed="yes" repeat="yes" under="secDesinia">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Explicit</xsa:label>
+				<xsa:help>Explicit of the work (in significant length).</xsa:help>
+			</xsa:messages>
+			<xsa:responsible required="false" />
+		</xsa:instance>
+		<xsa:instance mixed="yes" repeat="yes" under="secDesinia">
+			<xsa:ui>field</xsa:ui>
+			<xsa:attribute name="type" value="ending" />
+			<xsa:messages>
+				<xsa:label>Ending</xsa:label>
+				<xsa:help>2-3 lines of the end of the work if the explicit is missing, or if there is any text near the end that is considered significant.</xsa:help>
+			</xsa:messages>
+			<xsa:responsible required="false" />
+			<xsa:indexed>Ending</xsa:indexed>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/msContents/msItem/colophon">
+		<xsa:instance mixed="yes" repeat="yes" under="secDesinia">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Colophon</xsa:label>
+				<xsa:help>Colophon of the work.</xsa:help>
+			</xsa:messages>
+			<xsa:responsible required="false" />
+			<xsa:indexed advancedSearch="textAR" facet="string">Colophon.Work</xsa:indexed>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/msContents/msItem/msItem">
+		<xsa:instance mixed="no" repeat="yes" under="secTOC"
+			xml:id="contTOCEntry">
+			<xsa:attribute name="n" value="toc" />
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>TOC entry</xsa:label>
+				<xsa:help>Enter all chapter headings.</xsa:help>
+			</xsa:messages>
+			<xsa:responsible required="false" />
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/msContents/msItem/msItem/locus">
+		<xsa:instance mixed="no" repeat="no" under="contTOCEntry">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Folio</xsa:label>
+				<xsa:help>Number of folio on which the chapter heading appears.</xsa:help>
+			</xsa:messages>
+			<xsa:responsible required="false" />
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/msContents/msItem/msItem/title">
+		<xsa:instance mixed="yes" repeat="no" under="contTOCEntry">
+			<xsa:ui>field</xsa:ui>
+			<xsa:attribute name="type" value="normalised" />
+			<xsa:messages>
+				<xsa:label>Chapter heading normalised</xsa:label>
+				<xsa:help>Transcribe standard form of chapter heading or other minimal unit heading. If these are not available, only fill in field for chapter heading in original form.</xsa:help>
+			</xsa:messages>
+			<xsa:responsible required="false" />
+		</xsa:instance>
+		<xsa:instance mixed="yes" repeat="no" under="contTOCEntry">
+			<xsa:ui>field</xsa:ui>
+			<xsa:attribute name="type" value="original" />
+			<xsa:messages>
+				<xsa:label>Chapter heading original</xsa:label>
+				<xsa:help>Transcribe chapter heading or other minimal unit heading as written in the work.</xsa:help>
+			</xsa:messages>
+			<xsa:responsible required="false" />
+			<xsa:indexed advancedSearch="textAR">TOC</xsa:indexed>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/msContents/msItem/note">
+		<xsa:instance mixed="yes" repeat="no" under="secNote">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Note</xsa:label>
+				<xsa:help>Use this field for general notes about the work.</xsa:help>
+			</xsa:messages>
+			<xsa:responsible required="false" />
+			<xsa:indexed advancedSearch="textAR">Note</xsa:indexed>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder>
+		<xsa:instance mixed="no" under="site" xml:id="areaProduction">
+			<xsa:ui>area</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Codicology</xsa:label>
+				<xsa:help>Codicological and palaeographical description of the manuscript (e. g.: material, binding, decoration, hands).</xsa:help>
+			</xsa:messages>
+			<xsa:writeAccess>ROLE_WL_CONS</xsa:writeAccess>
+			<!--<xsa:readAccess>ROLE_WL_CONS</xsa:readAccess> -->
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder>
+		<xsa:instance mixed="no" under="areaProduction" xml:id="secMater">
+			<xsa:ui>section</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Material</xsa:label>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/objectDesc/supportDesc">
+		<xsa:instance mixed="no" xml:id="cntSuppDesc" under="secMater"
+			repeat="no">
+			<xsa:ui>container</xsa:ui>
+			<xsa:responsible required="true" />
+			<xsa:messages>
+				<xsa:label>Material preparation</xsa:label>
+			</xsa:messages>
+			
+		</xsa:instance>
+		
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/objectDesc/supportDesc/@material">
+		<xsa:instance mixed="no" repeat="no" under="cntSuppDesc"
+			authorityList="alMaterial">
+			<xsa:ui>field</xsa:ui>
+			<xsa:responsible required="true" />
+			<xsa:messages>
+				<xsa:label>Support material</xsa:label>
+				<xsa:help>Choose from the drop down list the material on which the text is written on, such as "chart" for paper, "perg" for vellum or parchment, etc.</xsa:help>
+			</xsa:messages>
+			
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/objectDesc/supportDesc/support">
+		<xsa:instance mixed="no" xml:id="cntSupport" under="cntSuppDesc"
+			repeat="no">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Support</xsa:label>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/objectDesc/supportDesc/support/material">
+		<xsa:instance mixed="no" repeat="no" under="cntSupport"
+			authorityList="alBurnished">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Burnished</xsa:label>
+				<xsa:help>Indicates whether material has been burnished (smoothed or polished).</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/objectDesc/supportDesc/support/watermark">
+		<xsa:instance mixed="no" repeat="no" under="cntSupport">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Watermark</xsa:label>
+				<xsa:help>Enter a brief description of the watermark(s) that exist, including a reference to Briquet if applicable (within a &lt;ref&gt; annotator).</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<!-- NS: extra field for "Watermark (Briquet) not needed. <xsa:dataHolder 
+		locator="/TEI/text/body/div/msDesc/physDesc/objectDesc/supportDesc/support/ref"> 
+		<xsa:instance mixed="no" repeat="no" under="cntSupport"> <xsa:ui>field</xsa:ui> 
+		<xsa:messages> <xsa:label>watermark (Briquet)</xsa:label> </xsa:messages> 
+		</xsa:instance> </xsa:dataHolder> -->
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/objectDesc/supportDesc/extent">
+		<xsa:instance mixed="yes" repeat="no" xml:id="cntExtnet"
+			under="cntSuppDesc">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Number of folios</xsa:label>
+				<xsa:help>Enter the number of folios of the manuscript or manuscript part.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/objectDesc/supportDesc/extent/dimensions">
+		<xsa:instance mixed="no" repeat="yes" xml:id="cntExtnetDimsFolio"
+			under="cntExtnet">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Dimensions of folio</xsa:label>
+				<xsa:help>Dimensions of the (physical) folios.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="unit" value="mm" />
+			<xsa:attribute name="type" value="leaf" />
+		</xsa:instance>
+		<xsa:instance mixed="no" repeat="yes" xml:id="cntExtnetDimsWritten"
+			under="cntExtnet">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Dimensions of written area</xsa:label>
+				<xsa:help>Dimensions of the written area.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="unit" value="mm" />
+			<xsa:attribute name="type" value="written" />
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/objectDesc/supportDesc/extent/dimensions/height">
+		<xsa:instance mixed="no" repeat="no" under="cntExtnetDimsFolio">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Height</xsa:label>
+				<xsa:help>Enter height of folios in mm.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+		<xsa:instance mixed="no" repeat="no" under="cntExtnetDimsWritten">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Height</xsa:label>
+				<xsa:help>Enter height of written area in mm, not including borders.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/objectDesc/supportDesc/extent/dimensions/width">
+		<xsa:instance mixed="no" repeat="no" under="cntExtnetDimsFolio">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Width</xsa:label>
+				<xsa:help>Enter width of folios in mm.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+		<xsa:instance mixed="no" repeat="no" under="cntExtnetDimsWritten">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Width</xsa:label>
+				<xsa:help>Enter width of written area in mm, not including borders.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/objectDesc/supportDesc/foliation">
+		<xsa:instance mixed="yes" repeat="no" under="cntSuppDesc"
+			xml:id="cntFoliation">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Foliation</xsa:label>
+				<xsa:help>Describe the numbering system or systems used to count the leaves or pages.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/objectDesc/supportDesc/collation/seg">
+		<xsa:instance mixed="no" repeat="yes" xml:id="cntGathering"
+			under="cntSuppDesc">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Gathering</xsa:label>
+			</xsa:messages>
+			<xsa:attribute name="type" value="gathering" />
+		</xsa:instance>
+
+		<!-- <xsa:instance mixed="no" xml:id="cntFormula" under="cntSuppDesc"> 
+			<xsa:ui>container</xsa:ui> <xsa:messages> <xsa:label>Formula</xsa:label> 
+			</xsa:messages> </xsa:instance> -->
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/objectDesc/supportDesc/collation/seg/@subtype">
+		<xsa:instance mixed="no" repeat="no" under="cntGathering"
+			authorityList="alGathering">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Gathering type</xsa:label>
+				<xsa:help>Choose the type of gathering from the drop down list.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/objectDesc/supportDesc/collation/seg/@n">
+		<xsa:instance mixed="no" repeat="no" under="cntGathering">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>range</xsa:label>
+				<xsa:help>Enter folio range if the information provided in the "Gathering type" field only applies to a certain range of folios.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/objectDesc/supportDesc/collation/seg/dimensions">
+		<xsa:instance mixed="no" xml:id="cntGathDims" repeat="no"
+			under="cntGathering">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Dimensions</xsa:label>
+			</xsa:messages>
+			<xsa:attribute name="unit" value="mm" />
+			<xsa:attribute name="type" value="leaf" />
+		</xsa:instance>
+	</xsa:dataHolder>
+	<!-- GB: gathering should be an empty element <xsa:dataHolder locator="/TEI/text/body/div/msDesc/physDesc/objectDesc/supportDesc/collation/seg/dimensions/height"> 
+		<xsa:instance mixed="no" under="cntGathDims" repeat="no"> <xsa:ui>field</xsa:ui> 
+		<xsa:messages> <xsa:label>Height</xsa:label> </xsa:messages> </xsa:instance> 
+		</xsa:dataHolder> -->
+	<!-- GB: gathering should be an empty element <xsa:dataHolder locator="/TEI/text/body/div/msDesc/physDesc/objectDesc/supportDesc/collation/seg/dimensions/width"> 
+		<xsa:instance mixed="no" under="cntGathDims" repeat="no"> <xsa:ui>field</xsa:ui> 
+		<xsa:messages> <xsa:label>Width</xsa:label> </xsa:messages> </xsa:instance> 
+		</xsa:dataHolder> -->
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/objectDesc/supportDesc/collation/seg/dimensions/@quantity">
+		<xsa:instance mixed="no" repeat="no" under="cntGathDims">
+			<!-- MUST BE @type="leaf" -->
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Number of gatherings</xsa:label>
+				<xsa:help>Number of gatherings (quires) in the manuscript.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/objectDesc/supportDesc/collation/seg/signatures">
+		<xsa:instance mixed="no" repeat="no" under="cntGathering">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Signatures (gathering)</xsa:label>
+				<xsa:help>Transcribe signature inscribed on the gathering if it exists.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/objectDesc/supportDesc/collation/seg/note">
+		<xsa:instance mixed="yes" repeat="no" under="cntGathering">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Note (gathering)</xsa:label>
+				<xsa:help>Explain in words the reasons for the absence of information.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/objectDesc/supportDesc/collation/seg/formula">
+		<xsa:instance mixed="no" repeat="no" under="cntSuppDesc">
+			<xsa:ui>field</xsa:ui>
+			<xsa:responsible />
+			<xsa:messages>
+				<xsa:label>Collation formula</xsa:label>
+				<xsa:help>Collation formula, formula for number of leaves in the quires.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/objectDesc/supportDesc/foliation/catchwords">
+		<xsa:instance mixed="no" repeat="no" under="cntFoliation">
+			<xsa:ui>field</xsa:ui>
+			<xsa:responsible />
+			<xsa:messages>
+				<xsa:label>Catchwords</xsa:label>
+				<xsa:help>Describes the system used to ensure
+correct ordering of the quires making up a codex or incunable,
+typically by means of annotations at the foot of the page.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/objectDesc/supportDesc/condition">
+		<xsa:instance mixed="no" repeat="no" under="cntSuppDesc"
+			authorityList="alCondition">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Condition of manuscript</xsa:label>
+				<xsa:help>Describe the general condition of the manuscript. Choose from the 2 entries in the drop down list: "sound", "deteriorated".</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/objectDesc/layoutDesc/layout">
+		<xsa:instance mixed="no" xml:id="cntLayout" under="secMater">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Layout</xsa:label>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/objectDesc/layoutDesc/layout/locus">
+		<xsa:instance mixed="yes" under="cntLayout" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Folio (layout info)</xsa:label>
+				<xsa:help>Enter the extent (folios from / to) to which the following layout descriptions apply, e. g. 123r - 124v.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<!-- "Mistara" should be a "YES/NO" field, and not a text input field. If 
+		"YES" it should insert @n="mistara" into <layout> -->
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/objectDesc/layoutDesc/layout/@columns">
+		<xsa:instance mixed="no" under="cntLayout" repeat="no"
+			authorityList="alNumColumns">
+			<xsa:ui>field</xsa:ui>
+			<xsa:responsible required="true" />
+			<xsa:messages>
+				<xsa:label>Columns</xsa:label>
+				<xsa:help>Enter the number of columns of written text.</xsa:help>
+			</xsa:messages>
+			
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/objectDesc/layoutDesc/layout/@ruledLines">
+		<xsa:instance mixed="no" under="cntLayout" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>No. of lines</xsa:label>
+				<xsa:help>Number of lines of text on the folio.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/objectDesc/layoutDesc/layout/@n">
+		<xsa:instance mixed="no" under="cntLayout" repeat="no"
+			authorityList="alMistara">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Mistara</xsa:label>
+				<xsa:help>If applicable, give the distance between two lines of the mistara in mm.</xsa:help>
+			</xsa:messages>
+			<!--<xsa:defaultVal>mistara</xsa:defaultVal> -->
+			<xsa:indexed solrType="boolean">Mistara.Present</xsa:indexed>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/objectDesc/layoutDesc/layout/dimensions/height">
+		<xsa:instance mixed="yes" under="cntLayout" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Line height (mistara)</xsa:label>
+				<xsa:help>Height of a line of text on the folio in mm.</xsa:help>
+			</xsa:messages>
+			<xsa:indexed solrType="tfloat" facet="tfloat">Mistara.Value</xsa:indexed>
+			<!-- <xsa:attribute name="unit" value="mm"/> -->
+			<!-- <xsa:attribute name="type" value="line-height"/> -->
+		</xsa:instance>
+	</xsa:dataHolder>
+
+	<xsa:dataHolder>
+		<xsa:instance mixed="no" xml:id="areaHistory" under="site">
+			<xsa:ui>area</xsa:ui>
+			<xsa:messages>
+				<xsa:label>History</xsa:label>
+				<xsa:help>Information related to the history of the manuscript (e. g.: dates, provenance, bibliography).</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder>
+		<xsa:instance mixed="no" xml:id="secDates" under="areaHistory">
+			<xsa:ui>section</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Dates / provenance</xsa:label>
+			</xsa:messages>
+			<xsa:writeAccess>ROLE_BA_ED</xsa:writeAccess>
+			<!--<xsa:readAccess>ROLE_BA_ED</xsa:readAccess> -->
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder>
+		<xsa:instance mixed="no" xml:id="secBinding" under="areaProduction">
+			<xsa:ui>section</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Binding</xsa:label>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder>
+		<xsa:instance mixed="no" xml:id="secDecoration" under="areaProduction">
+			<xsa:ui>section</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Decoration</xsa:label>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder>
+		<xsa:instance mixed="no" xml:id="secAdditions" under="areaProduction">
+			<xsa:ui>section</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Additions</xsa:label>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<!-- There should be a container called "Binding support" that contains 
+		the two fields "Sewing support" and "Support type" -->
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/bindingDesc/binding/p/seg">
+		<xsa:instance mixed="yes" under="secBinding" xml:id="cntSupportKind"
+			authorityList="alSupportKind" group="grpSupportKind">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Support type</xsa:label>
+				<xsa:help>Indicate material used for the support of the binding structure. Only needed if "Sewing support" is "supported".</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="structure" />
+		</xsa:instance>
+		<xsa:instance mixed="no" repeat="yes" xml:id="cntBoard"
+			under="secBinding" group="grpBoard">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Binding board</xsa:label>
+			</xsa:messages>
+			<xsa:attribute name="type" value="board" />
+		</xsa:instance>
+		<!-- The container "Cover" should contain the fields "Attached", "Material", 
+			"Flaps" and "Spine" as normal fields - at the moment there is a container 
+			"Flaps" that contains one field "Flaps", and one container "Spine" that contains 
+			"Spine", "Attached" and "Material" -->
+		<xsa:instance mixed="no" repeat="yes" xml:id="cntCover"
+			under="secBinding" group="grpCover">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Cover</xsa:label>
+			</xsa:messages>
+			<xsa:attribute name="type" value="covers" />
+		</xsa:instance>
+		<xsa:instance mixed="no" under="secBinding" repeat="no"
+			group="grpFurnEtc">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Furniture</xsa:label>
+				<xsa:help>Describe any furniture.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="furniture" />
+		</xsa:instance>
+		<xsa:instance mixed="no" xml:id="cntBookmark" under="secBinding"
+			repeat="no" group="grpFurnEtc">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Bookmark</xsa:label>
+			</xsa:messages>
+			<xsa:attribute name="type" value="bookmark" />
+		</xsa:instance>
+		<xsa:instance mixed="no" under="secBinding" xml:id="cntSatchel"
+			repeat="no" group="grpFurnEtc">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Satchel</xsa:label>
+				<xsa:help>If a satchel exists indicate whether leather or paper.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="satchel" />
+		</xsa:instance>
+		<xsa:instance mixed="no" xml:id="cntEndBands" under="secBinding"
+			repeat="no" group="grpFurnEtc">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>End bands</xsa:label>
+				<xsa:help>Describe the end bands in general.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="endbands" />
+		</xsa:instance>
+		<xsa:instance mixed="no" xml:id="tie" under="secBinding"
+			group="grpFurnEtc" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Tie</xsa:label>
+				<xsa:help>Describe any ties.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute value="tie" name="type" />
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/bindingDesc/binding/p/seg/@subtype">
+		<xsa:instance mixed="no" under="cntSupportKind" repeat="no"
+			authorityList="alSupportedOrNot">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Sewing support</xsa:label>
+				<xsa:help>Enter if sewing support is used for the binding structure.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+		<xsa:instance mixed="no" under="cntCover" repeat="no"
+			authorityList="alAttached">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Attached</xsa:label>
+				<xsa:help>Indicate whether the cover is attached to the spine/board.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/bindingDesc/binding/p/seg/material">
+		<xsa:instance mixed="no" under="cntBookmark" repeat="no"
+			authorityList="alBookmark">
+			<xsa:ui>field</xsa:ui>
+			<xsa:responsible required="false" />
+			<xsa:messages>
+				<xsa:label>Material</xsa:label>
+				<xsa:help>Indicate whether material of bookmark is "textile ribbon" or "other".</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+		<xsa:instance mixed="no" under="cntBoard" repeat="no"
+			authorityList="alBoardMaterial">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Material of board</xsa:label>
+				<xsa:help>Enter material of the board.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+		<xsa:instance mixed="no" under="cntCover" repeat="no"
+			authorityList="alCoverMaterial">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Material</xsa:label>
+				<xsa:help>Indicate the type of material used for the covering.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+		<xsa:instance mixed="no" under="cntSatchel" repeat="no"
+			authorityList="alSatchel">
+			<xsa:ui>field</xsa:ui>
+			<xsa:responsible required="false" />
+			<xsa:messages>
+				<xsa:label>Satchel</xsa:label>
+				<xsa:help>If a satchel exists, indicate if "leather" or "paper".</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/bindingDesc/binding/p/seg/desc">
+		<xsa:instance mixed="yes" under="cntEndBands" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:responsible />
+			<xsa:messages>
+				<xsa:label>Description</xsa:label>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/bindingDesc/binding/p/seg/seg">
+		<xsa:instance mixed="no" xml:id="cntEndBandsPrim" under="cntEndBands"
+			repeat="no">
+			<xsa:ui>container</xsa:ui>
+			<xsa:responsible />
+			<xsa:messages>
+				<xsa:label>Primary</xsa:label>
+				<xsa:help>Describe the primary end bands.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="primary" />
+		</xsa:instance>
+		<xsa:instance mixed="no" xml:id="cntEndBandsSec" under="cntEndBands"
+			repeat="no">
+			<xsa:ui>container</xsa:ui>
+			<xsa:responsible />
+			<xsa:messages>
+				<xsa:label>Secondary</xsa:label>
+				<xsa:help>Describe the secondary end bands.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="secondary" />
+		</xsa:instance>
+		<xsa:instance mixed="no" under="cntCover" repeat="no"
+			facs="yes" xml:id="cntFlaps">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Flaps</xsa:label>
+				<xsa:help>Indicate whether there are any flaps.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="extension" />
+		</xsa:instance>
+		<xsa:instance mixed="no" under="cntCover" repeat="no"
+			facs="yes" xml:id="cntSpine">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Spine</xsa:label>
+				<xsa:help>If a spine exists, indicate whether "flush" or "moulded".</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="spine_formation" />
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/bindingDesc/binding/p/seg/seg/@subtype">
+		<xsa:instance mixed="no" under="cntFlaps" repeat="no"
+			authorityList="alFlap">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Flaps</xsa:label>
+			</xsa:messages>
+			<!-- <xsa:defaultVal>flap</xsa:defaultVal> -->
+			<xsa:responsible required="true" />
+			
+		</xsa:instance>
+		<xsa:instance mixed="no" under="cntSpine" repeat="no"
+			authorityList="alSpine">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Spine</xsa:label>
+			</xsa:messages>
+			<xsa:responsible required="true" />
+			
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/bindingDesc/binding/p/seg/seg/desc">
+		<xsa:instance mixed="yes" under="cntEndBandsPrim" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Description</xsa:label>
+			</xsa:messages>
+		</xsa:instance>
+		<xsa:instance mixed="yes" under="cntEndBandsSec" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Description</xsa:label>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/bindingDesc/binding/p/seg/seg/seg">
+		<xsa:instance mixed="yes" under="cntEndBandsPrim" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Colour</xsa:label>
+				<xsa:help>Describe the colour of the primary end bands.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="color" />
+		</xsa:instance>
+		<xsa:instance mixed="yes" under="cntEndBandsSec" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Colour</xsa:label>
+				<xsa:help>Describe the colour of the secondary end bands.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="color" />
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/bindingDesc/binding/decoNote/desc">
+		<xsa:instance mixed="no" under="cntTooling" repeat="no"
+			authorityList="alTooling">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Description</xsa:label>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/bindingDesc/binding/decoNote">
+		<xsa:instance mixed="no" xml:id="cntTooling" under="secBinding"
+			group="grpFurnEtc">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Tooling</xsa:label>
+				<xsa:help>Describe any tooling.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="tooling" />
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder locator="/TEI/text/body/div/msDesc/physDesc/decoDesc/decoNote">
+		<xsa:instance mixed="yes" under="secDecoration" repeat="yes">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Border</xsa:label>
+				<xsa:help>Describe border or frame around the text.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="border" />
+		</xsa:instance>
+		<xsa:instance mixed="yes" under="secDecoration" repeat="yes">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Miniature</xsa:label>
+				<xsa:help>Describe illustrations on the page.</xsa:help>
+			</xsa:messages>
+			<xsa:indexed solrType="boolean">Miniatures.Present</xsa:indexed>
+			<xsa:attribute name="type" value="miniature" />
+		</xsa:instance>
+		<xsa:instance mixed="no" xml:id="cntUnwan" under="secDecoration"
+			repeat="no">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Unwan</xsa:label>
+				<xsa:help>Describe decorated 'unwan.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="unwan" />
+		</xsa:instance>
+		<xsa:instance mixed="no" xml:id="cntRubrication" under="secDecoration"
+			repeat="no">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Rubrication</xsa:label>
+				<xsa:help>Describe any rubrication.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="rubrication" />
+		</xsa:instance>
+		<xsa:instance mixed="yes" under="secDecoration" repeat="yes">
+			<xsa:ui>field</xsa:ui>
+			<xsa:responsible />
+			<xsa:messages>
+				<xsa:label>Other decoration</xsa:label>
+				<xsa:help>List any other decorations on the manuscript.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="other" />
+			
+		</xsa:instance>
+		
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/decoDesc/decoNote/desc">
+		<xsa:instance mixed="yes" under="cntUnwan" repeat="yes">
+			<xsa:ui>field</xsa:ui>
+			<xsa:responsible required="true" />
+			<xsa:messages>
+				<xsa:label>Unwan</xsa:label>
+			</xsa:messages>
+			
+			<xsa:indexed  solrType="boolean">Unwan.Present</xsa:indexed>
+		</xsa:instance>
+		<xsa:instance mixed="yes" under="cntRubrication" repeat="yes">
+			<xsa:ui>field</xsa:ui>
+			<xsa:responsible required="true" />
+			<xsa:messages>
+				<xsa:label>Rubrication</xsa:label>
+			</xsa:messages>
+			
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/additions/list/item">
+		<!-- ??? -->
+		<xsa:instance mixed="yes" under="secAdditions" repeat="yes"
+			xml:id="cntAddItem">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Additions</xsa:label>
+				<xsa:help>Give any notheworthy additional information, such as marginalia, kabikaj or translations of terms. Format:
+&lt;label&gt;Marginalia&lt;/label&gt;descriptive text &lt;label&gt;Kabikaj&lt;/label&gt;descriptive text &lt;label&gt;Translation&lt;/label&gt;descriptive text
+</xsa:help>
+			</xsa:messages>
+<!--			<xsa:indexed solrType="boolean">Additions.Present</xsa:indexed> -->
+		</xsa:instance>
+	</xsa:dataHolder>
+	<!-- <xsa:dataHolder locator="/TEI/text/body/div/msDesc/physDesc/additions/list/item/label"> 
+		<xsa:instance mixed="no" under="cntAddItem" repeat="no" authorityList="alAddItemType"> 
+		<xsa:ui>field</xsa:ui> <xsa:messages> <xsa:label>Type</xsa:label> </xsa:messages> 
+		<xsa:responsible required="true" /> </xsa:instance> </xsa:dataHolder> -->
+	<xsa:dataHolder locator="/TEI/text/body/div/msDesc/physDesc/accMat">
+		<xsa:instance mixed="yes" under="secAdditions" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Accompanying material</xsa:label>
+				<xsa:help>Contains details of any significant additional material which may be closely associated with the manuscript being described, such as non-contemporaneous documents or fragments bound in with the manuscript at some earlier historical period.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+
+	<xsa:dataHolder locator="/TEI/text/body/div/msDesc/physDesc/handDesc/handNote">
+		<xsa:instance mixed="no" xml:id="cntScript" under="secHand">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Hand</xsa:label>
+			</xsa:messages>
+			<xsa:attribute name="scope" value="major" />
+		</xsa:instance>
+	</xsa:dataHolder>
+	<!-- "Script" should be a subsec under "Hand". It should contain the fields 
+		"Script", "Ink colour", "Rubrication" and "Monochrome". "Ink colour" should 
+		_not_ be a container that contains "Rubrication" and "Monochrome" -->
+	<!-- "Script" should take its values from an authority list: alScript this 
+		is a requirement by the ENRICH standard -->
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/handDesc/handNote/@script">
+		<xsa:instance mixed="no" under="cntScript" repeat="no"
+			authorityList="alScript">
+			<xsa:ui>field</xsa:ui>
+			<xsa:responsible required="true" />
+			<xsa:messages>
+				<xsa:label>Script</xsa:label>
+				<xsa:help>Select type of script used.</xsa:help>
+			</xsa:messages>
+			<xsa:writeAccess>ROLE_BA_ED</xsa:writeAccess>
+			<!--<xsa:readAccess>ROLE_BA_ED</xsa:readAccess> -->
+			
+		</xsa:instance>
+	</xsa:dataHolder>
+	<!-- we created an additional field for a more verbous description as we 
+		realised when we looked at Nikolaj's previous inputs that he often likes 
+		to qualify the entries with additional information -->
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/handDesc/handNote/desc">
+		<xsa:instance mixed="no" under="cntScript" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:responsible required="false" />
+			<xsa:messages>
+				<xsa:label>Script description</xsa:label>
+				<xsa:help>If necessary, give a more verbose description of the script.</xsa:help>
+			</xsa:messages>
+			<xsa:writeAccess>ROLE_BA_ED</xsa:writeAccess>
+			<!--<xsa:readAccess>ROLE_BA_ED</xsa:readAccess> -->
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/handDesc/handNote/seg">
+		<xsa:instance mixed="yes" under="cntScript" repeat="no"
+			xml:id="cntInk">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Ink colour</xsa:label>
+				<xsa:help>Enter colour of the ink.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="ink" />
+			<xsa:writeAccess>ROLE_BA_ED</xsa:writeAccess>
+			<!--<xsa:readAccess>ROLE_BA_ED</xsa:readAccess> -->
+		</xsa:instance>
+		<xsa:instance mixed="no" xml:id="cntPace" under="cntScript"
+			repeat="no">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Pace</xsa:label>
+				<xsa:help>Numeric representation of script.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="pace" />
+			<xsa:writeAccess>ROLE_WL_ED</xsa:writeAccess>
+			<!--<xsa:readAccess>ROLE_WL_ED</xsa:readAccess> -->
+		</xsa:instance>
+		<xsa:instance mixed="no" xml:id="cntScribeNameSeg" under="cntScript"
+			repeat="no">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Scribe Name</xsa:label>
+			</xsa:messages>
+			<xsa:writeAccess>ROLE_BA_ED</xsa:writeAccess>
+			<!--<xsa:readAccess>ROLE_BA_ED</xsa:readAccess> -->
+		</xsa:instance>
+	</xsa:dataHolder>
+	<!-- If there is a "Rubrication" tdThere should also be an input field for 
+		the colour of the rubrication, i. e. the element content that would go into 
+		the "../handNote/seg/seg" when <seg type="rubrication"> -->
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/handDesc/handNote/seg/seg">
+		<xsa:instance mixed="no" under="cntInk" repeat="no"
+			authorityList="alBlank">
+			<xsa:ui>field</xsa:ui>
+<!-- Cannot be required while it uses alBlank			<xsa:responsible required="true" /> -->
+			<xsa:responsible required="false" />
+			<xsa:messages>
+				<xsa:label>Rubrication</xsa:label>
+				<xsa:help>Choose "Present" if there is rubrication in the manuscript.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="rubrication" />
+			
+		</xsa:instance>
+		<xsa:instance mixed="no" under="cntInk" repeat="no"
+			authorityList="alBlank">
+			<xsa:ui>field</xsa:ui>
+<!-- Cannot be required while it uses alBlank			<xsa:responsible required="true" /> -->
+			<xsa:responsible required="false" />
+			<xsa:messages>
+				<xsa:label>Monochrome</xsa:label>
+				<xsa:help>Choose "Present" if manuscript is in one colour only.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="monochrome" />
+			
+		</xsa:instance>
+		<xsa:instance mixed="no" under="cntPace" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Lines</xsa:label>
+				<xsa:help>Number of lines per page.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="lines" />
+			<xsa:indexed solrType="tfloat"  facet="tfloat">Pace.Lines</xsa:indexed>
+		</xsa:instance>
+		<xsa:instance mixed="no" under="cntPace" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Density</xsa:label>
+				<xsa:help>Multiply the number of lines by the number of connected units (not individual characters) per line.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="density" />
+			<xsa:indexed solrType="tfloat"  facet="tfloat">Pace.Density</xsa:indexed>
+		</xsa:instance>
+		<xsa:instance mixed="no" under="cntPace" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Ratio of characters</xsa:label>
+				<xsa:help>Measure the ratio between the height of the tallest letter (e. g. Alif) and the width of the widest letter (e. g. Ba), i. e. divide the height by the width and enter the result which should be a decimal number to one decimal place.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="ratio" />
+<!-- 	TODO: make it numeric somehow		<xsa:indexed>Pace.Character.Ratio</xsa:indexed> -->
+		</xsa:instance>
+		<xsa:instance mixed="no" under="cntPace" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Angle of alif</xsa:label>
+				<xsa:help>Measure the angle of connected alif.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="anglealef" />
+			<xsa:indexed solrType="tfloat"  facet="tfloat">Pace.Angle.Alef</xsa:indexed>
+		</xsa:instance>
+		<xsa:instance mixed="no" under="cntPace" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Angle of kaf</xsa:label>
+				<xsa:help>Measure the angle of the bar of the letter kaf.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="anglekaf" />
+			<xsa:indexed solrType="tfloat"  facet="tfloat">Pace.Angle.Kaf</xsa:indexed>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/handDesc/handNote/seg/persName">
+		<xsa:instance mixed="no" repeat="no" under="cntScribeNameSeg">
+			<xsa:ui>field</xsa:ui>
+			<xsa:attribute name="lang"
+				nsuri="http://www.w3.org/XML/1998/namespace" value="ara-Latn" />
+			<xsa:attribute name="type" value="standard" />
+			<xsa:messages>
+				<xsa:label>Name of scribe in transliteration</xsa:label>
+				<xsa:help>If there is a known or widely used English transliteration of the name, enter it here.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+		<xsa:instance mixed="no" group="grpScribeAr" repeat="no"
+			xml:id="cntScribeAr" under="cntScribeNameSeg">
+			<xsa:ui>container</xsa:ui>
+			<xsa:attribute name="lang"
+				nsuri="http://www.w3.org/XML/1998/namespace" value="ara-Arab" />
+			<xsa:attribute name="type" value="standard" />
+			<xsa:messages>
+				<xsa:label>Standard</xsa:label>
+			</xsa:messages>
+		</xsa:instance>
+		<xsa:instance mixed="no" group="grpScribeAr" repeat="no"
+			under="cntScribeNameSeg">
+			<xsa:ui>field</xsa:ui>
+			<xsa:attribute name="lang"
+				nsuri="http://www.w3.org/XML/1998/namespace" value="ara-Arab" />
+			<xsa:attribute name="type" value="original" />
+			<xsa:messages>
+				<xsa:label>Original</xsa:label>
+				<xsa:help>Name of the scribe as written in the manuscript.</xsa:help>
+			</xsa:messages>
+			<xsa:indexed facet="string">Scribe.Name</xsa:indexed>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/handDesc/handNote/seg/persName/surname">
+		<xsa:instance mixed="no" under="cntScribeAr" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Patronymic</xsa:label>
+				<xsa:help>Enter the patronymic component of the name.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/handDesc/handNote/seg/persName/forename">
+		<xsa:instance mixed="no" under="cntScribeAr" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Ism</xsa:label>
+				<xsa:help>Enter the "ism" part of the name.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/handDesc/handNote/seg/persName/addName">
+		<xsa:instance mixed="no" under="cntScribeAr">
+			<xsa:ui>field</xsa:ui>
+			<xsa:attribute name="type" value="laqab" />
+			<xsa:messages>
+				<xsa:label>Laqab</xsa:label>
+				<xsa:help>Enter the "laqab" component of the name.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+		<xsa:instance mixed="no" under="cntScribeAr">
+			<xsa:ui>field</xsa:ui>
+			<xsa:attribute name="type" value="kunyah" />
+			<xsa:messages>
+				<xsa:label>Kunyah</xsa:label>
+				<xsa:help>Enter the "kunya" component of the name.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+		<xsa:instance mixed="no" under="cntScribeAr">
+			<xsa:ui>field</xsa:ui>
+			<xsa:attribute name="type" value="khitab" />
+			<xsa:messages>
+				<xsa:label>Ḥiṭāb</xsa:label>
+				<xsa:help>Enter the "ẖiṭāb" component of the name, i. e. how the person is addressed.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+		<xsa:instance mixed="no" under="cntScribeAr">
+			<xsa:ui>field</xsa:ui>
+			<xsa:attribute name="type" value="nisbah" />
+			<xsa:messages>
+				<xsa:label>Nisbah</xsa:label>
+				<xsa:help>Enter the "nisbah" component of the name.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder locator="/TEI/text/body/div/msDesc/history/origin/date">
+		<xsa:instance mixed="yes" repeat="yes" xml:id="cntDateWritten"
+			under="secDates">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Scribal date</xsa:label>
+				<xsa:help>Dates as indicated in the colophon or elsewhere in the manuscript (choose era from calendar field).</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="written" />
+			<xsa:indexed solrType="tlong">Scribal.Year</xsa:indexed>
+		</xsa:instance>
+		<xsa:instance mixed="yes" repeat="yes" xml:id="cntDateGiven"
+			under="secDates">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Librarian date</xsa:label>
+				<xsa:help>Dates as determined by the encoder / librarian (choose era from calendar field).</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="given" />
+			<xsa:indexed  solrType="tlong">Librarian.Year</xsa:indexed>
+		</xsa:instance>
+		<xsa:instance mixed="yes" repeat="yes" xml:id="cntDateApprox"
+			under="secDates">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Approximate date</xsa:label>
+				<xsa:help>If the exact date is unknown, give an approximate date in textual form, e. g. "beginning of 15th century" (choose era from calendar field).</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="approxDate" />
+			<xsa:indexed  solrType="tlong">Approximate.Year</xsa:indexed>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/history/origin/date/@calendar">
+		<xsa:instance mixed="no" under="cntDateWritten" repeat="no"
+			authorityList="alCalendars">
+			<xsa:ui>field</xsa:ui>
+			<xsa:responsible required="true" />
+			<xsa:messages>
+				<xsa:label>Calendar</xsa:label>
+				<xsa:help>Select calendar / era.</xsa:help>
+			</xsa:messages>
+			
+		</xsa:instance>
+		<xsa:instance mixed="no" under="cntDateGiven" repeat="no"
+			authorityList="alCalendars">
+			<xsa:ui>field</xsa:ui>
+			<xsa:responsible required="true" />
+			<xsa:messages>
+				<xsa:label>Calendar</xsa:label>
+				<xsa:help>Select calendar / era.</xsa:help>
+			</xsa:messages>
+			
+		</xsa:instance>
+		<xsa:instance mixed="no" under="cntDateApprox" repeat="no"
+			authorityList="alCalendars">
+			<xsa:ui>field</xsa:ui>
+			<xsa:responsible required="true" />
+			<xsa:messages>
+				<xsa:label>Calendar</xsa:label>
+				<xsa:help>Select calendar / era.</xsa:help>
+			</xsa:messages>
+			
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/history/origin/date/@notBefore">
+		<xsa:instance mixed="no" under="cntDateApprox" repeat="yes">
+			<xsa:ui>field</xsa:ui>
+			<xsa:responsible required="false" />
+			<xsa:messages>
+				<xsa:label>Not before</xsa:label>
+				<xsa:help>Indicate earliest date.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/history/origin/date/@notAfter">
+		<xsa:instance mixed="no" under="cntDateApprox" repeat="yes">
+			<xsa:ui>field</xsa:ui>
+			<xsa:responsible required="false" />
+			<xsa:messages>
+				<xsa:help>Indicate latest date.</xsa:help>
+				<xsa:label>Not after</xsa:label>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder locator="/TEI/text/body/div/msDesc/history/origin/quote">
+		<xsa:instance mixed="yes" repeat="yes" under="secDates">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Colophon of manuscript</xsa:label>
+				<xsa:help>Transcribe the colophon for the whole manuscript in full if one exists.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="colophon" />
+			<xsa:indexed advancedSearch="textAR" facet="string">Colophon.Ms</xsa:indexed>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder locator="/TEI/text/body/div/msDesc/history/provenance">
+		<xsa:instance mixed="yes" repeat="yes" under="secDates">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Provenance / owners / readers</xsa:label>
+				<xsa:help>Input any information about previous owners, etc.</xsa:help>
+			</xsa:messages>
+			<!-- facet="string" -->
+			<xsa:indexed advancedSearch="textExactEN" >Provenance.Owners.Readers</xsa:indexed>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder locator="/TEI/text/body/div/msDesc/physDesc/sealDesc/seal/p">
+		<xsa:instance mixed="yes" repeat="yes" under="secDates">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Seal</xsa:label>
+				<xsa:help>Describe seals of current and previous owners.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/bindingDesc/binding/p/seg/dimensions">
+		<xsa:instance mixed="no" xml:id="cntBoardDims" under="cntBoard">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Dimensions</xsa:label>
+				<xsa:help>Dimensions of covered board.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="binding" />
+			<xsa:attribute name="unit" value="mm" />
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/bindingDesc/binding/p/seg/dimensions/height">
+		<xsa:instance mixed="yes" under="cntBoardDims" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:responsible required="true" />
+			<xsa:messages>
+				<xsa:label>Height</xsa:label>
+				<xsa:help>Enter height of the board in mm.</xsa:help>
+			</xsa:messages>
+			
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/physDesc/bindingDesc/binding/p/seg/dimensions/width">
+		<xsa:instance mixed="yes" under="cntBoardDims" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:responsible required="true" />
+			<xsa:messages>
+				<xsa:label>Width</xsa:label>
+				<xsa:help>Enter width of the board in mm.</xsa:help>
+			</xsa:messages>
+			
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder>
+		<xsa:instance xml:id="secAddInfo" under="areaHistory"
+			mixed="no">
+			<xsa:ui>section</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Additional information</xsa:label>
+			</xsa:messages>
+			<xsa:writeAccess>ROLE_WL_ED</xsa:writeAccess>
+			<!--<xsa:readAccess>ROLE_WL_ED</xsa:readAccess> -->
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder>
+		<xsa:instance xml:id="secBiblio" under="areaHistory"
+			mixed="no">
+			<xsa:ui>section</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Bibliography</xsa:label>
+			</xsa:messages>
+			<xsa:writeAccess>ROLE_WL_ED</xsa:writeAccess>
+			<!--<xsa:readAccess>ROLE_WL_ED</xsa:readAccess> -->
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/additional/adminInfo/recordHist/source">
+		<xsa:instance under="secAddInfo" mixed="yes">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Other catalogues</xsa:label>
+				<xsa:help>Give references to original catalogue entries from other sources.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder locator="/TEI/text/body/div/msDesc/history/acquisition">
+		<xsa:instance under="secAddInfo" mixed="yes">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Acquisition</xsa:label>
+				<xsa:help>Give any descriptive or other information
+concerning the process by which a manuscript or manuscript part entered the holding
+institution.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/additional/adminInfo/availability">
+		<xsa:instance xml:id="cntAvail" under="secAddInfo" mixed="no">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Availability</xsa:label>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/additional/adminInfo/availability/@status">
+		<xsa:instance under="cntAvail" mixed="no" authorityList="alAvailStatus">
+			<xsa:ui mixed="no">field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Availability status</xsa:label>
+				<xsa:help>Choose information about availability of the manuscript from drop down list.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/additional/adminInfo/availability/p">
+		<xsa:instance under="cntAvail" mixed="yes">
+			<xsa:ui mixed="no">field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Availability desc.</xsa:label>
+				<xsa:help>If necessary give a more verbose description about the availability of the manuscript.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/additional/adminInfo/custodialHist">
+		<xsa:instance xml:id="cntCustHist" under="secAddInfo"
+			mixed="no">
+			<xsa:ui mixed="no">container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Custodial history</xsa:label>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/additional/adminInfo/custodialHist/custEvent">
+		<xsa:instance xml:id="cntCustEv" under="cntCustHist"
+			mixed="yes">
+			<xsa:ui mixed="no">container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Custodial event</xsa:label>
+				<xsa:help>If necessary give a more verbose description of the custodial event.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/additional/adminInfo/custodialHist/custEvent/@type">
+		<xsa:instance under="cntCustEv" authorityList="alCustEvType"
+			mixed="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Type</xsa:label>
+				<xsa:help>Choose information about the type of any custodial event (e. g. conservation, exhibition, etc.) from drop down list.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/additional/adminInfo/custodialHist/custEvent/@when">
+		<xsa:instance under="cntCustEv" mixed="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Date</xsa:label>
+				<xsa:help>Give the date of the custodial event in ISO 8601 format, e. g.: "2010-08-30" (see: http://en.wikipedia.org/wiki/ISO_8601).</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder locator="/TEI/text/body/div/msDesc/additional/surrogates">
+		<xsa:instance mixed="yes" under="secAddInfo">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Surrogates</xsa:label>
+				<xsa:help>Describe existing surrogates of the manuscript, or parts of the manuscript, e. g. microfilms, photographs, digital photographs, etc.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder locator="/TEI/text/body/div/msDesc/additional/listBibl/bibl">
+		<xsa:instance under="secBiblio" mixed="yes" repeat="yes">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Bibl. item</xsa:label>
+				<xsa:help>Give bibliographical references of any known descriptions, editions, or other relevant publications.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder>
+		<xsa:instance mixed="no" xml:id="secHand" under="areaProduction">
+			<xsa:ui>section</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Hand</xsa:label>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+
+
+	<xsa:dataHolder>
+		<xsa:instance xml:id="areaAuditTrail" under="site">
+			<xsa:ui>area</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Audit Trail</xsa:label>
+			</xsa:messages>
+			<xsa:writeAccess>ROLE_NOBODY</xsa:writeAccess>
+			<xsa:readAccess>ROLE_XMLTEMPLATE_VIEWER</xsa:readAccess>
+		</xsa:instance>
+
+	</xsa:dataHolder>
+	<xsa:dataHolder locator="/TEI/teiHeader/revisionDesc/change">
+		<xsa:instance mixed="yes" repeat="yes" under="areaAuditTrail"
+			xml:id="cntChange">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Change</xsa:label>
+			</xsa:messages>
+			<xsa:writeAccess>ROLE_NOBODY</xsa:writeAccess>
+			<xsa:readAccess>ROLE_XMLTEMPLATE_VIEWER</xsa:readAccess>
+		</xsa:instance>
+	</xsa:dataHolder>
+
+	<xsa:dataHolder locator="/TEI/teiHeader/revisionDesc/change/@when">
+		<xsa:instance mixed="no" repeat="no" under="cntChange">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Date</xsa:label>
+			</xsa:messages>
+			<xsa:writeAccess>ROLE_NOBODY</xsa:writeAccess>
+			<xsa:readAccess>ROLE_XMLTEMPLATE_VIEWER</xsa:readAccess>
+		</xsa:instance>
+	</xsa:dataHolder>
+
+	<xsa:dataHolder locator="/TEI/teiHeader/revisionDesc/change/persName">
+		<xsa:instance mixed="no" repeat="no" under="cntChange">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Person Name</xsa:label>
+			</xsa:messages>
+			<xsa:writeAccess>ROLE_NOBODY</xsa:writeAccess>
+			<xsa:readAccess>ROLE_XMLTEMPLATE_VIEWER</xsa:readAccess>
+		</xsa:instance>
+	</xsa:dataHolder>
+
+	<xsa:groupDef ixInUi="2" xml:id="grpTEI">
+		<xsa:messages>
+			<xsa:label>TEI</xsa:label>
+		</xsa:messages>
+	</xsa:groupDef>
+	<xsa:groupDef ixInUi="1" xml:id="grpLibrary">
+		<xsa:messages>
+			<xsa:label>Library</xsa:label>
+		</xsa:messages>
+	</xsa:groupDef>
+	<xsa:groupDef ixInUi="1" xml:id="grpCover" decorate="no">
+		<xsa:messages>
+			<xsa:label>NONE</xsa:label>
+		</xsa:messages>
+	</xsa:groupDef>
+	<xsa:groupDef ixInUi="2" xml:id="grpBoard" decorate="no">
+		<xsa:messages>
+			<xsa:label>NONE</xsa:label>
+		</xsa:messages>
+	</xsa:groupDef>
+	<!-- grpFurnEtc should contain the normal fields (in this order) "Furniture", 
+		"Bookmark", "Satchel", the section "Endbands", and the normal fields "Tie" 
+		and "Tooling". There should not be a container "Bookmark" with the field 
+		"Material", but only "Bookmark" as a field offering the values of alBookmark. 
+		"Tooling" should not be a container with a field called "Description", but 
+		"Tooling" should be a field offering the values of alTooling. -->
+
+	<xsa:groupDef ixInUi="3" xml:id="grpFurnEtc">
+		<xsa:messages>
+			<xsa:label>Furniture etc</xsa:label>
+		</xsa:messages>
+	</xsa:groupDef>
+
+	<xsa:groupDef ixInUi="4" xml:id="grpSupportKind" decorate="no">
+		<xsa:messages>
+			<xsa:label>NONE</xsa:label>
+		</xsa:messages>
+	</xsa:groupDef>
+
+	<xsa:groupDef ixInUi="1" xml:id="grpScribeAr">
+		<xsa:messages>
+			<xsa:label>Scribe in Arabic</xsa:label>
+			<xsa:help>Split the standard form of the scribe's name into its constituent parts as applicable.</xsa:help>
+		</xsa:messages>
+	</xsa:groupDef>
+	<xsa:groupDef ixInUi="1" xml:id="grpArName">
+		<xsa:messages>
+			<xsa:label>Author in Arabic</xsa:label>
+			<xsa:help>Split the standard form of the author name into its constituent parts as applicable.</xsa:help>
+		</xsa:messages>
+	</xsa:groupDef>
+	<xsa:groupDef ixInUi="5" xml:id="grpTitle">
+		<xsa:messages>
+			<xsa:label>Title</xsa:label>
+		</xsa:messages>
+	</xsa:groupDef>
+
+	<!-- COPY FROM HERE DOWN ************************-->
+		<xsa:dataHolder>
+		<xsa:instance mixed="no" under="site" xml:id="parts_areaProduction">
+			<xsa:ui>area</xsa:ui>
+						<xsa:baseShift
+				pattern="/TEI/text/body/div/msDesc/msPart[?Manuscript Part]" />
+			<xsa:messages>
+				<xsa:label>Codicology (Parts)</xsa:label>
+				<xsa:help>Codicological and palaeographical description parts of the manuscript that is different from that of the manuscript as a whole(e. g.: material, binding, decoration, hands).</xsa:help>
+			</xsa:messages>
+			<xsa:writeAccess>ROLE_WL_CONS</xsa:writeAccess>
+			<!--<xsa:readAccess>ROLE_REVIEWER2</xsa:readAccess>-->
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder>
+		<xsa:instance mixed="no" under="parts_areaProduction" xml:id="parts_secMater">
+			<xsa:ui>section</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Material</xsa:label>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/objectDesc/supportDesc">
+		<xsa:instance mixed="no" xml:id="parts_cntSuppDesc" under="parts_secMater"
+			repeat="no">
+			<xsa:ui>container</xsa:ui>
+			<xsa:responsible required="false" />
+			<xsa:messages>
+				<xsa:label>Material preparation</xsa:label>
+			</xsa:messages>
+			
+		</xsa:instance>
+		
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/objectDesc/supportDesc/@material">
+		<xsa:instance mixed="no" repeat="no" under="parts_cntSuppDesc"
+			authorityList="alMaterial">
+			<xsa:ui>field</xsa:ui>
+			<xsa:responsible required="true" />
+			<xsa:messages>
+				<xsa:label>Support material</xsa:label>
+				<xsa:help>Choose from the drop down list the material on which the text is written on, such as "chart" for paper, "perg" for vellum or parchment, etc.</xsa:help>
+			</xsa:messages>
+			
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/objectDesc/supportDesc/support">
+		<xsa:instance mixed="no" xml:id="parts_cntSupport" under="parts_cntSuppDesc"
+			repeat="no">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Support</xsa:label>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/objectDesc/supportDesc/support/material">
+		<xsa:instance mixed="no" repeat="no" under="parts_cntSupport"
+			authorityList="alBurnished">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Burnished</xsa:label>
+				<xsa:help>Indicates whether material has been burnished (smoothed or polished).</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/objectDesc/supportDesc/support/watermark">
+		<xsa:instance mixed="no" repeat="no" under="parts_cntSupport">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Watermark</xsa:label>
+				<xsa:help>Enter a brief description of the watermark(s) that exist, including a reference to Briquet if applicable (within a &lt;ref&gt; annotator).</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<!-- NS: extra field for "Watermark (Briquet) not needed. <xsa:dataHolder 
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/objectDesc/supportDesc/support/ref"> 
+		<xsa:instance mixed="no" repeat="no" under="parts_cntSupport"> <xsa:ui>field</xsa:ui> 
+		<xsa:messages> <xsa:label>watermark (Briquet)</xsa:label> </xsa:messages> 
+		</xsa:instance> </xsa:dataHolder> -->
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/objectDesc/supportDesc/extent">
+		<xsa:instance mixed="yes" repeat="no" xml:id="parts_cntExtnet"
+			under="parts_cntSuppDesc">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Number of folios</xsa:label>
+				<xsa:help>Enter the number of folios of the manuscript or manuscript part.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/objectDesc/supportDesc/extent/dimensions">
+		<xsa:instance mixed="no" repeat="yes" xml:id="parts_cntExtnetDimsFolio"
+			under="parts_cntExtnet">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Dimensions of folio</xsa:label>
+				<xsa:help>Dimensions of the (physical) folios.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="unit" value="mm" />
+			<xsa:attribute name="type" value="leaf" />
+		</xsa:instance>
+		<xsa:instance mixed="no" repeat="yes" xml:id="parts_cntExtnetDimsWritten"
+			under="parts_cntExtnet">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Dimensions of written area</xsa:label>
+				<xsa:help>Dimensions of the written area.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="unit" value="mm" />
+			<xsa:attribute name="type" value="written" />
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/objectDesc/supportDesc/extent/dimensions/height">
+		<xsa:instance mixed="no" repeat="no" under="parts_cntExtnetDimsFolio">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Height</xsa:label>
+				<xsa:help>Enter height of folios in mm.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+		<xsa:instance mixed="no" repeat="no" under="parts_cntExtnetDimsWritten">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Height</xsa:label>
+				<xsa:help>Enter height of written area in mm, not including borders.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/objectDesc/supportDesc/extent/dimensions/width">
+		<xsa:instance mixed="no" repeat="no" under="parts_cntExtnetDimsFolio">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Width</xsa:label>
+				<xsa:help>Enter width of folios in mm.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+		<xsa:instance mixed="no" repeat="no" under="parts_cntExtnetDimsWritten">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Width</xsa:label>
+				<xsa:help>Enter width of written area in mm, not including borders.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/objectDesc/supportDesc/foliation">
+		<xsa:instance mixed="yes" repeat="no" under="parts_cntSuppDesc"
+			xml:id="parts_cntFoliation">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Foliation</xsa:label>
+				<xsa:help>Describe the numbering system or systems used to count the leaves or pages.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/objectDesc/supportDesc/collation/seg">
+		<xsa:instance mixed="no" repeat="yes" xml:id="parts_cntGathering"
+			under="parts_cntSuppDesc">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Gathering</xsa:label>
+			</xsa:messages>
+			<xsa:attribute name="type" value="gathering" />
+		</xsa:instance>
+
+		<!-- <xsa:instance mixed="no" xml:id="parts_cntFormula" under="parts_cntSuppDesc"> 
+			<xsa:ui>container</xsa:ui> <xsa:messages> <xsa:label>Formula</xsa:label> 
+			</xsa:messages> </xsa:instance> -->
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/objectDesc/supportDesc/collation/seg/@subtype">
+		<xsa:instance mixed="no" repeat="no" under="parts_cntGathering"
+			authorityList="alGathering">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Gathering type</xsa:label>
+				<xsa:help>Choose the type of gathering from the drop down list.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/objectDesc/supportDesc/collation/seg/@n">
+		<xsa:instance mixed="no" repeat="no" under="parts_cntGathering">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>range</xsa:label>
+				<xsa:help>Enter folio range if the information provided in the "Gathering type" field only applies to a certain range of folios.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/objectDesc/supportDesc/collation/seg/dimensions">
+		<xsa:instance mixed="no" xml:id="parts_cntGathDims" repeat="no"
+			under="parts_cntGathering">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Dimensions</xsa:label>
+			</xsa:messages>
+			<xsa:attribute name="unit" value="mm" />
+			<xsa:attribute name="type" value="leaf" />
+		</xsa:instance>
+	</xsa:dataHolder>
+	<!-- GB: gathering should be an empty element <xsa:dataHolder locator="/TEI/text/body/div/msDesc/msPart/physDesc/objectDesc/supportDesc/collation/seg/dimensions/height"> 
+		<xsa:instance mixed="no" under="parts_cntGathDims" repeat="no"> <xsa:ui>field</xsa:ui> 
+		<xsa:messages> <xsa:label>Height</xsa:label> </xsa:messages> </xsa:instance> 
+		</xsa:dataHolder> -->
+	<!-- GB: gathering should be an empty element <xsa:dataHolder locator="/TEI/text/body/div/msDesc/msPart/physDesc/objectDesc/supportDesc/collation/seg/dimensions/width"> 
+		<xsa:instance mixed="no" under="parts_cntGathDims" repeat="no"> <xsa:ui>field</xsa:ui> 
+		<xsa:messages> <xsa:label>Width</xsa:label> </xsa:messages> </xsa:instance> 
+		</xsa:dataHolder> -->
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/objectDesc/supportDesc/collation/seg/dimensions/@quantity">
+		<xsa:instance mixed="no" repeat="no" under="parts_cntGathDims">
+			<!-- MUST BE @type="leaf" -->
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Number of gatherings</xsa:label>
+				<xsa:help>Number of gatherings (quires) in the manuscript.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/objectDesc/supportDesc/collation/seg/signatures">
+		<xsa:instance mixed="no" repeat="no" under="parts_cntGathering">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Signatures (gathering)</xsa:label>
+				<xsa:help>Transcribe signature inscribed on the gathering if it exists.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/objectDesc/supportDesc/collation/seg/note">
+		<xsa:instance mixed="yes" repeat="no" under="parts_cntGathering">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Note (gathering)</xsa:label>
+				<xsa:help>Explain in words the reasons for the absence of information.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/objectDesc/supportDesc/collation/seg/formula">
+		<xsa:instance mixed="no" repeat="no" under="parts_cntSuppDesc">
+			<xsa:ui>field</xsa:ui>
+			<xsa:responsible />
+			<xsa:messages>
+				<xsa:label>Collation formula</xsa:label>
+				<xsa:help>Collation formula, formula for number of leaves in the quires.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/objectDesc/supportDesc/foliation/catchwords">
+		<xsa:instance mixed="no" repeat="no" under="parts_cntFoliation">
+			<xsa:ui>field</xsa:ui>
+			<xsa:responsible />
+			<xsa:messages>
+				<xsa:label>Catchwords</xsa:label>
+				<xsa:help>Describes the system used to ensure
+correct ordering of the quires making up a codex or incunable,
+typically by means of annotations at the foot of the page.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/objectDesc/supportDesc/condition">
+		<xsa:instance mixed="no" repeat="no" under="parts_cntSuppDesc"
+			authorityList="alCondition">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Condition of manuscript</xsa:label>
+				<xsa:help>Describe the general condition of the manuscript. Choose from the 2 entries in the drop down list: "sound", "deteriorated".</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/objectDesc/layoutDesc/layout">
+		<xsa:instance mixed="no" xml:id="parts_cntLayout" under="parts_secMater">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Layout</xsa:label>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/objectDesc/layoutDesc/layout/locus">
+		<xsa:instance mixed="yes" under="parts_cntLayout" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Folio (layout info)</xsa:label>
+				<xsa:help>Enter the extent (folios from / to) to which the following layout descriptions apply, e. g. 123r - 124v.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<!-- "Mistara" should be a "YES/NO" field, and not a text input field. If 
+		"YES" it should insert @n="mistara" into <layout> -->
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/objectDesc/layoutDesc/layout/@columns">
+		<xsa:instance mixed="no" under="parts_cntLayout" repeat="no"
+			authorityList="alNumColumns">
+			<xsa:ui>field</xsa:ui>
+			<xsa:responsible required="true" />
+			<xsa:messages>
+				<xsa:label>Columns</xsa:label>
+				<xsa:help>Enter the number of columns of written text.</xsa:help>
+			</xsa:messages>
+			
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/objectDesc/layoutDesc/layout/@ruledLines">
+		<xsa:instance mixed="no" under="parts_cntLayout" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>No. of lines</xsa:label>
+				<xsa:help>Number of lines of text on the folio.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/objectDesc/layoutDesc/layout/@n">
+		<xsa:instance mixed="no" under="parts_cntLayout" repeat="no"
+			authorityList="alMistara">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Mistara</xsa:label>
+				<xsa:help>If applicable, give the distance between two lines of the mistara in mm.</xsa:help>
+			</xsa:messages>
+			<!--<xsa:defaultVal>mistara</xsa:defaultVal> -->
+			<xsa:indexed solrType="boolean">Mistara.Present</xsa:indexed>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/objectDesc/layoutDesc/layout/dimensions/height">
+		<xsa:instance mixed="yes" under="parts_cntLayout" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Line height (mistara)</xsa:label>
+				<xsa:help>Height of a line of text on the folio in mm.</xsa:help>
+			</xsa:messages>
+			<xsa:indexed solrType="tfloat" facet="tfloat">Mistara.Value</xsa:indexed>
+			<!-- <xsa:attribute name="unit" value="mm"/> -->
+			<!-- <xsa:attribute name="type" value="line-height"/> -->
+		</xsa:instance>
+	</xsa:dataHolder>
+
+<xsa:dataHolder>
+		<xsa:instance mixed="no" xml:id="parts_areaHistory" under="site">
+			<xsa:ui>area</xsa:ui>
+			<xsa:baseShift
+				pattern="/TEI/text/body/div/msDesc/msPart[?Manuscript Part]" />
+			<xsa:messages>
+				<xsa:label>History (Parts)</xsa:label>
+				<xsa:help>Information related to the history of parts of the manuscript that is different from that of the manuscript as a whole (e. g.: dates, provenance, bibliography).</xsa:help>
+			</xsa:messages>
+			<!--<xsa:readAccess>ROLE_REVIEWER2</xsa:readAccess>-->
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder>
+		<xsa:instance mixed="no" xml:id="parts_secDates" under="parts_areaHistory">
+			<xsa:ui>section</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Dates / provenance</xsa:label>
+			</xsa:messages>
+			<xsa:writeAccess>ROLE_BA_ED</xsa:writeAccess>
+			<!--<xsa:readAccess>ROLE_BA_ED</xsa:readAccess> -->
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder>
+		<xsa:instance mixed="no" xml:id="parts_secBinding" under="parts_areaProduction">
+			<xsa:ui>section</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Binding</xsa:label>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder>
+		<xsa:instance mixed="no" xml:id="parts_secDecoration" under="parts_areaProduction">
+			<xsa:ui>section</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Decoration</xsa:label>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder>
+		<xsa:instance mixed="no" xml:id="parts_secAdditions" under="parts_areaProduction">
+			<xsa:ui>section</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Additions</xsa:label>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<!-- There should be a container called "Binding support" that contains 
+		the two fields "Sewing support" and "Support type" -->
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/bindingDesc/binding/p/seg">
+		<xsa:instance mixed="yes" under="parts_secBinding" xml:id="parts_cntSupportKind"
+			authorityList="alSupportKind" group="parts_grpSupportKind">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Support type</xsa:label>
+				<xsa:help>Indicate material used for the support of the binding structure. Only needed if "Sewing support" is "supported".</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="structure" />
+		</xsa:instance>
+		<xsa:instance mixed="no" repeat="yes" xml:id="parts_cntBoard"
+			under="parts_secBinding" group="parts_grpBoard">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Binding board</xsa:label>
+			</xsa:messages>
+			<xsa:attribute name="type" value="board" />
+		</xsa:instance>
+		<!-- The container "Cover" should contain the fields "Attached", "Material", 
+			"Flaps" and "Spine" as normal fields - at the moment there is a container 
+			"Flaps" that contains one field "Flaps", and one container "Spine" that contains 
+			"Spine", "Attached" and "Material" -->
+		<xsa:instance mixed="no" repeat="yes" xml:id="parts_cntCover"
+			under="parts_secBinding" group="parts_grpCover">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Cover</xsa:label>
+			</xsa:messages>
+			<xsa:attribute name="type" value="covers" />
+		</xsa:instance>
+		<xsa:instance mixed="no" under="parts_secBinding" repeat="no"
+			group="parts_grpFurnEtc">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Furniture</xsa:label>
+				<xsa:help>Describe any furniture.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="furniture" />
+		</xsa:instance>
+		<xsa:instance mixed="no" xml:id="parts_cntBookmark" under="parts_secBinding"
+			repeat="no" group="parts_grpFurnEtc">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Bookmark</xsa:label>
+			</xsa:messages>
+			<xsa:attribute name="type" value="bookmark" />
+		</xsa:instance>
+		<xsa:instance mixed="no" under="parts_secBinding" xml:id="parts_cntSatchel"
+			repeat="no" group="parts_grpFurnEtc">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Satchel</xsa:label>
+				<xsa:help>If a satchel exists indicate whether leather or paper.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="satchel" />
+		</xsa:instance>
+		<xsa:instance mixed="no" xml:id="parts_cntEndBands" under="parts_secBinding"
+			repeat="no" group="parts_grpFurnEtc">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>End bands</xsa:label>
+				<xsa:help>Describe the end bands in general.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="endbands" />
+		</xsa:instance>
+		<xsa:instance mixed="no" xml:id="parts_tie" under="parts_secBinding"
+			group="parts_grpFurnEtc" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Tie</xsa:label>
+				<xsa:help>Describe any ties.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute value="tie" name="type" />
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/bindingDesc/binding/p/seg/@subtype">
+		<xsa:instance mixed="no" under="parts_cntSupportKind" repeat="no"
+			authorityList="alSupportedOrNot">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Sewing support</xsa:label>
+				<xsa:help>Enter if sewing support is used for the binding structure.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+		<xsa:instance mixed="no" under="parts_cntCover" repeat="no"
+			authorityList="alAttached">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Attached</xsa:label>
+				<xsa:help>Indicate whether the cover is attached to the spine/board.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/bindingDesc/binding/p/seg/material">
+		<xsa:instance mixed="no" under="parts_cntBookmark" repeat="no"
+			authorityList="alBookmark">
+			<xsa:ui>field</xsa:ui>
+			<xsa:responsible required="false" />
+			<xsa:messages>
+				<xsa:label>Material</xsa:label>
+				<xsa:help>Indicate whether material of bookmark is "textile ribbon" or "other".</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+		<xsa:instance mixed="no" under="parts_cntBoard" repeat="no"
+			authorityList="alBoardMaterial">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Material of board</xsa:label>
+				<xsa:help>Enter material of the board.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+		<xsa:instance mixed="no" under="parts_cntCover" repeat="no"
+			authorityList="alCoverMaterial">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Material</xsa:label>
+				<xsa:help>Indicate the type of material used for the covering.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+		<xsa:instance mixed="no" under="parts_cntSatchel" repeat="no"
+			authorityList="alSatchel">
+			<xsa:ui>field</xsa:ui>
+			<xsa:responsible required="false" />
+			<xsa:messages>
+				<xsa:label>Satchel</xsa:label>
+				<xsa:help>If a satchel exists, indicate if "leather" or "paper".</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/bindingDesc/binding/p/seg/desc">
+		<xsa:instance mixed="yes" under="parts_cntEndBands" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:responsible />
+			<xsa:messages>
+				<xsa:label>Description</xsa:label>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/bindingDesc/binding/p/seg/seg">
+		<xsa:instance mixed="no" xml:id="parts_cntEndBandsPrim" under="parts_cntEndBands"
+			repeat="no">
+			<xsa:ui>container</xsa:ui>
+			<xsa:responsible />
+			<xsa:messages>
+				<xsa:label>Primary</xsa:label>
+				<xsa:help>Describe the primary end bands.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="primary" />
+		</xsa:instance>
+		<xsa:instance mixed="no" xml:id="parts_cntEndBandsSec" under="parts_cntEndBands"
+			repeat="no">
+			<xsa:ui>container</xsa:ui>
+			<xsa:responsible />
+			<xsa:messages>
+				<xsa:label>Secondary</xsa:label>
+				<xsa:help>Describe the secondary end bands.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="secondary" />
+		</xsa:instance>
+		<xsa:instance mixed="no" under="parts_cntCover" repeat="no"
+			facs="yes" xml:id="parts_cntFlaps">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Flaps</xsa:label>
+				<xsa:help>Indicate whether there are any flaps.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="extension" />
+		</xsa:instance>
+		<xsa:instance mixed="no" under="parts_cntCover" repeat="no"
+			facs="yes" xml:id="parts_cntSpine">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Spine</xsa:label>
+				<xsa:help>If a spine exists, indicate whether "flush" or "moulded".</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="spine_formation" />
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/bindingDesc/binding/p/seg/seg/@subtype">
+		<xsa:instance mixed="no" under="parts_cntFlaps" repeat="no"
+			authorityList="alFlap">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Flaps</xsa:label>
+			</xsa:messages>
+			<!-- <xsa:defaultVal>flap</xsa:defaultVal> -->
+			<xsa:responsible required="true" />
+			
+		</xsa:instance>
+		<xsa:instance mixed="no" under="parts_cntSpine" repeat="no"
+			authorityList="alSpine">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Spine</xsa:label>
+			</xsa:messages>
+			<xsa:responsible required="true" />
+			
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/bindingDesc/binding/p/seg/seg/desc">
+		<xsa:instance mixed="yes" under="parts_cntEndBandsPrim" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Description</xsa:label>
+			</xsa:messages>
+		</xsa:instance>
+		<xsa:instance mixed="yes" under="parts_cntEndBandsSec" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Description</xsa:label>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/bindingDesc/binding/p/seg/seg/seg">
+		<xsa:instance mixed="yes" under="parts_cntEndBandsPrim" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Colour</xsa:label>
+				<xsa:help>Describe the colour of the primary end bands.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="color" />
+		</xsa:instance>
+		<xsa:instance mixed="yes" under="parts_cntEndBandsSec" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Colour</xsa:label>
+				<xsa:help>Describe the colour of the secondary end bands.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="color" />
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/bindingDesc/binding/decoNote/desc">
+		<xsa:instance mixed="no" under="parts_cntTooling" repeat="no"
+			authorityList="alTooling">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Description</xsa:label>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/bindingDesc/binding/decoNote">
+		<xsa:instance mixed="no" xml:id="parts_cntTooling" under="parts_secBinding"
+			group="parts_grpFurnEtc">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Tooling</xsa:label>
+				<xsa:help>Describe any tooling.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="tooling" />
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder locator="/TEI/text/body/div/msDesc/msPart/physDesc/decoDesc/decoNote">
+		<xsa:instance mixed="yes" under="parts_secDecoration" repeat="yes">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Border</xsa:label>
+				<xsa:help>Describe border or frame around the text.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="border" />
+		</xsa:instance>
+		<xsa:instance mixed="yes" under="parts_secDecoration" repeat="yes">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Miniature</xsa:label>
+				<xsa:help>Describe illustrations on the page.</xsa:help>
+			</xsa:messages>
+			<xsa:indexed solrType="boolean">Miniatures.Present</xsa:indexed>
+			<xsa:attribute name="type" value="miniature" />
+		</xsa:instance>
+		<!-- "Unwan" should be a normal input field, not a container with a sub 
+			field called "Description" -->
+		<xsa:instance mixed="no" xml:id="parts_cntUnwan" under="parts_secDecoration"
+			repeat="no">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Unwan</xsa:label>
+				<xsa:help>Describe decorated 'unwan.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="unwan" />
+		</xsa:instance>
+		<!-- "Rubrication" should be a normal input field, not a container with 
+			a sub field called "Description". "Border", "Miniature" and "Other decoration" 
+			should be normal input fields on the same level as "Unwan" and "Rubrication" -->
+		<!-- 2010-08-23 "Ink colour" should be repeatable - Rubrication and Monochrome 
+			should have "none" as second option -->
+		<xsa:instance mixed="no" xml:id="parts_cntRubrication" under="parts_secDecoration"
+			repeat="no">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Rubrication</xsa:label>
+				<xsa:help>Describe any rubrication.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="rubrication" />
+		</xsa:instance>
+		<xsa:instance mixed="yes" under="parts_secDecoration" repeat="yes">
+			<xsa:ui>field</xsa:ui>
+			<xsa:responsible />
+			<xsa:messages>
+				<xsa:label>Other decoration</xsa:label>
+				<xsa:help>List any other decorations on the manuscript.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="other" />
+			
+		</xsa:instance>
+		
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/decoDesc/decoNote/desc">
+		<xsa:instance mixed="yes" under="parts_cntUnwan" repeat="yes">
+			<xsa:ui>field</xsa:ui>
+			<xsa:responsible required="true" />
+			<xsa:messages>
+				<xsa:label>Unwan</xsa:label>
+			</xsa:messages>
+			
+			<xsa:indexed  solrType="boolean">Unwan.Present</xsa:indexed>
+		</xsa:instance>
+		<xsa:instance mixed="yes" under="parts_cntRubrication" repeat="yes">
+			<xsa:ui>field</xsa:ui>
+			<xsa:responsible required="true" />
+			<xsa:messages>
+				<xsa:label>Rubrication</xsa:label>
+			</xsa:messages>
+			
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/additions/list/item">
+		<!-- ??? -->
+		<xsa:instance mixed="yes" under="parts_secAdditions" repeat="yes"
+			xml:id="parts_cntAddItem">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Additions</xsa:label>
+				<xsa:help>Give any notheworthy additional information, such as marginalia, kabikaj or translations of terms. Format:
+&lt;label&gt;Marginalia&lt;/label&gt;descriptive text &lt;label&gt;Kabikaj&lt;/label&gt;descriptive text &lt;label&gt;Translation&lt;/label&gt;descriptive text
+</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<!-- <xsa:dataHolder locator="/TEI/text/body/div/msDesc/msPart/physDesc/additions/list/item/label"> 
+		<xsa:instance mixed="no" under="parts_cntAddItem" repeat="no" authorityList="alAddItemType"> 
+		<xsa:ui>field</xsa:ui> <xsa:messages> <xsa:label>Type</xsa:label> </xsa:messages> 
+		<xsa:responsible required="true" /> </xsa:instance> </xsa:dataHolder> -->
+	<xsa:dataHolder locator="/TEI/text/body/div/msDesc/msPart/physDesc/accMat">
+		<xsa:instance mixed="yes" under="parts_secAdditions" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Accompanying material</xsa:label>
+				<xsa:help>Contains details of any significant additional material which may be closely associated with the manuscript being described, such as non-contemporaneous documents or fragments bound in with the manuscript at some earlier historical period.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+
+	<xsa:dataHolder locator="/TEI/text/body/div/msDesc/msPart/physDesc/handDesc/handNote">
+		<xsa:instance mixed="no" xml:id="parts_cntScript" under="parts_secHand">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Hand</xsa:label>
+			</xsa:messages>
+			<xsa:attribute name="scope" value="major" />
+		</xsa:instance>
+	</xsa:dataHolder>
+	<!-- "Script" should be a subsec under "Hand". It should contain the fields 
+		"Script", "Ink colour", "Rubrication" and "Monochrome". "Ink colour" should 
+		_not_ be a container that contains "Rubrication" and "Monochrome" -->
+	<!-- "Script" should take its values from an authority list: alScript this 
+		is a requirement by the ENRICH standard -->
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/handDesc/handNote/@script">
+		<xsa:instance mixed="no" under="parts_cntScript" repeat="no"
+			authorityList="alScript">
+			<xsa:ui>field</xsa:ui>
+			<xsa:responsible required="true" />
+			<xsa:messages>
+				<xsa:label>Script</xsa:label>
+				<xsa:help>Select type of script used.</xsa:help>
+			</xsa:messages>
+			<xsa:writeAccess>ROLE_BA_ED</xsa:writeAccess>
+			<!--<xsa:readAccess>ROLE_BA_ED</xsa:readAccess> -->
+			
+		</xsa:instance>
+	</xsa:dataHolder>
+	<!-- we created an additional field for a more verbous description as we 
+		realised when we looked at Nikolaj's previous inputs that he often likes 
+		to qualify the entries with additional information -->
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/handDesc/handNote/desc">
+		<xsa:instance mixed="no" under="parts_cntScript" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:responsible required="false" />
+			<xsa:messages>
+				<xsa:label>Script description</xsa:label>
+				<xsa:help>If necessary, give a more verbose description of the script.</xsa:help>
+			</xsa:messages>
+			<xsa:writeAccess>ROLE_BA_ED</xsa:writeAccess>
+			<!--<xsa:readAccess>ROLE_BA_ED</xsa:readAccess> -->
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/handDesc/handNote/seg">
+		<xsa:instance mixed="yes" under="parts_cntScript" repeat="no"
+			xml:id="parts_cntInk">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Ink colour</xsa:label>
+				<xsa:help>Enter colour of the ink.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="ink" />
+			<xsa:writeAccess>ROLE_BA_ED</xsa:writeAccess>
+			<!--<xsa:readAccess>ROLE_BA_ED</xsa:readAccess> -->
+		</xsa:instance>
+		<xsa:instance mixed="no" xml:id="parts_cntPace" under="parts_cntScript"
+			repeat="no">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Pace</xsa:label>
+				<xsa:help>Numeric representation of script.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="pace" />
+			<xsa:writeAccess>ROLE_WL_ED</xsa:writeAccess>
+			<!--<xsa:readAccess>ROLE_WL_ED</xsa:readAccess> -->
+		</xsa:instance>
+		<xsa:instance mixed="no" xml:id="parts_cntScribeNameSeg" under="parts_cntScript"
+			repeat="no">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Scribe Name</xsa:label>
+			</xsa:messages>
+			<xsa:writeAccess>ROLE_BA_ED</xsa:writeAccess>
+			<!--<xsa:readAccess>ROLE_BA_ED</xsa:readAccess> -->
+		</xsa:instance>
+	</xsa:dataHolder>
+	<!-- If there is a "Rubrication" tdThere should also be an input field for 
+		the colour of the rubrication, i. e. the element content that would go into 
+		the "../handNote/seg/seg" when <seg type="rubrication"> -->
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/handDesc/handNote/seg/seg">
+		<xsa:instance mixed="no" under="parts_cntInk" repeat="no"
+			authorityList="alBlank">
+			<xsa:ui>field</xsa:ui>
+<!-- Cannot be required while it uses alBlank			<xsa:responsible required="true" /> -->
+			<xsa:responsible required="false" />
+			<xsa:messages>
+				<xsa:label>Rubrication</xsa:label>
+				<xsa:help>Choose "Present" if there is rubrication in the manuscript.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="rubrication" />
+			
+		</xsa:instance>
+		<xsa:instance mixed="no" under="parts_cntInk" repeat="no"
+			authorityList="alBlank">
+			<xsa:ui>field</xsa:ui>
+<!-- Cannot be required while it uses alBlank			<xsa:responsible required="true" /> -->
+			<xsa:responsible required="false" />
+			<xsa:messages>
+				<xsa:label>Monochrome</xsa:label>
+				<xsa:help>Choose "Present" if manuscript is in one colour only.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="monochrome" />
+			
+		</xsa:instance>
+		<xsa:instance mixed="no" under="parts_cntPace" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Lines</xsa:label>
+				<xsa:help>Number of lines per page.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="lines" />
+			<xsa:indexed solrType="tfloat"  facet="tfloat">Pace.Lines</xsa:indexed>
+		</xsa:instance>
+		<xsa:instance mixed="no" under="parts_cntPace" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Density</xsa:label>
+				<xsa:help>Multiply the number of lines by the number of connected units (not individual characters) per line.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="density" />
+			<xsa:indexed solrType="tfloat"  facet="tfloat">Pace.Density</xsa:indexed>
+		</xsa:instance>
+		<xsa:instance mixed="no" under="parts_cntPace" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Ratio of characters</xsa:label>
+				<xsa:help>Measure the ratio between the height of the tallest letter (e. g. Alif) and the width of the widest letter (e. g. Ba), i. e. divide the height by the width and enter the result which should be a decimal number to one decimal place.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="ratio" />
+<!--			<xsa:indexed>Pace.Character.Ratio</xsa:indexed> -->
+		</xsa:instance>
+		<xsa:instance mixed="no" under="parts_cntPace" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Angle of alif</xsa:label>
+				<xsa:help>Measure the angle of connected alif.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="anglealef" />
+			<xsa:indexed solrType="tfloat"  facet="tfloat">Pace.Angle.Alef</xsa:indexed>
+		</xsa:instance>
+		<xsa:instance mixed="no" under="parts_cntPace" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Angle of kaf</xsa:label>
+				<xsa:help>Measure the angle of the bar of the letter kaf.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="anglekaf" />
+			<xsa:indexed solrType="tfloat"  facet="tfloat">Pace.Angle.Kaf</xsa:indexed>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/handDesc/handNote/seg/persName">
+		<xsa:instance mixed="no" repeat="no" under="parts_cntScribeNameSeg">
+			<xsa:ui>field</xsa:ui>
+			<xsa:attribute name="lang"
+				nsuri="http://www.w3.org/XML/1998/namespace" value="ara-Latn" />
+			<xsa:attribute name="type" value="standard" />
+			<xsa:messages>
+				<xsa:label>Name of scribe in transliteration</xsa:label>
+				<xsa:help>If there is a known or widely used English transliteration of the name, enter it here.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+		<xsa:instance mixed="no" group="parts_grpScribeAr" repeat="no"
+			xml:id="parts_cntScribeAr" under="parts_cntScribeNameSeg">
+			<xsa:ui>container</xsa:ui>
+			<xsa:attribute name="lang"
+				nsuri="http://www.w3.org/XML/1998/namespace" value="ara-Arab" />
+			<xsa:attribute name="type" value="standard" />
+			<xsa:messages>
+				<xsa:label>Standard</xsa:label>
+			</xsa:messages>
+		</xsa:instance>
+		<xsa:instance mixed="no" group="parts_grpScribeAr" repeat="no"
+			under="parts_cntScribeNameSeg">
+			<xsa:ui>field</xsa:ui>
+			<xsa:attribute name="lang"
+				nsuri="http://www.w3.org/XML/1998/namespace" value="ara-Arab" />
+			<xsa:attribute name="type" value="original" />
+			<xsa:messages>
+				<xsa:label>Original</xsa:label>
+				<xsa:help>Name of the scribe as written in the manuscript.</xsa:help>
+			</xsa:messages>
+			<xsa:indexed facet="string">Scribe.Name</xsa:indexed>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/handDesc/handNote/seg/persName/surname">
+		<xsa:instance mixed="no" under="parts_cntScribeAr" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Patronymic</xsa:label>
+				<xsa:help>Enter the patronymic component of the name.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/handDesc/handNote/seg/persName/forename">
+		<xsa:instance mixed="no" under="parts_cntScribeAr" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Ism</xsa:label>
+				<xsa:help>Enter the "ism" part of the name.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/handDesc/handNote/seg/persName/addName">
+		<xsa:instance mixed="no" under="parts_cntScribeAr">
+			<xsa:ui>field</xsa:ui>
+			<xsa:attribute name="type" value="laqab" />
+			<xsa:messages>
+				<xsa:label>Laqab</xsa:label>
+				<xsa:help>Enter the "laqab" component of the name.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+		<xsa:instance mixed="no" under="parts_cntScribeAr">
+			<xsa:ui>field</xsa:ui>
+			<xsa:attribute name="type" value="kunyah" />
+			<xsa:messages>
+				<xsa:label>Kunyah</xsa:label>
+				<xsa:help>Enter the "kunya" component of the name.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+		<xsa:instance mixed="no" under="parts_cntScribeAr">
+			<xsa:ui>field</xsa:ui>
+			<xsa:attribute name="type" value="khitab" />
+			<xsa:messages>
+				<xsa:label>Ḥiṭāb</xsa:label>
+				<xsa:help>Enter the "ẖiṭāb" component of the name, i. e. how the person is addressed.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+		<xsa:instance mixed="no" under="parts_cntScribeAr">
+			<xsa:ui>field</xsa:ui>
+			<xsa:attribute name="type" value="nisbah" />
+			<xsa:messages>
+				<xsa:label>Nisbah</xsa:label>
+				<xsa:help>Enter the "nisbah" component of the name.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder locator="/TEI/text/body/div/msDesc/msPart/history/origin/date">
+		<xsa:instance mixed="yes" repeat="yes" xml:id="parts_cntDateWritten"
+			under="parts_secDates">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Scribal date</xsa:label>
+				<xsa:help>Dates as indicated in the colophon or elsewhere in the manuscript (choose era from calendar field).</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="written" />
+			<xsa:indexed solrType="tlong">Scribal.Year</xsa:indexed>
+		</xsa:instance>
+		<xsa:instance mixed="yes" repeat="yes" xml:id="parts_cntDateGiven"
+			under="parts_secDates">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Librarian date</xsa:label>
+				<xsa:help>Dates as determined by the encoder / librarian (choose era from calendar field).</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="given" />
+			<xsa:indexed  solrType="tlong">Librarian.Year</xsa:indexed>
+		</xsa:instance>
+		<xsa:instance mixed="yes" repeat="yes" xml:id="parts_cntDateApprox"
+			under="parts_secDates">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Approximate date</xsa:label>
+				<xsa:help>If the exact date is unknown, give an approximate date in textual form, e. g. "beginning of 15th century" (choose era from calendar field).</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="approxDate" />
+			<xsa:indexed  solrType="tlong">Approximate.Year</xsa:indexed>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/history/origin/date/@calendar">
+		<xsa:instance mixed="no" under="parts_cntDateWritten" repeat="no"
+			authorityList="alCalendars">
+			<xsa:ui>field</xsa:ui>
+			<xsa:responsible required="true" />
+			<xsa:messages>
+				<xsa:label>Calendar</xsa:label>
+				<xsa:help>Select calendar / era.</xsa:help>
+			</xsa:messages>
+			
+		</xsa:instance>
+		<xsa:instance mixed="no" under="parts_cntDateGiven" repeat="no"
+			authorityList="alCalendars">
+			<xsa:ui>field</xsa:ui>
+			<xsa:responsible required="true" />
+			<xsa:messages>
+				<xsa:label>Calendar</xsa:label>
+				<xsa:help>Select calendar / era.</xsa:help>
+			</xsa:messages>
+			
+		</xsa:instance>
+		<xsa:instance mixed="no" under="parts_cntDateApprox" repeat="no"
+			authorityList="alCalendars">
+			<xsa:ui>field</xsa:ui>
+			<xsa:responsible required="true" />
+			<xsa:messages>
+				<xsa:label>Calendar</xsa:label>
+				<xsa:help>Select calendar / era.</xsa:help>
+			</xsa:messages>
+			
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/history/origin/date/@notBefore">
+		<xsa:instance mixed="no" under="parts_cntDateApprox" repeat="yes">
+			<xsa:ui>field</xsa:ui>
+			<xsa:responsible required="false" />
+			<xsa:messages>
+				<xsa:label>Not before</xsa:label>
+				<xsa:help>Indicate earliest date.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/history/origin/date/@notAfter">
+		<xsa:instance mixed="no" under="parts_cntDateApprox" repeat="yes">
+			<xsa:ui>field</xsa:ui>
+			<xsa:responsible required="false" />
+			<xsa:messages>
+				<xsa:help>Indicate latest date.</xsa:help>
+				<xsa:label>Not after</xsa:label>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder locator="/TEI/text/body/div/msDesc/msPart/history/origin/quote">
+		<xsa:instance mixed="yes" repeat="yes" under="parts_secDates">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Colophon of manuscript</xsa:label>
+				<xsa:help>Transcribe the colophon for the whole manuscript in full if one exists.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="colophon" />
+			<xsa:indexed advancedSearch="textAR" facet="string">Colophon.Ms</xsa:indexed>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder locator="/TEI/text/body/div/msDesc/msPart/history/provenance">
+		<xsa:instance mixed="yes" repeat="yes" under="parts_secDates">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Provenance / owners / readers</xsa:label>
+				<xsa:help>Input any information about previous owners, etc.</xsa:help>
+			</xsa:messages>
+			<xsa:indexed advancedSearch="textExactEN">Provenance.Owners.Readers</xsa:indexed>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder locator="/TEI/text/body/div/msDesc/msPart/physDesc/sealDesc/seal/p">
+		<xsa:instance mixed="yes" repeat="yes" under="parts_secDates">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Seal</xsa:label>
+				<xsa:help>Describe seals of current and previous owners.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/bindingDesc/binding/p/seg/dimensions">
+		<xsa:instance mixed="no" xml:id="parts_cntBoardDims" under="parts_cntBoard">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Dimensions</xsa:label>
+				<xsa:help>Dimensions of covered board.</xsa:help>
+			</xsa:messages>
+			<xsa:attribute name="type" value="binding" />
+			<xsa:attribute name="unit" value="mm" />
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/bindingDesc/binding/p/seg/dimensions/height">
+		<xsa:instance mixed="yes" under="parts_cntBoardDims" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:responsible required="true" />
+			<xsa:messages>
+				<xsa:label>Height</xsa:label>
+				<xsa:help>Enter height of the board in mm.</xsa:help>
+			</xsa:messages>
+			
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/physDesc/bindingDesc/binding/p/seg/dimensions/width">
+		<xsa:instance mixed="yes" under="parts_cntBoardDims" repeat="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:responsible required="true" />
+			<xsa:messages>
+				<xsa:label>Width</xsa:label>
+				<xsa:help>Enter width of the board in mm.</xsa:help>
+			</xsa:messages>
+			
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder>
+		<xsa:instance xml:id="parts_secAddInfo" under="parts_areaHistory"
+			mixed="no">
+			<xsa:ui>section</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Additional information</xsa:label>
+			</xsa:messages>
+			<xsa:writeAccess>ROLE_WL_ED</xsa:writeAccess>
+			<!--<xsa:readAccess>ROLE_WL_ED</xsa:readAccess> -->
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder>
+		<xsa:instance xml:id="parts_secBiblio" under="parts_areaHistory"
+			mixed="no">
+			<xsa:ui>section</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Bibliography</xsa:label>
+			</xsa:messages>
+			<xsa:writeAccess>ROLE_WL_ED</xsa:writeAccess>
+			<!--<xsa:readAccess>ROLE_WL_ED</xsa:readAccess> -->
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/additional/adminInfo/recordHist/source">
+		<xsa:instance under="parts_secAddInfo" mixed="yes">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Other catalogues</xsa:label>
+				<xsa:help>Give references to original catalogue entries from other sources.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder locator="/TEI/text/body/div/msDesc/msPart/history/acquisition">
+		<xsa:instance under="parts_secAddInfo" mixed="yes">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Acquisition</xsa:label>
+				<xsa:help>Give any descriptive or other information
+concerning the process by which a manuscript or manuscript part entered the holding
+institution.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/additional/adminInfo/availability">
+		<xsa:instance xml:id="parts_cntAvail" under="parts_secAddInfo" mixed="no">
+			<xsa:ui>container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Availability</xsa:label>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/additional/adminInfo/availability/@status">
+		<xsa:instance under="parts_cntAvail" mixed="no" authorityList="alAvailStatus">
+			<xsa:ui mixed="no">field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Availability status</xsa:label>
+				<xsa:help>Choose information about availability of the manuscript from drop down list.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/additional/adminInfo/availability/p">
+		<xsa:instance under="parts_cntAvail" mixed="yes">
+			<xsa:ui mixed="no">field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Availability desc.</xsa:label>
+				<xsa:help>If necessary give a more verbose description about the availability of the manuscript.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/additional/adminInfo/custodialHist">
+		<xsa:instance xml:id="parts_cntCustHist" under="parts_secAddInfo"
+			mixed="no">
+			<xsa:ui mixed="no">container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Custodial history</xsa:label>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/additional/adminInfo/custodialHist/custEvent">
+		<xsa:instance xml:id="parts_cntCustEv" under="parts_cntCustHist"
+			mixed="yes">
+			<xsa:ui mixed="no">container</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Custodial event</xsa:label>
+				<xsa:help>If necessary give a more verbose description of the custodial event.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/additional/adminInfo/custodialHist/custEvent/@type">
+		<xsa:instance under="parts_cntCustEv" authorityList="alCustEvType"
+			mixed="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Type</xsa:label>
+				<xsa:help>Choose information about the type of any custodial event (e. g. conservation, exhibition, etc.) from drop down list.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder
+		locator="/TEI/text/body/div/msDesc/msPart/additional/adminInfo/custodialHist/custEvent/@when">
+		<xsa:instance under="parts_cntCustEv" mixed="no">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Date</xsa:label>
+				<xsa:help>Give the date of the custodial event in ISO 8601 format, e. g.: "2010-08-30" (see: http://en.wikipedia.org/wiki/ISO_8601).</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder locator="/TEI/text/body/div/msDesc/msPart/additional/surrogates">
+		<xsa:instance mixed="yes" under="parts_secAddInfo">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Surrogates</xsa:label>
+				<xsa:help>Describe existing surrogates of the manuscript, or parts of the manuscript, e. g. microfilms, photographs, digital photographs, etc.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder locator="/TEI/text/body/div/msDesc/msPart/additional/listBibl/bibl">
+		<xsa:instance under="parts_secBiblio" mixed="yes" repeat="yes">
+			<xsa:ui>field</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Bibl. item</xsa:label>
+				<xsa:help>Give bibliographical references of any known descriptions, editions, or other relevant publications.</xsa:help>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+	<xsa:dataHolder>
+		<xsa:instance mixed="no" xml:id="parts_secHand" under="parts_areaProduction">
+			<xsa:ui>section</xsa:ui>
+			<xsa:messages>
+				<xsa:label>Hand</xsa:label>
+			</xsa:messages>
+		</xsa:instance>
+	</xsa:dataHolder>
+
+	<xsa:groupDef ixInUi="2" xml:id="parts_grpTEI">
+		<xsa:messages>
+			<xsa:label>TEI</xsa:label>
+		</xsa:messages>
+	</xsa:groupDef>
+	<xsa:groupDef ixInUi="1" xml:id="parts_grpLibrary">
+		<xsa:messages>
+			<xsa:label>Library</xsa:label>
+		</xsa:messages>
+	</xsa:groupDef>
+	<xsa:groupDef ixInUi="1" xml:id="parts_grpCover" decorate="no">
+		<xsa:messages>
+			<xsa:label>NONE</xsa:label>
+		</xsa:messages>
+	</xsa:groupDef>
+	<xsa:groupDef ixInUi="2" xml:id="parts_grpBoard" decorate="no">
+		<xsa:messages>
+			<xsa:label>NONE</xsa:label>
+		</xsa:messages>
+	</xsa:groupDef>
+	<!-- grpFurnEtc should contain the normal fields (in this order) "Furniture", 
+		"Bookmark", "Satchel", the section "Endbands", and the normal fields "Tie" 
+		and "Tooling". There should not be a container "Bookmark" with the field 
+		"Material", but only "Bookmark" as a field offering the values of alBookmark. 
+		"Tooling" should not be a container with a field called "Description", but 
+		"Tooling" should be a field offering the values of alTooling. -->
+
+	<xsa:groupDef ixInUi="3" xml:id="parts_grpFurnEtc">
+		<xsa:messages>
+			<xsa:label>Furniture etc</xsa:label>
+		</xsa:messages>
+	</xsa:groupDef>
+
+	<xsa:groupDef ixInUi="4" xml:id="parts_grpSupportKind" decorate="no">
+		<xsa:messages>
+			<xsa:label>NONE</xsa:label>
+		</xsa:messages>
+	</xsa:groupDef>
+
+	<xsa:groupDef ixInUi="1" xml:id="parts_grpScribeAr">
+		<xsa:messages>
+			<xsa:label>Scribe in Arabic</xsa:label>
+			<xsa:help>Split the standard form of the scribe's name into its constituent parts as applicable.</xsa:help>
+		</xsa:messages>
+	</xsa:groupDef>
+	<xsa:groupDef ixInUi="1" xml:id="parts_grpArName">
+		<xsa:messages>
+			<xsa:label>Author in Arabic</xsa:label>
+			<xsa:help>Split the standard form of the author name into its constituent parts as applicable.</xsa:help>
+		</xsa:messages>
+	</xsa:groupDef>
+	<xsa:groupDef ixInUi="5" xml:id="parts_grpTitle">
+		<xsa:messages>
+			<xsa:label>Title</xsa:label>
+		</xsa:messages>
+	</xsa:groupDef>
+
+</xsa:xsa>

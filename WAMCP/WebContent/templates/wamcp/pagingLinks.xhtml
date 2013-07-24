@@ -1,0 +1,132 @@
+<!--
+   Copyright 2013 Bibliotheca Alexandrina
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:c="http://java.sun.com/jstl/core">
+	
+<!--  The paginator -->
+		<center>
+			
+	        
+		<ice:panelGroup id="OP_AuthorPaging" rendered="#{searchBBean.totalPages>1}">
+			<ice:panelGroup id="innerDiv"
+				rendered="#{((searchBBean.currPage!=searchBBean.totalPages) or (searchBBean.currPage!=1))}">
+				<div id="Pagging">
+				<table align="center">
+					<tr>
+						<td align="center" valign="middle">
+						<ul>
+							<li>
+								<ice:commandLink  rendered="#{searchBBean.currPage>1}" actionListener="#{searchBBean.changePage}">
+									<f:attribute name="PARAM_PageNum"  value="#{searchBBean.currPage-1}" />
+									<ice:outputText value="Previous" />
+							 	</ice:commandLink> 
+							 	<ice:outputText value="Previous" rendered="#{searchBBean.currPage==1}" styleClass="dim" />
+							</li>
+
+							<li>
+								<ice:commandLink rendered="#{searchBBean.currPage>1}" actionListener="#{searchBBean.changePage}">
+									<f:attribute name="PARAM_PageNum" value="1" />
+									<ice:outputText value="1" />
+							    </ice:commandLink> 
+							    <ice:outputText value="1"
+								rendered="#{searchBBean.currPage==1}" styleClass="current" />
+							</li>
+							
+							<li>
+							<ice:outputText value="........"
+								rendered="#{searchBBean.displayFrontDotes}" /> 
+						    </li>
+
+
+							<ui:repeat value="#{searchBBean.pages}" var="page">
+
+								<li><ice:commandLink 
+									rendered="#{page!=searchBBean.currPage}"  actionListener="#{searchBBean.changePage}">
+
+									<f:attribute
+										name="PARAM_PageNum" value="#{page}" />
+
+									<ice:outputText value="#{page}">
+
+										<f:convertNumber pattern="###,###,###" />
+
+									</ice:outputText>
+
+								</ice:commandLink> 
+								<ice:outputText value="#{page}" 
+									rendered="#{page==searchBBean.currPage}" styleClass="current">
+									<f:convertNumber pattern="###,###,###" />
+								</ice:outputText>
+							</li>
+
+							</ui:repeat>
+
+						 	<li>
+						 	  	<ice:outputText value="........"
+									rendered="#{searchBBean.displayBackDotes}" />
+							</li>
+
+							<li>
+								<ice:commandLink  rendered="#{searchBBean.currPage!=searchBBean.totalPages}" actionListener="#{searchBBean.changePage}">
+									<f:attribute name="PARAM_PageNum" value="#{searchBBean.totalPages}" />
+									<ice:outputText value="#{searchBBean.totalPages}">
+										<f:convertNumber pattern="###,###,###" />
+									</ice:outputText>
+								</ice:commandLink> 
+							
+								<ice:outputText value="#{searchBBean.totalPages}"
+									rendered="#{searchBBean.currPage==searchBBean.totalPages and searchBBean.totalPages!=1}"
+									styleClass="current">
+										<f:convertNumber pattern="###,###,###" />
+								</ice:outputText>
+							</li>
+
+							<li>
+								<ice:commandLink  value="Next" rendered="#{searchBBean.currPage &lt; searchBBean.totalPages}" actionListener="#{searchBBean.changePage}">
+									<f:attribute name="PARAM_PageNum" value="#{searchBBean.currPage+1}" />
+								</ice:commandLink> 
+							    <ice:outputText value="Next" 
+							    	rendered="#{searchBBean.currPage==searchBBean.totalPages}"
+									styleClass="dim" />
+							</li>
+
+						</ul>
+
+						</td>
+					</tr>
+
+				</table>
+
+				<div class="Clear"></div>
+
+				</div>
+
+			</ice:panelGroup>
+
+		</ice:panelGroup>
+		
+		
+	        
+	        
+	        
+		</center>
+		
+</ui:fragment>

@@ -1,0 +1,60 @@
+<!--
+   Copyright 2013 Bibliotheca Alexandrina
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+	
+	THIS PAGE USES FACELETS AND ALL THAT IS OUTSIDE COMPOSITION 
+	 >>>> WILL BE IGNORED 
+	
+<ui:composition template="templates/layout.xhtml">
+<ui:define name="content">
+                <div class="area">
+                	<div class="inner-upper-part">
+						<img src="images/Inner-UpperLeft.png" align="left"/>
+					    <img src="images/Inner-UpperRight.png" align="right"/>
+					</div>
+                    <div class="content" style="min-height:450px;">
+                        <h3 class="welcome">Welcome 
+							<ice:outputText style="color:#cb6e1e" value=' "#{sessionBBean.userName}" '/>
+                        </h3>
+                        <div style="margin-bottom:5px" class="areaText">Select an Administrative task:</div>
+                        <ul class="home-list">
+                        	<li><a href="AdminUsers.iface">Administer users account and roles.</a></li>
+							<li><ice:commandLink actionListener="#{uiActionListener.wamcpStorage.writeIndexFieldsToFile}">Create Solr Fields Properties File: </ice:commandLink><ice:outputText value="#{uiActionListener.wamcpStorage.quickMessage}" escape="false" /></li>
+							<li><ice:commandLink onclick="; if(!confirm('This will rebuild the Solr Index from SVN documents, are you sure?')) { return false; };" actionListener="#{uiActionListener.wamcpStorage.rebuildIndex}">Rebuild index</ice:commandLink></li>
+							<li><ice:commandLink actionListener="#{uiActionListener.wamcpStorage.reindexManuscript}">Reindex the following manuscript: </ice:commandLink><ice:inputText value="#{uiActionListener.wamcpStorage.mssToReindex}" /></li>
+							<li><ice:commandLink actionListener="#{uiActionListener.generatePortletHTMLFiles}">Regenerate portlet-viewable HTML files for released manuscripts. </ice:commandLink></li>
+							<li><ice:commandLink actionListener="#{uiActionListener.generatePrintableMetadataHTMLFiles}">Regenerate printable metadata HTML and PDF files for released manuscripts. </ice:commandLink></li>
+							<li><ice:commandLink actionListener="#{uiActionListener.generateImagePdfFiles}">Regenerate image PDF files for released manuscripts. </ice:commandLink></li>
+							<li><ice:commandLink actionListener="#{uiActionListener.generateMARCFiles}">Generate MARC files for released manuscripts. </ice:commandLink></li>
+                        </ul>
+                    </div>
+					<div class="inner-lower-part">
+					    <img src="images/Inner-LowerLeft.png" align="left"/>
+					    <img src="images/Inner-LowerRight.png" align="right"/>
+				    </div>
+                </div>                
+
+
+</ui:define>
+</ui:composition>
+</html>

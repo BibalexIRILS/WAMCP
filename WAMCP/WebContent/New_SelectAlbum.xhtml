@@ -1,0 +1,108 @@
+<!--
+   Copyright 2013 Bibliotheca Alexandrina
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+	
+	THIS PAGE USES FACELETS AND ALL THAT IS OUTSIDE COMPOSITION 
+	 >>>> WILL BE IGNORED 
+	
+<ui:composition template="templates/layout.xhtml">
+<ui:param name="reqBBean" value="#{createNewBBean}"/>
+<ui:define name="content" style="min-height:330px;">
+
+<div class="area">
+
+	<div class="inner-upper-part">
+		<img src="images/Inner-UpperLeft.png" align="left"/>
+	    <img src="images/Inner-UpperRight.png" align="right"/>
+	</div>
+
+    <div class="content">
+    	<h3 class="New-file">
+    		New manuscript description
+   		</h3>
+    	
+    	<p style="font-family:Arial, Helvetica, sans-serif;font-size:small;margin:0 0 10px 47px;">
+    		Select the manuscript for which you want to create the description:
+   		</p>
+    	
+    	
+    	<div style="margin-left:50px;">
+    	<!-- rows="20"  -->
+	    	<ice:panelSeries id="coversSeries" var="cover" value="#{galleryBeanOnSVN.nonAlbumedFolders}">
+				<div class="images" style="margin-bottom:10px">
+					<ice:commandLink actionListener="#{createNewBBean.selectAlbum}">
+<!--					<div style="margin:5px">-->
+<!--						<ice:graphicImage url="#{cover.imageUrlStr}" />-->
+<!--					</div>-->
+					<ice:outputText style="background:url(images/side-menu-bullet.png) no-repeat 0px 4px; padding-left:13px" value="#{cover}"/>
+						<f:attribute name="PARAM_SELECTALBUM_NAME" value="#{cover}"/>
+					</ice:commandLink><br/>
+				</div>
+			</ice:panelSeries>
+		</div>
+<!--			<center>-->
+<!--			<ice:dataPaginator id="coversSeriesPaginator"-->
+<!--        				for="coversSeries"-->
+<!--                         fastStep="3"-->
+<!--                         paginator="true"-->
+<!--                         paginatorMaxPages="4">-->
+<!-- -->
+<!--                <f:facet name="first" >-->
+<!--                         <ice:graphicImage url="css-icefaces/rime/css-images/arrow-first.gif" style="border:none;"/>-->
+<!--                </f:facet>-->
+<!-- -->
+<!--                <f:facet name="last">-->
+<!--                        <ice:graphicImage url="css-icefaces/rime/css-images/arrow-last.gif" style="border:none;" />-->
+<!--                </f:facet>-->
+<!-- -->
+<!--                <f:facet name="previous">-->
+<!--                        <ice:graphicImage url="css-icefaces/rime/css-images/arrow-previous.gif" style="border:none;" />-->
+<!--                </f:facet>-->
+<!-- -->
+<!--                <f:facet name="next">-->
+<!--                        <ice:graphicImage url="css-icefaces/rime/css-images/arrow-next.gif" style="border:none;" />-->
+<!--                </f:facet>-->
+<!-- -->
+<!--                <f:facet name="fastforward">-->
+<!--                        <ice:graphicImage url="css-icefaces/rime/css-images/arrow-ff.gif" style="border:none;" />-->
+<!--                </f:facet>-->
+<!-- -->
+<!--                <f:facet name="fastrewind">-->
+<!--                        <ice:graphicImage url="css-icefaces/rime/css-images/arrow-fr.gif" style="border:none;" />-->
+<!--                </f:facet>-->
+<!-- -->
+<!--        </ice:dataPaginator>-->
+<!--		</center>-->
+    </div>
+
+    <div class="inner-lower-part">
+	    <img src="images/Inner-LowerLeft.png" align="left"/>
+	    <img src="images/Inner-LowerRight.png" align="right"/>
+    </div>
+
+</div>
+
+		
+</ui:define>
+</ui:composition>
+</html>

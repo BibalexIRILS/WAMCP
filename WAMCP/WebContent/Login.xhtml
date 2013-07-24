@@ -1,0 +1,80 @@
+<!--
+   Copyright 2013 Bibliotheca Alexandrina
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+
+THIS PAGE USES FACELETS AND ALL THAT IS OUTSIDE COMPOSITION >>>> WILL BE
+IGNORED
+
+<ui:composition template="templates/layout.xhtml">
+	<ui:param name="reqBBean" value="#{loginBBean}"/>
+	<ui:define name="content">
+	<div class="area">
+                	<div class="inner-upper-part">
+                		<img src="images/Inner-UpperLeft.png" align="left"/>
+                		<img src="images/Inner-UpperRight.png" align="right"/>
+               		</div>
+                  <div class="content" style="min-height:330px;">
+                      <h3 class="Log-in">Login In<span style="color: rgb(213, 161, 25);"/></h3>
+                      <table style="margin-left: 43px;font-family: Arial,Helvetica,sans-serif; font-size: 14px;">
+                      	<tbody>
+                      		<tr>
+	                      		<td align="right" valign="middle">
+	                              Username:                            
+	                            </td>
+                      			<td>  
+                              	  <ice:inputText actionListener="#{loginBBean.login}" styleClass="xsaTextField" style="width:300px" id="inUsername" value="#{loginBBean.username}" partialSubmit="false"/>
+                   	 			</td>
+                        	</tr>
+                        	<tr><td colspan="2"></td></tr>
+                        	<tr>    
+	                     		<td align="right" valign="middle">
+	                              Password:                            
+	                            </td>
+                      		<td>
+                               <ice:inputSecret actionListener="#{loginBBean.login}" styleClass="xsaTextField" style="width:300px" id="inPassword" value="#{loginBBean.password}" partialSubmit="false"/>
+                    		</td>
+                        </tr>
+                        <tr>
+                        	<td height="30">
+                        	</td>
+                            <td align="center">
+                            	<div class="btnLink" style="margin-left:100px">
+                            		<ice:commandLink id="cmdLogin" value="Login" actionListener="#{loginBBean.login}" partialSubmit="false" />
+								</div>
+                            </td>
+                    		</tr>
+                      	</tbody>
+                    </table>
+                     <div style="margin-left:65px;height:30px"><ice:messages style="color: red" id="msgsLogin" /></div>
+                       
+                  </div>
+                    <div class="inner-lower-part">
+						<img src="images/Inner-LowerLeft.png" align="left"/>
+                		<img src="images/Inner-LowerRight.png" align="right"/>
+					</div>
+                </div>
+                
+
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,960 @@
+<!--
+   Copyright 2013 Bibliotheca Alexandrina
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=7" />
+
+<!-- IMPORTANT.. I have experienced some problems with document.getElementById, so I replaced it by 
+     Prototype's $ since Icefaces already have loaded  -->
+	 
+<!-- YA 20101226 Making IE7 faster.. unbind onfocus event listeners when possible	 -->
+<script type="text/javascript">
+	
+	var currentlyAttached = undefined;
+	
+	function attachInputToVKB(e){
+		
+		if(currentlyAttached === e){
+			return false;
+		}
+		
+		PopupVirtualKeyboard.attachInput(e);
+		
+		currentlyAttached = e;
+		
+		return true;
+	}; 
+
+</script>	 
+			
+<!--This is the function used in the subsection to toggle the body's visibility.A more sophisiticated way is to include 
+			this script as a js from the facelet and to include it only once too.. but it is only 4 lines.. come on!-->
+ 
+
+<script type="text/javascript">
+				function toggleSubsection(toggleArea) {
+					var subsecBody = toggleArea.previousSibling;
+					while (subsecBody.nodeType != 1) {
+						subsecBody = subsecBody.previousSibling;
+					}
+					subsecBody.style.display = (subsecBody.style.display == 'none' ? 'block' : 'none');
+			
+					var imgNodeArray = toggleArea.childElements();
+					for(var ix in imgNodeArray){
+			//			if(imgNodeArray[ix].getTagName() != 'IMG')
+							//continue;
+						var imgNode = imgNodeArray[ix]; 
+						imgNode.style.display = (imgNode.style.display == 'none' ? '' : 'none');
+					}
+
+					return true;
+				}
+
+				function toggleFacsRefMenu(toggleArea, ev) {
+					var subsecBody = toggleArea.nextSibling;
+					while (subsecBody.nodeType != 1) {
+						subsecBody = subsecBody.nextSibling;
+					}
+					subsecBody.style.display = (subsecBody.style.display == 'none' ? 'block' : 'none');
+
+					return true;
+				}
+			</script>
+
+<!-- These are functions for the annotators toolbar.. now I think we need some TODO: REFACTORING -->
+
+<script type="text/javascript">
+				function setLastActive(idStr, locatorStr){
+					
+					var idHidden = $('WAMCPForm:lastActiveId');
+					var locHidden = $('WAMCPForm:lastActiveLocator');
+					
+					if(idHidden.value === idStr){
+						return false; // this is IE retriggering the onFocus
+					}
+					
+					idHidden.value = idStr;
+					
+					locHidden.value = locatorStr;
+
+					setSelectionInps();
+					var annotsParent = $('annotsParent');
+					annotsParent.style.display = 'none';
+					
+					return true;
+				}
+			
+			</script>
+
+<script type="text/javascript">
+
+	function js_countTextAreaChars(text) {
+		return text.length;
+		//IE7 should report the length with inconsistent counting of \r...
+		// if this happens, detect IE7 and use one of the two below..
+		// When they were used with IE8 they caused trouble
+	//1)
+		var iLen=text.length-(text.split('\r').length-1);
+		return iLen;
+	//2)
+		var n = 0;
+    	for (var i = 0; i &lt; text.length; i++) {
+	        if (text.charAt(i) != '\r') {
+            	n++;
+        	}
+    	}
+    	return n;
+	}
+
+	function getSelection(inputBox) {
+					if(!inputBox){
+						return false;
+					}
+					
+			        if ("selectionStart" in inputBox) {
+			                return {
+			                        start: inputBox.selectionStart,
+			                        end: inputBox.selectionEnd
+			                }
+			        }
+			
+			        //and now IE
+			        var result = { start: -1, end: -1};
+
+			        //If there is actually a selection, bookmarking will work perfectly
+			        var bookmark = document.selection.createRange().getBookmark();
+
+			        var selection = inputBox.createTextRange();
+			        selection.moveToBookmark(bookmark);
+			        
+			        var selLength = selection.text.length;
+			        
+					// But sometime the annotator should be placed empty
+					if(selLength > 0){
+						
+			        	var before = inputBox.createTextRange()
+			        
+			        	//move to the begining of the selection
+			        	before.collapse(true)
+			        	
+			        	//blah blah blaah refer to http://www.webdeveloper.com/forum/showthread.php?t=74982
+			        	// for good documentation of the bookmark method
+			        	before.setEndPoint("EndToStart", selection)
+			        	
+			        	beforeLength = before.text.length
+			        
+			        	result.start=beforeLength;
+			        	result.end = result.start + selLength;
+			        
+					} else {
+						// FIXME: if there are leading balnk lines this JS breaks
+						
+						//Believe it or not this is more like the offecial method
+						// refer to http://msdn.microsoft.com/en-us/library/Bb250513
+						// or for the better: http://blogs.nitobi.com/alexei/?p=173
+						// or the one with fixes: http://the-stickman.com/web-development/javascript/finding-selection-cursor-position-in-a-textarea-in-internet-explorer/
+			        	inputBox.focus();
+
+			        	var sel1 = document.selection.createRange();
+			        	var sel2 = sel1.duplicate();
+			        	sel2.moveToElementText(inputBox);
+			        	var selText = sel1.text;
+
+			        	//The file end cahracter is used as a dummy characters instead of ~ or ^
+			        	sel1.text = String.fromCharCode(28);
+			        	var index = sel2.text.indexOf(String.fromCharCode(28));
+			        	
+			        	result.start = js_countTextAreaChars((index == -1) ? sel2.text : sel2.text.substring(0, index));
+			        	// we use this only when there is no selection: end = js_countTextAreaChars(selText) + start;
+			        	result.end = result.start;
+
+			        	//remove the  dummy sleceted character
+			        	sel1.moveStart('character', -1);
+			        	sel1.text = selText;
+					}
+					
+			        return result;
+				}
+			</script>
+
+			<script type="text/javascript">
+				function setSelectionInps(){
+					
+					var lastActive = $('WAMCPForm:lastActiveId');
+					var lastActiveId = lastActive.value;
+					if(lastActiveId.length === 0){
+						return false;
+					}
+					var txt = $(lastActiveId);
+					if(!txt){
+						return false;
+					}
+					var selection = getSelection(txt);
+					if(!selection){
+						return false;
+					}
+					$('WAMCPForm:selectionStart').value = selection.start;
+					$('WAMCPForm:selectionEnd').value = selection.end;
+
+				//toggleAnnots();
+					
+					return true;	
+				}
+			</script>
+
+
+<script type="text/javascript">
+function toggleAnnots() {
+	//WAMCPForm:
+	var annotsParent = $('annotsParent');
+	if(annotsParent.style.display === 'none'){
+		annotsParent.style.display = 'inline'; //'block';
+	} else {
+		annotsParent.style.display = 'none';
+	}
+	return true;
+}
+
+
+	</script>
+	
+	
+	<script type="text/javascript">
+/* And this is for the select zoom **/
+/***************** Select Mode **************************/
+	
+	//We don't replace the event anymore but rather use the already loaded prototye Event object
+	//var oldDocOnMouseUp = null;
+	
+	var pos = [];
+	var ds = [];
+	var drawingMode = false;
+	var viewPaneleft = 0;
+	var viewPanetop = 0;
+	var selDraggable = null;
+	var selMarker = null;
+	
+	function toggleSelectMode(){
+		selDraggable = $('selectionDraggable');
+		selMarker = $("selectionMarker");
+		if(selDraggable.style.display == 'none'){
+			selDraggable.style.display = 'inline';
+			selMarker.style.display = 'inline';
+		} else {
+			selDraggable.style.display = 'none';
+			selMarker.style.display = 'none';
+			selMarker.style.left = "0px";
+			selMarker.style.width = "0px"; 
+			selMarker.style.top = "0px";
+			selMarker.style.height = "0px"; ;
+		}
+		return true;
+	}
+	
+	function startSelection(e) {
+		//if mouse up not in outer div after drag
+		Event.observe(document, "mouseup", endSelection);
+		 
+		drawingMode = true;
+
+		var parentViewPane = $('WAMCPForm:albumViewPane'); 
+		 viewPaneleft = viewPanetop = 0; 
+		var obj = parentViewPane; 
+		if (obj.offsetParent) { 
+			do { 
+				viewPaneleft += obj.offsetLeft; 
+				viewPanetop += obj.offsetTop; 
+			} while (obj = obj.offsetParent); 
+		} 
+		
+		viewPaneleft -= parentViewPane.scrollLeft;
+		viewPanetop -= parentViewPane.scrollTop;
+		
+		if (!e)
+			e = window.event; //IE
+			
+		ds[0] = e.clientX;
+		ds[1] = e.clientY;
+		pos[0] = e.clientX;
+		pos[1] = e.clientY;
+		
+
+		selMarker.style.left = ds[0] - viewPaneleft+ "px";
+		selMarker.style.top = ds[1] - viewPanetop+ "px";
+		return true;
+	}
+
+	function endSelection(e) {
+		if (!e)
+			e = window.event; //IE
+
+		
+		Event.stopObserving(document, "mouseup", endSelection);
+					
+		drawingMode = false;
+
+		var pwidth = phieght = pleft = ptop = -1;
+		
+		if(e.clientX > ds[0]){
+			pwidth = e.clientX - ds[0];
+			pleft = pos[0] - viewPaneleft;
+		} else {
+			ds[0] = e.clientX;
+			pwidth=pos[0] - ds[0];
+			pleft = ds[0] - viewPaneleft;
+		}
+		
+		
+		
+		if(e.clientY > ds[1]){
+			pheight = e.clientY - ds[1];
+			ptop = pos[1] - viewPanetop;
+		} else {
+			ds[1] = e.clientY;
+			pheight=pos[1] - ds[1];
+			ptop = ds[1] - viewPanetop;
+		}
+		
+
+		$('WAMCPForm:selectionMarkerLeftHolder').value = pleft;
+		$('WAMCPForm:selectionMarkerTopHolder').value = ptop;
+		$('WAMCPForm:selectionMarkerWidthHolder').value = pwidth;
+	
+		$('WAMCPForm:selectionMarkerHeightHolder').value = pheight;
+
+		toggleSelectMode();
+
+		iceSubmitPartial($("WAMCPForm"),$("WAMCPForm:zoomSelection"));
+		
+		
+		return true;
+	}
+	
+	function doSelect(e) {
+		if (drawingMode == true) {
+			if (!e)
+				e = window.event; //IE
+
+			
+			if(e.clientX > ds[0]){
+				pwidth = e.clientX - ds[0];
+				selMarker.style.width = pwidth		+ "px";
+			} else {
+				ds[0] = e.clientX;
+				pleft = ds[0] - viewPaneleft;
+				selMarker.style.left = pleft+ "px";
+				pwidth=pos[0] - ds[0];
+				selMarker.style.width = pwidth + "px"; ;
+			}
+			 
+			
+
+			
+			if(e.clientY > ds[1]){
+				pheight = e.clientY - ds[1];
+				selMarker.style.height = pheight+ "px";
+			} else {
+				ds[1] = e.clientY;
+				ptop = ds[1] - viewPanetop;
+				selMarker.style.top = ptop + "px";
+				pheight=pos[1] - ds[1];
+				selMarker.style.height = pheight + "px";
+			}
+
+			
+						
+		}
+		return true;
+	}
+	
+	function repositionDraggable(){
+		var draggable = $('WAMCPForm:imageDraggable');
+		if(draggable == null) 
+			return true; //IE no manuscript laoded 
+		draggable.style.left = '0px'; 
+		draggable.style.top = '0px';
+		return true;
+	}
+	
+</script>
+<script type="text/javascript">
+	/******** view pane dims *************/
+
+	function calcViewPaneDims(){
+		// View pane width and height should be reported after refit to window
+		var vpWidth = 0, vpHeight = 0;
+
+//Using prototype
+		var viewPane = $('WAMCPForm:albumViewPane');
+//		vpWidth = viewPane.clientWidth;
+//		vpHeight = viewPane.clientHeight;
+		
+		if(viewPane == null)
+			return true;
+		
+		var dims = Element.getDimensions(viewPane);
+		vpWidth = dims.width;
+		vpHeight = dims.height;
+		
+		var vpWidthHidden = $('WAMCPForm:albumViewPaneWidthHolder');
+		var vpHeightHidden = $('WAMCPForm:albumViewPaneHeightHolder');
+
+		var result = 0; 
+
+		if(vpWidthHidden.value != vpWidth){ //less bound values changing
+			vpWidthHidden.value = vpWidth;
+			result += 1;
+		}
+		
+		if(vpHeightHidden.value != vpHeight){ //less bound values changing
+			vpHeightHidden.value = vpHeight;
+			result += 2;
+		}
+		
+
+		if(result > 0){ //don't wait for the server to tell you to reposition draggable
+			repositionDraggable();
+		}
+		
+		return result;
+	}
+	
+	function reportViewPaneDims(){	
+		var vpDimsChanged = calcViewPaneDims();
+		if(vpDimsChanged !=0 ){ // we don't care about height: > 1, why? we do: != 0
+			
+
+			iceSubmitPartial($("WAMCPForm"),$("WAMCPForm:setViewPaneDims"));
+
+			if(vpDimsChanged >= 2){
+				requestBGImageReposition();
+			}
+
+		}	
+
+		return true; //always true because this might be onlcick or something
+	}
+</script>
+<script type="text/javascript">	
+	/*************** windows dims ****************/
+	function calcWindowDims(){
+
+		var winWidth = 0, winHeight = 0;
+		
+		  if( typeof( window.innerWidth ) == 'number' ) {
+		    //Non-IE
+		    winWidth = window.innerWidth;
+		    winHeight = window.innerHeight;
+		    
+		  } else if( document.documentElement &amp;&amp; ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+		    //IE 6+ in 'standards compliant mode'
+		    winWidth = document.documentElement.clientWidth;
+		    winHeight = document.documentElement.clientHeight;
+		    
+		  } else if( document.body &amp;&amp; ( document.body.clientWidth || document.body.clientHeight ) ) {
+		    //IE 4 compatible
+		    winWidth = document.body.clientWidth;
+		    winHeight = document.body.clientHeight;
+		    
+		  }
+
+
+		var winWidthHidden = document
+			.getElementById('WAMCPForm:windowWidthHolder');
+		var winHeightHidden = document
+			.getElementById('WAMCPForm:windowHeightHolder');
+
+		var result = false; 
+			
+		if(winHeightHidden.value != winHeight) {			
+			winHeightHidden.value = winHeight;
+			result = true;
+		}
+
+		if (winWidthHidden.value != winWidth){
+			winWidthHidden.value = winWidth;
+			//actually we don't care about the width: result = true;
+		}
+
+		return result;
+	}
+	
+	function fitAlbumViewerToWindow(){
+
+		if(calcWindowDims()){
+		// this is not necessary and causes some trouble: return true; //always true because this might be onlcick or something
+		
+		
+//For this have an effect the command must be a button		
+// emmitate a click on the refit to window link
+		   iceSubmitPartial($("WAMCPForm"),$("WAMCPForm:refitToWindow"));
+                }
+		return true;
+	}
+</script>
+<script type="text/javascript">
+	/*********** resize listeners *****************/
+// YA 20101130A - Calling reportViewPaneDims() every second.. the complex listerners logic below is not that reliable after all	
+	//The width and height cannot be correct before the new panel divider is rendered
+	// so we wait for it
+	var verPendingTimerId = -1;
+	var horPendingTimerId = -1;
+	
+	function verDividerResizeListener(){
+		//document.onmouseup = oldDocOnMouseUp;
+		Event.stopObserving(document, "mouseup", verDividerResizeListener);
+
+		if(verPendingTimerId != -1){
+			window.clearTimeout(verPendingTimerId);
+		}
+
+		//this reports only the width
+		verPendingTimerId = verDividerResizeTimeout.defer(); //delay(0.1)
+
+		
+		return true;
+	}
+
+	function verDividerResizeTimeout(){
+		reportViewPaneDims(); 
+		
+		requestBGImageReposition();
+
+		//The dom element for the divider have been regenerated.. 
+		// also the horizontal divider because it is inside the vertical
+		tamperVerDivMouseDown(); 
+		tamperHorDivMouseDown();
+		 
+		verPendingTimerId = -1;
+		
+		return true;
+	}
+
+	function horDividerResizeListener(){
+		//document.onmouseup = oldDocOnMouseUp;
+		Event.stopObserving(document, "mouseup",horDividerResizeListener);
+		
+		if(horPendingTimerId != -1){
+			window.clearTimeout(horPendingTimerId);
+		}
+
+		//this fixes the reported height
+		horPendingTimerId = horDividerResizeTimout.defer(); //delay(0.1);
+		
+		return true;
+	}
+
+	function horDividerResizeTimout() {
+
+		reportViewPaneDims(); 
+//		requestViewPaneHieghtCalc();
+		 
+		requestBGImageReposition();
+		 
+		tamperHorDivMouseDown();
+		 
+		horPendingTimerId = -1;
+		return true;
+	}
+
+//	function requestViewPaneHieghtCalc() {
+//		iceSubmitPartial($("WAMCPForm"),$("WAMCPForm:reqVPHCalc"));
+		
+//		//althought top should not be affected when the divider below is moved.. it is, so:
+//		repositionDraggable();
+
+//		return true;	
+//	}
+
+	function requestBGImageReposition(){
+		iceSubmitPartial($("WAMCPForm"),$("WAMCPForm:reqBGRepos"));
+	}
+ </script>
+ <script type="text/javascript">
+	/********* on load *************/
+	var frequentlyCorrectViewPaneDimsProblemsTimer = null;
+	function windowOnLoadFunction(){
+
+		PopupVirtualKeyboard.toggle('inpVirtKBDefault','pnlVirtKB');
+		
+//		reportViewPaneDims();
+		
+		fitAlbumViewerToWindow();
+
+//For this have an effect the command must be a button 
+// emmitate a click on the button areas
+		var btnAreas = $("WAMCPForm:btnAreas");
+		if(btnAreas != null){
+			iceSubmitPartial($("WAMCPForm"),btnAreas);
+		}
+
+// The paneldivider does not report when it gets resized.. so we have to listen for it somehow!
+
+		//Before tampering with the onmousedown of the divider I also tried to create a div and set its onresize
+		// but in Fire Fox onresize is fired only when the window is resized  
+	
+		//Tampering with onmousedown didn't work directly either.. but that was fixed 
+		
+ tamperVerDivMouseDown(); 
+ tamperHorDivMouseDown();
+
+//YA 20101130A
+  frequentlyCorrectViewPaneDimsProblems();
+
+// END YA 20101130A
+// END listening for resize
+
+		return true;
+	}
+	function stopFrequentlyCorrectViewPaneDimsProblems(){
+		if(frequentlyCorrectViewPaneDimsProblemsTimer != -1){
+			window.clearTimeout(frequentlyCorrectViewPaneDimsProblemsTimer);
+		}
+	}
+	
+	
+	function tamperVerDivMouseDown(){
+		
+		var verDividerDivider = $('WAMCPForm:editFormVerDividerDivider');
+		if(verDividerDivider == null)
+			return true;
+		
+		// The onmouseup doesn't work because the mouse is most porbably not inside the divider
+		//Event.observe(verDividerDivider, "mouseup",verDividerResizeListener);
+	
+		Event.observe(verDividerDivider, "mousedown", verDivMouseDownListener);
+		//verDividerDivider.onmousedown = verDivMouseDownListener;
+
+	}
+
+	function verDivMouseDownListener(){
+		Event.observe(document, "mouseup",verDividerResizeListener);
+		return true; 
+		
+	}
+	
+ 	function tamperHorDivMouseDown(){
+		
+		var horDividerDivider = $('WAMCPForm:albumHorDividerDivider');
+		if(horDividerDivider == null)
+			return true;
+		
+		// The onmouseup doesn't work because the mouse is most porbably not inside the divider 
+		//Event.observe(horDividerDivider, "mouseup", horDividerResizeListener);
+			
+		Event.observe(horDividerDivider, "mousedown", horDivMouseDownListener);
+		//horDividerDivider.onmousedown = horDivMouseDownListener;
+ 	}	
+
+ 	function horDivMouseDownListener(){
+		
+		Event.observe(document, "mouseup",horDividerResizeListener);
+		return true;
+	}
+
+</script>	
+<ui:insert name="unload_script" />
+<title><ui:insert name="title">
+					Wellcome Arabic Manuscripts Cataloging Project
+				</ui:insert></title>
+
+<ice:outputStyle href="Application.css" />
+
+<ice:outputStyle href="css-icefaces/rime/rime_datatable.css" />
+
+<ice:outputStyle href="css-icefaces/xp/xp_tabs.css" />
+
+<ice:outputStyle href="font/OldArabicFamily.css" />
+
+<script type="text/javascript"
+	src="JS/VirtKB/vk_popup.js?vk_skin=flat_gray"></script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+</head>
+
+<body style="overflow:hidden;">
+<f:view id="WAMCPView">
+	<ice:form id="WAMCPForm">
+<!--		<input type="hidden" id="inpVirtKBDefault" />-->
+		<input id="inpVirtKBDefault" style="position:absolute; left:0px; top:0px; width: 0px; height:0px"/>
+
+		<div class="header" style="margin-bottom: 0px;">
+	<!--	Save vertical space	-->
+<!--		<div>-->
+<!--		<div style="float: left"><img src="images/Banner.jpg" />-->
+<!--		</div>-->
+<!--		<div class="maximize"><a href="javascript:void;" onclick="fitAlbumViewerToWindow();">Fit to window</a>-->
+<!--		<ice:commandButton actionListener="#{albumBBean.refitToWindow}" value="Refit" id="refitToWindow" visible="false"/>-->
+<!--		</div>-->
+<!--		<div class="clear"></div>-->
+<!--		</div>-->
+
+		<div class="main-menu">
+		
+		<ui:insert name="menu" >
+		<ul>
+		<li>
+			<ice:commandLink onclick=";  toggleAnnots(); setSelectionInps();" value="Annotators" />
+			<div style="clear:both;"/>
+			<div style="position:relative; z-index:3;">
+						<div id="annotsParent" style="display: none; position: absolute; z-index: 2; top: 5px;"
+			 class="toolbar" >
+
+				<!-- vertical toolbar -->
+
+					<ul class="drop-down">
+						<!-- Since the renderer sometimes go crazy and place the annotators everywhere in the page -->
+						<!-- I have doubted that it is because of the use of c:forEach not ui:repeat -->
+						<!-- But ui:repeat didn't work.. see http://www.ilikespam.com/blog/c:foreach-vs-ui:repeat-in-facelets -->
+                      	<c:forEach items="#{uiGenListener.annotatorsLinks}" var="link">
+                      		<li>
+                      			<ice:commandLink binding="#{link}" />
+                     		</li>
+                       	</c:forEach>
+                       	
+					</ul>		
+
+
+			</div>	
+			</div>
+			</li>
+		
+			<li>
+				<ice:commandButton immediate="true" visible="false" id="btnAreas" value="Areas" actionListener="#{uiActionListener.goToAreas}"  />
+				<ice:commandLink immediate="false" id="lnkAreas" value="Areas" actionListener="#{uiActionListener.goToAreas}"  />
+			</li>
+
+			<li>
+				<ice:commandLink immediate="true" id="btnCommitToDomTree" value="Save" actionListener="#{uiActionListener.saveToWorkspace}">
+					<!-- disabled="#{domTreeBeanRef.changesExist == false}"  -->
+					<f:attribute name="#{applicationScope.XSAConstants.PARAM_SAVE_MSG}" value="XML file saved in user's workspace, this is a temporary storage, please remember to Unlock to save to storage server." />
+				</ice:commandLink>
+			</li>
+
+			<li>
+				<ice:commandLink immediate="false" id="btnSaveRealDom" value="Unlock" actionListener="#{uiActionListener.saveToStorage}">
+					<f:attribute name="#{applicationScope.XSAConstants.PARAM_SAVE_MSG}" value="XML file saved in storage server" />
+				</ice:commandLink>
+			</li>
+
+<!--			<li>-->
+<!--				<ice:commandLink immediate="true" id="btnRollbackToDomTree" value="Rollback" actionListener="#{uiActionListener.rollbackUnsaved}" />-->
+<!--			</li>-->
+<!---->
+<!--			<li>-->
+<!--				<ice:commandLink immediate="true" id="btnRevert" value="Revert" actionListener="#{uiActionListener.revertToBase}" />-->
+<!--			</li>-->
+<li>
+				<ice:commandLink renderedOnUserRole="ROLE_VALIDATOR" immediate="true" value="Test Validity" actionListener="#{uiActionListener.testValidation}" />
+				
+			</li>
+			</ul>
+		</ui:insert>
+	<ui:insert name="workflow" />
+	
+	<ui:insert name="menu-home">
+		<ul class="home-sk">
+			<li><ice:commandLink id="btnClose" styleClass="home"
+				value="Home" actionListener="#{reqBBean.close}"  immediate="false"/>
+			</li>
+			<li> <!--  style="width:125px"> --> 
+			<ice:commandLink
+				styleClass="SK"
+				onclick="; PopupVirtualKeyboard.toggle('inpVirtKBDefault','pnlVirtKB');"
+				value="VKB" /></li>
+				<li>
+					<a href="images/WAMCP_Cataloguing_Tool_Manual.pdf" target="_blank" class="help">
+						Help
+					</a>						
+				</li>
+			<li class="maximize"><a href="javascript:void;" onclick="fitAlbumViewerToWindow();">Fit to window</a>
+				<ice:commandButton actionListener="#{albumBBean.refitToWindow}" value="Refit" id="refitToWindow" visible="false"/>
+			</li>
+			
+		</ul>
+		</ui:insert>
+		<!--<span style="float: right"><img src="images/main-menu-right.jpg" /></span>-->
+		
+		</div>
+		<div class="clear" />
+		</div>
+
+		<ice:panelDivider binding="#{albumBBean.verticalDivider}" id="editFormVerDivider" orientation="vertical" dividerPosition="60"
+			actionListener="#{albumBBean.verDivResize}" style="width:100%; height: 100%;" styleClass="albumOnRight">
+			<f:facet name="first">
+				<ice:panelGroup>
+					<div class="wrapper">
+					
+<!--	Fix the position of the messages				-->
+<div id="pnlMessagesParent_UNIQUE_ID" style="display:none;">
+<ice:panelPopup modal="false" draggable="true" clientOnly="true" 
+			autoPosition="100,35" styleClass="toolbar" rendered="#{!empty reqBBean}" visible="#{!reqBBean.headerMsgIsEmpty}">
+						
+						
+			<f:facet name="body">
+				
+				<ice:panelGrid style="padding: 0px; background-color: transparent;">
+				
+				<table cellpadding="0" cellspacing="0">
+                     
+                      <tr>
+                      	<td height="9" align="left" valign="top">
+                        	<img src="images/c1.png" width="8" height="9" align="bottom" />
+                       	</td>
+                        <td valign="bottom"><div class="Side-01"></div></td>
+                        <td  height="9">
+                        	<img src="images/c2.png" width="15" height="9" align="bottom"/></td>
+                      </tr>
+                      
+                      <tr>
+                        <td class="Side-04"><div></div></td>
+                        <td class="Side-Menu-down">
+                        
+                        	<ice:outputText escape="false"
+							styleClass="#{reqBBean.headerMsgStyle}"
+							value="#{reqBBean.headerMsgText}" />
+							<div style="margin-left:15px; padding-bottom: 5px; display: inline;">
+							<a href="javascript:void;" style="color: #CB6E1E!important; text-decoration: none!important;" onclick="document.getElementById('pnlMessagesParent_UNIQUE_ID').style.display='none';" >x</a>
+							</div>
+							<div style="clear:both;"/>
+							
+                        </td>
+                        <td class="Side-02"></td>
+                      </tr>
+                      
+                      <tr>
+                        <td valign="top" align="right" height="7">
+                        	<img src="images/c4.png" align="top" width="8" height="7" />
+                       	</td>
+                        <td height="7" class="Side-03" valign="top"></td>
+                        <td height="7" valign="top" align="left">
+                        	<img src="images/c3.png" align="top" width="15" height="7" />
+                       	</td>
+                      </tr>
+                      
+                    </table>
+				</ice:panelGrid>
+			</f:facet>
+		</ice:panelPopup>
+
+</div>
+<!--					<div class="text-description"-->
+<!--						style="display: block; height: 16px; padding-top: 10px"><c:if-->
+<!--						test="#{!empty reqBBean}">-->
+<!--						-->
+<!--						<ice:outputText escape="false"-->
+<!--							styleClass="#{reqBBean.headerMsgStyle}"-->
+<!--							value="#{reqBBean.headerMsgText}" />-->
+<!--					</c:if></div>-->
+<!-- Done Position of Messages			-->
+					
+					<div class="main-content">
+					<div class="upper-part"><img
+						src="images/Outer-UpperLeft-part.png" align="left" /> <img
+						src="images/Outer-UpperRight-part.png" align="right" /></div>
+
+					<div class="main-content-BG">
+						<div style=" font-family:Georgia,Helvetica,sans-serif; font-size: 14px; color: #CB6E1E;font-weight:bold;margin-left:15px;margin-bottom:10px">
+							<ice:outputText rendered="#{uiActionListener.storage.isWorking}" value="#{uiActionListener.storage.artifactShelfMark}"/>
+						</div>
+						<ui:insert name="content" />
+					</div>
+
+					<div class="lower-part"><img
+						src="images/Outer-LowerLeft-part.png" align="left" /> <img
+						src="images/Outer-LowerRight-part.png" align="right" /></div>
+					</div>
+					</div>
+				</ice:panelGroup>
+			</f:facet>
+
+			<f:facet name="second">
+				<ice:panelGroup style="overflow: hidden;">
+					<ui:include src="bag/#{albumBBean.albumTemplateFilePathStr}" />
+				</ice:panelGroup>
+				
+			</f:facet>
+		</ice:panelDivider>
+
+
+
+<!-- For reporting the dimensions of the window and the album view pane -->
+			
+<!--	*************************		-->
+
+		<ice:inputHidden id="albumViewPaneWidthHolder"
+			value="#{albumBBean.viewPaneWidth}" />
+
+		<ice:inputHidden id="albumViewPaneHeightHolder" />
+<!-- The value biding is not useful because the value is always 0			value="#{albumBBean.viewPaneHeight}" />-->
+			
+		<ice:inputHidden id="windowWidthHolder"
+			value="#{albumBBean.windowWidth}" />
+
+		<ice:inputHidden id="windowHeightHolder"
+			value="#{albumBBean.windowHeight}" />
+			
+<!--	It doesn't work wwhen		immediate="true"-->
+		<ice:commandButton visible="false" id="setViewPaneDims"  value="invisible" actionListener="#{albumBBean.setViewPaneDims}"/>
+		
+		<!--	It doesn't work wwhen		immediate="true"-->
+		<!-- actionListener="#{albumBBean.calculateViewPaneHeight}"  -->
+<!--		<ice:commandButton actionListener="#{albumBBean.setViewPaneDims}" value="UNSEEN" id="reqVPHCalc" visible="false"/>-->
+		
+		<ice:commandButton actionListener="#{albumBBean.requestBGImageReposition}" value="UNSEEN" id="reqBGRepos" visible="false"/>
+		
+			
+<!--	*************************		-->
+			
+			<ice:inputHidden id="selectionMarkerTopHolder"
+			value="#{albumBBean.selectionMarkerTop}" />
+			
+			<ice:inputHidden id="selectionMarkerLeftHolder"
+			value="#{albumBBean.selectionMarkerLeft}" />
+			
+			<ice:inputHidden id="selectionMarkerWidthHolder"
+			value="#{albumBBean.selectionMarkerWidth}" />
+			
+			<ice:inputHidden id="selectionMarkerHeightHolder"
+			value="#{albumBBean.selectionMarkerHeight}"  />
+			
+			<ice:commandButton visible="false" id="zoomSelection" value="invisible" actionListener="#{albumBBean.zoomSelection}" />
+
+
+		<!-- TODO is this still necessary now that we execute this code with each setImage? -->
+		<script type="text/javascript">
+	
+	
+	window.onLoad(windowOnLoadFunction);
+	
+	
+	
+</script>
+
+
+
+	</ice:form>
+</f:view>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!--
+   Copyright 2013 Bibliotheca Alexandrina
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:c="http://java.sun.com/jstl/core">
+	
+	<ice:panelGroup styleClass="subsec-header" binding="#{xsaBindersBean.dynComps[applicationScope.XSAConstants.ID_subsecHead]}">
+        <ice:outputText style="padding: 3px 0px; float: left;" binding="#{xsaBindersBean.dynComps[applicationScope.XSAConstants.ID_subsecTitle]}"/>
+    	<div class="clear"/>
+    </ice:panelGroup>
+    
+    <div class="content" style="padding-top: 10px;">
+	    <!-- ******** Don't touch these *********************-->
+		<ice:panelGroup style="display: block;" binding="#{xsaBindersBean.dynComps[applicationScope.XSAConstants.ID_subsecBody]}" />
+		<ice:commandLink style="display:block;text-align:center;padding-top:10px" onclick="; toggleSubsection(this); ">
+			<!-- styleClass="subsec-clickToOpen"  this.class = (this.class == 'subsec-clickToOpen'? 'subsec-clickToClose': 'subsec-clickToOpen'); " -->
+			<img src="images/Down-arrow.png" border="0" id="open" style="display: none;"/> 
+		<!--	style="display: inherit;" />-->
+			<img src="images/Up-arrow.png" border="0" id="close" height="14" width="56" />
+		</ice:commandLink>
+		
+		<!-- ************************************ -->	
+	</div>		
+	
+	<div class="inner-lower-part" style="background-position:50% 0;">
+        <img align="left" src="images/LL-corner.jpg"/>
+        <img align="right" src="images/LR-corner.jpg"/>
+    </div>
+	<div class="clear"></div>
+	<div style="height:10px; opacity:0"/>
+
+</ui:component>

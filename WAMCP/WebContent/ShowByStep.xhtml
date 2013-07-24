@@ -1,0 +1,284 @@
+<!--
+   Copyright 2013 Bibliotheca Alexandrina
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:c="http://java.sun.com/jstl/core">
+
+THIS PAGE USES FACELETS AND ALL THAT IS OUTSIDE COMPOSITION >>>> WILL BE
+IGNORED
+
+<ui:composition template="templates/layout.xhtml">
+	<ui:param name="reqBBean" value="#{uiActionListener}" />
+	<ui:define name="content">
+		<div class="area">
+			<div class="inner-upper-part">
+				<img src="images/Inner-UpperLeft.png" align="left"/>
+       			<img src="images/Inner-UpperRight.png" align="right"/>
+			</div>
+			<div class="content" style="min-height:330px;">
+				<h3 class="Files-by-step-view">Manuscripts by work flow stage</h3>
+				<div style="margin: 2px 0pt 10px 45px;font-size:small" class="areaText">
+					Here you can see all manuscript descriptions in each work flow stage, click any manuscript description to open it.
+				</div>
+				
+				
+				<div style="margin-left: 35px;">
+					<!--********************************************Edit************************************************************-->
+
+					<div style="margin-bottom: 20px">
+						<div class="orange-title">Under development</div>
+<!--						<ui:include src="templates/wamcp/artifactsInWFStep.xhtml">-->
+<!--							<ui:param name="artifactsList" value="#{uiActionListener.artifactsInEdit}"/>-->
+<!--							<ui:param name="stepId" value="EDIT"/>-->
+<!--							<ui:param name="stepRole" value="ROLE_WRITER"/>-->
+<!--						</ui:include>-->
+						<div style="margin-left:30px">
+						<div style="font-family:arial;font-size:small;margin-bottom:5px">
+							<ice:dataPaginator id="editingSeriesStats"
+									        	for="editingSeries"
+												rowsCountVar="rowsCount"
+									            displayedRowsCountVar="displayedRowsCount"
+									            firstRowIndexVar="firstRowIndex"
+									            lastRowIndexVar="lastRowIndex"
+									            pageCountVar="pageCount"
+									            pageIndexVar="pageIndex">
+	        				
+		        				<ice:outputFormat styleClass="standard" value="{0} manuscripts, displaying {1}; from {2} to {3}. Page {4} / {5}.">
+			            			<f:param value="#{rowsCount}"/>
+						            <f:param value="#{displayedRowsCount}"/>
+						            <f:param value="#{firstRowIndex}"/>
+						            <f:param value="#{lastRowIndex}"/>
+						            <f:param value="#{pageIndex}"/>
+						            <f:param value="#{pageCount}"/>
+		        				</ice:outputFormat>
+	
+			 
+							</ice:dataPaginator>
+	    	<!-- 10 --></div>
+	    				<ice:panelSeries rows="10" id="editingSeries" var="entry" value="#{uiActionListener.artifactsInEdit}" >
+							<div class="file-name" style="margin:2px 5px">
+								-&nbsp; 
+								<ice:commandLink enabledOnUserRole="ROLE_WRITER" value="#{entry}" actionListener="#{uiActionListener.openFile}">
+									<f:attribute name="PARAM_MSDESC_FILENAME" value="#{entry}" />
+									<f:attribute name="PARAM_OPEN_STEP" value="EDIT" />
+								</ice:commandLink>
+							</div>
+						</ice:panelSeries>
+						
+						
+							<ice:dataPaginator id="editingSeriesPaginator" for="editingSeries" fastStep="3" paginator="true" paginatorMaxPages="4">
+	 
+					                <f:facet name="first" >
+					                         <ice:graphicImage url="css-icefaces/rime/css-images/arrow-first.gif" style="border:none;"/>
+					                </f:facet>
+					 
+					                <f:facet name="last">
+					                        <ice:graphicImage url="css-icefaces/rime/css-images/arrow-last.gif" style="border:none;" />
+					                </f:facet>
+					 
+					                <f:facet name="previous">
+					                        <ice:graphicImage url="css-icefaces/rime/css-images/arrow-previous.gif" style="border:none;" />
+					                </f:facet>
+					 
+					                <f:facet name="next">
+					                        <ice:graphicImage url="css-icefaces/rime/css-images/arrow-next.gif" style="border:none;" />
+					                </f:facet>
+					 
+					                <f:facet name="fastforward">
+					                        <ice:graphicImage url="css-icefaces/rime/css-images/arrow-ff.gif" style="border:none;" />
+					                </f:facet>
+					 
+					                <f:facet name="fastrewind">
+					                        <ice:graphicImage url="css-icefaces/rime/css-images/arrow-fr.gif" style="border:none;" />
+					                </f:facet>
+					 
+					        </ice:dataPaginator>
+				        </div>
+			        
+					</div>
+					
+					<!--*****************************************To Be Released*****************************************************-->
+					
+					<div style="margin-bottom: 20px">
+						<div class="orange-title">To be reviewed</div>
+<!--						<c:forEach items="#{uiActionListener.artifactsInReview}" var="entry" varStatus="status">-->
+<!--							<div class="file-name">-->
+<!--								-&nbsp; -->
+<!--								<ice:commandLink enabledOnUserRole="ROLE_REVIEWER" value="#{entry}" actionListener="#{uiActionListener.openFile}">-->
+<!--									<f:attribute name="PARAM_MSDESC_FILENAME" value="#{entry}" />-->
+<!--									<f:attribute name="PARAM_OPEN_STEP" value="RELEASE" />-->
+<!--								</ice:commandLink></div>-->
+<!--						</c:forEach>-->
+					<div style="margin-left:30px">	
+					<div style="font-family:arial;font-size:small;margin-bottom:5px">
+						<ice:dataPaginator id="ReleaseingSeriesStats"
+								        	for="ReleaseingSeries"
+											rowsCountVar="rowsCount"
+								            displayedRowsCountVar="displayedRowsCount"
+								            firstRowIndexVar="firstRowIndex"
+								            lastRowIndexVar="lastRowIndex"
+								            pageCountVar="pageCount"
+								            pageIndexVar="pageIndex">
+				        	<ice:outputFormat styleClass="standard" value="{0} manuscripts, displaying {1}; from {2} to {3}. Page {4} / {5}.">
+					            <f:param value="#{rowsCount}"/>
+					            <f:param value="#{displayedRowsCount}"/>
+					            <f:param value="#{firstRowIndex}"/>
+					            <f:param value="#{lastRowIndex}"/>
+					            <f:param value="#{pageIndex}"/>
+					            <f:param value="#{pageCount}"/>
+					        </ice:outputFormat>
+						</ice:dataPaginator>
+    	<!-- 10 --></div>
+	    				<ice:panelSeries rows="10" id="ReleaseingSeries" var="entry" value="#{uiActionListener.artifactsInReview}" >
+							<div class="file-name" style="margin:2px 5px">
+								-&nbsp; 
+								<ice:commandLink enabledOnUserRole="ROLE_REVIEWER" value="#{entry}" actionListener="#{uiActionListener.openFile}">
+									<f:attribute name="PARAM_MSDESC_FILENAME" value="#{entry}" />
+									<f:attribute name="PARAM_OPEN_STEP" value="REVIEW" />
+								</ice:commandLink>
+							</div>
+						</ice:panelSeries>
+						
+						<ice:dataPaginator id="ReleaseingSeriesPaginator"
+											for="ReleaseingSeries"
+											fastStep="3"
+											paginator="true"
+											paginatorMaxPages="4">
+ 
+			                <f:facet name="first" >
+			                         <ice:graphicImage url="css-icefaces/rime/css-images/arrow-first.gif" style="border:none;"/>
+			                </f:facet>
+			 
+			                <f:facet name="last">
+			                        <ice:graphicImage url="css-icefaces/rime/css-images/arrow-last.gif" style="border:none;" />
+			                </f:facet>
+			 
+			                <f:facet name="previous">
+			                        <ice:graphicImage url="css-icefaces/rime/css-images/arrow-previous.gif" style="border:none;" />
+			                </f:facet>
+			 
+			                <f:facet name="next">
+			                        <ice:graphicImage url="css-icefaces/rime/css-images/arrow-next.gif" style="border:none;" />
+			                </f:facet>
+			 
+			                <f:facet name="fastforward">
+			                        <ice:graphicImage url="css-icefaces/rime/css-images/arrow-ff.gif" style="border:none;" />
+			                </f:facet>
+			 
+			                <f:facet name="fastrewind">
+			                        <ice:graphicImage url="css-icefaces/rime/css-images/arrow-fr.gif" style="border:none;" />
+			                </f:facet>
+			 
+			        </ice:dataPaginator>
+		        </div>
+			</div>
+					
+					<!--****************************************Already Released***************************************************-->
+				
+					<div style="margin-bottom: 20px">
+						<div class="orange-title">Published</div>
+<!--						<c:forEach items="#{uiActionListener.artifactsInDone}" var="entry" varStatus="status">-->
+<!--							<div class="file-name">-->
+<!--								-&nbsp; -->
+<!--								<ice:commandLink enabledOnUserRole="ROLE_WF_UNTERMINATER" value="#{entry}" actionListener="#{uiActionListener.unterminateFile}">-->
+<!--									<f:attribute name="PARAM_MSDESC_FILENAME" value="#{entry}" />-->
+<!--								</ice:commandLink>-->
+<!--							</div>-->
+<!--						</c:forEach>-->
+					<div style="margin-left:30px">
+						<div style="font-family:arial;font-size:small;margin-bottom:5px">
+							<ice:dataPaginator id="DoneingSeriesStats"
+									        	for="DoneingSeries"
+												rowsCountVar="rowsCount"
+									            displayedRowsCountVar="displayedRowsCount"
+									            firstRowIndexVar="firstRowIndex"
+									            lastRowIndexVar="lastRowIndex"
+									            pageCountVar="pageCount"
+									            pageIndexVar="pageIndex">
+						        <ice:outputFormat styleClass="standard" value="{0} manuscripts, displaying {1}; from {2} to {3}. Page {4} / {5}.">
+						            <f:param value="#{rowsCount}"/>
+						            <f:param value="#{displayedRowsCount}"/>
+						            <f:param value="#{firstRowIndex}"/>
+						            <f:param value="#{lastRowIndex}"/>
+						            <f:param value="#{pageIndex}"/>
+						            <f:param value="#{pageCount}"/>
+						        </ice:outputFormat>
+							</ice:dataPaginator>
+	    	<!-- 10 --></div>
+	    	<ice:panelSeries rows="10" id="DoneingSeries" var="entry" value="#{uiActionListener.artifactsInDone}" >
+				
+							<div class="file-name">
+								-&nbsp; 
+								<ice:commandLink enabledOnUserRole="ROLE_READER" value="#{entry}" actionListener="#{uiActionListener.openFile}">
+									<f:attribute name="PARAM_MSDESC_FILENAME" value="#{entry}" />
+									<f:attribute name="PARAM_OPEN_STEP" value="DONE" />
+								</ice:commandLink>
+							</div>
+						</ice:panelSeries>
+						<ice:dataPaginator id="DoneingSeriesPaginator"
+        				for="DoneingSeries"
+                         fastStep="3"
+                         paginator="true"
+                         paginatorMaxPages="4">
+ 
+                <f:facet name="first" >
+                         <ice:graphicImage url="css-icefaces/rime/css-images/arrow-first.gif" style="border:none;"/>
+                </f:facet>
+ 
+                <f:facet name="last">
+                        <ice:graphicImage url="css-icefaces/rime/css-images/arrow-last.gif" style="border:none;" />
+                </f:facet>
+ 
+                <f:facet name="previous">
+                        <ice:graphicImage url="css-icefaces/rime/css-images/arrow-previous.gif" style="border:none;" />
+                </f:facet>
+ 
+                <f:facet name="next">
+                        <ice:graphicImage url="css-icefaces/rime/css-images/arrow-next.gif" style="border:none;" />
+                </f:facet>
+ 
+                <f:facet name="fastforward">
+                        <ice:graphicImage url="css-icefaces/rime/css-images/arrow-ff.gif" style="border:none;" />
+                </f:facet>
+ 
+                <f:facet name="fastrewind">
+                        <ice:graphicImage url="css-icefaces/rime/css-images/arrow-fr.gif" style="border:none;" />
+                </f:facet>
+ 
+        </ice:dataPaginator></div>
+					</div>
+
+				
+
+				</div>
+			</div>
+			
+			<div class="inner-lower-part">
+				<img src="images/Inner-LowerLeft.png" align="left"/>
+        		<img src="images/Inner-LowerRight.png" align="right"/>
+			</div>
+			
+		</div>
+
+	</ui:define>
+</ui:composition>
+</html>

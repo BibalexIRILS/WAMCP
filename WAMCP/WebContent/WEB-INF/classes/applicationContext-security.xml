@@ -1,0 +1,134 @@
+<!--
+   Copyright 2013 Bibliotheca Alexandrina
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<b:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:b="http://www.springframework.org/schema/beans" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.2.xsd
+						http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+						http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd
+						http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+	<http>
+		<!--  Resources exceptions -->
+		<intercept-url pattern="/*.css" filters="none" /> <!-- access="ROLE_ANONYMOUS" /> -->
+		<intercept-url pattern="/css-icefaces/**" filters="none" /> <!-- access="ROLE_ANONYMOUS" /> -->
+		<intercept-url pattern="/font/**" filters="none" /> <!-- access="ROLE_ANONYMOUS" /> -->
+		<intercept-url pattern="/images/**" filters="none" /> <!-- access="ROLE_ANONYMOUS" /> -->
+		<intercept-url pattern="/ImageCache/**" filters="none" /> <!-- access="ROLE_ANONYMOUS" /> -->
+		<intercept-url pattern="/JS/**" filters="none" /> <!-- access="ROLE_ANONYMOUS" /> -->
+		<intercept-url pattern="/*.js" filters="none" /> <!-- access="ROLE_ANONYMOUS" /> -->
+		<!--  End Resources exceptions -->
+
+
+		<!--		  For icefaces to function -->
+		<intercept-url pattern="/xmlhttp/**" filters="none" /> <!-- access="ROLE_ANONYMOUS" /> -->
+		<intercept-url pattern="/block/**" filters="none" /> <!-- access="ROLE_ANONYMOUS" /> -->
+		<!--		 End Icefaces needed exceptions -->
+
+		<!-- Login page exception -->
+		<intercept-url pattern="/Login.*" filters="none" /> <!-- access="ROLE_ANONYMOUS" /> -->
+		<intercept-url pattern="/Logout.*" filters="none" /> <!-- access="ROLE_ANONYMOUS" /> -->  
+		<!-- End Login page exception -->
+
+		<!-- SVN accessing pages -->
+		<intercept-url pattern="/EditForm.*" access="ROLE_EDITOR" />
+		<intercept-url pattern="/Review1.*" access="ROLE_REVIEWER1" />
+		<intercept-url pattern="/Review2.*" access="ROLE_REVIEWER2" />
+		<intercept-url pattern="/ViewForm.*" access="ROLE_READER" />
+
+
+		<intercept-url pattern="/Admin**" access="ROLE_ADMIN" />
+		<intercept-url pattern="/**" access="ROLE_AUTHENTICATED" />
+
+		<form-login login-page="/Login.iface" default-target-url="/Welcome.iface" />
+		<logout invalidate-session="true" logout-success-url="/Logout.jsp" />
+	</http>
+
+
+	<!-- in case we need a reference to AuthMgr -->
+	<authentication-manager alias="authenticationManager" />
+
+	<!--
+		This could be used to prevent deletion of all users.. I don't think
+		this is necessary!
+	-->
+	<!--	<authentication-provider>-->
+	<!--		<user-service>-->
+	<!--
+		<user name="SuperAdmin" password="AdminSuper"
+		authorities="ROLE_AUTHENTICATED,ROLE_ADMIN" />
+	-->
+	<!--		</user-service>-->
+	<!--	</authentication-provider>-->
+
+	<!--
+		This can be used is passwords are stored in plain text (how would you
+		hash without having the bean?)
+	-->
+	<!--
+		<authentication-provider user-service-ref='wamcpUserDetailsSvc' />
+	-->
+
+
+	<b:bean id="wamcpUserDetailsSvc"
+		class="org.springframework.security.userdetails.jdbc.JdbcDaoImpl">
+		<b:property name="dataSource" ref="wamcpAppDataSource" />
+	</b:bean>
+
+	<tx:annotation-driven />
+	<b:bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<b:property name="dataSource" ref="wamcpAppDataSource" />
+	</b:bean>
+
+	<b:bean id="wamcpAppDataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<b:property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<b:property name="url" value="jdbc:mysql://${IP_Database_Server}:${Port}/wamcpapp" />
+		<b:property name="username" value="${username}" />
+		<b:property name="password" value="${password}" />
+	</b:bean>
+
+	<b:bean id="passwordEncoder"
+		class="org.springframework.security.providers.encoding.Md5PasswordEncoder" />
+
+	<b:bean id="saltSource"
+		class="org.springframework.security.providers.dao.salt.ReflectionSaltSource"
+		p:userPropertyToUse="username" />
+
+	<b:bean id="daoAuthenticationProvider"
+		class="org.springframework.security.providers.dao.DaoAuthenticationProvider"
+		p:userDetailsService-ref="wamcpUserDetailsSvc" p:passwordEncoder-ref="passwordEncoder"
+		p:saltSource-ref="saltSource">
+		<custom-authentication-provider />
+	</b:bean>
+
+<!-- This didn't work -->
+<!--	<b:bean id="anonymousProcessingFilter"-->
+<!--		class="org.springframework.security.providers.anonymous.AnonymousProcessingFilter">-->
+<!--		<b:property name="key" value="wamcpAnonymousUserKey" />-->
+<!--		<b:property name="userAttribute" value="anonymousUser,ROLE_ANONYMOUS" />-->
+<!--	</b:bean>-->
+<!---->
+<!--	<b:bean id="anonymousAuthenticationProvider"-->
+<!--		class="org.springframework.security.providers.anonymous.AnonymousAuthenticationProvider">-->
+<!--		<b:property name="key" value="wamcpAnonymousUserKey" />-->
+<!--	</b:bean>-->
+
+</b:beans>

@@ -1,0 +1,133 @@
+<!--
+   Copyright 2013 Bibliotheca Alexandrina
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:c="http://java.sun.com/jstl/core">
+
+THIS PAGE USES FACELETS AND ALL THAT IS OUTSIDE COMPOSITION >>>> WILL BE
+IGNORED
+
+<ui:composition template="templates/layout.xhtml">
+	<ui:param name="reqBBean" value="#{uiActionListener}" />
+	<ui:define name="content">
+
+		<!--<ice:outputStyle href="/xmlhttp/css/rime/rime.css"/>-->
+
+		<div class="area">
+
+	<div class="inner-upper-part">
+		<img src="images/Inner-UpperLeft.png" align="left"/>
+	    <img src="images/Inner-UpperRight.png" align="right"/>
+	</div>
+		<div class="content" style="min-height: 450px;">
+		<h3 class="Search-Results">Search Results for <ice:outputText value=" (#{searchBBean.criteria})"/> </h3>
+		<div style="margin: 2px 0pt 10px 35px; line-height: 20px;"
+			class="areaText">
+
+<ui:include src="templates/wamcp/solrfacets.xhtml" />
+
+
+<br/>
+		'<em>hint:</em> Click any manuscript to open it in its stage of development'</div>
+		<div style="margin-left: 35px;"><!-- ************************************  -->
+		
+		<ui:include src="templates/wamcp/pagingSummary.xhtml" />
+		
+    	<!-- 10 -->
+	    	<ice:panelSeries id="resultsSeries" var="res" value="#{searchBBean.results}" >
+				
+		
+		
+		
+			<table style="margin: 5px 20px">
+				<tr>
+					<td colspan="2" class="file-name" style="padding-bottom: 2px; padding-left: 0px;" valign="top">
+						<ice:commandLink style="font-weight:bold;font-family:Georgia;color:#CB6E1E" value="#{res.name}" actionListener="#{uiActionListener.openFile}">
+							<f:attribute name="PARAM_MSDESC_FILENAME" value="#{res.name}" />
+							<f:attribute name="PARAM_OPEN_STEP" value="#{res.workflowStage}" />
+						</ice:commandLink>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" class="file-info" width="100%">
+					<ice:outputText styleClass="showAllText" value="Stage of Development:" />
+						<b><ice:outputText styleClass="showAllText" value="#{res.workflowStage}," /></b>
+						<em><ice:outputText styleClass="showAllText" value="Revision:#{res.revision}," /></em>
+						<ice:outputText styleClass="showAllText" value="Last Modified By #{res.lastModifiedBy}" />
+						<ice:outputText styleClass="showAllText" style="font-size:11px!important" value="'#{res.lastModifiedDate}'" />
+					</td>
+				</tr>
+				<tr>
+					<td rowspan="2" valign="top" width="30%" style="padding-top:5px">
+						<center>
+							<ice:commandLink actionListener="#{uiActionListener.openFile}">
+								<f:attribute name="PARAM_MSDESC_FILENAME" value="#{res.name}" />
+								<f:attribute name="PARAM_OPEN_STEP" value="#{res.workflowStage}" />
+								<ice:graphicImage url="#{res.thumb.imageUrlStr}" style="width:150px;" />
+								<div class="active-title">
+									<ice:outputText value="#{res.thumb.caption}" />
+								</div>
+							</ice:commandLink>
+							<div class="active-title">
+								<ice:commandLink actionListener="#{uiActionListener.openFileReadOnly}">
+									<f:attribute name="PARAM_MSDESC_FILENAME" value="#{res.name}" />
+								<f:attribute name="PARAM_OPEN_STEP" value="#{res.workflowStage}" />
+									<ice:outputText value="Read Only" />
+								</ice:commandLink>
+							</div>
+						</center>
+					</td>
+					<td colspan="2" valign="top" align="left">
+	
+						<table cellpadding="2" cellspacing="0" style="font-family:arial;font-size:12px">
+							<ui:repeat value="#{res.summaryKeys}" var="sKey" varStatus="sKeyStat">
+							<tr>
+								<td align="left">	
+									<b><ice:outputText value="#{sKey}"/>:</b>
+								</td>
+								<td>
+									<ice:outputText style="font-family:OldArabic;" value=" #{res.summaryValues[sKey]}"/>
+								</td>
+							</tr>
+							</ui:repeat>
+						</table>
+					</td>
+					</tr>
+				</table>
+				<hr style="margin:0px 20px;color:#999999"/>
+		</ice:panelSeries>
+		 
+		<ui:include src="templates/wamcp/pagingLinks.xhtml" />
+		
+        <!--****************************************--></div>
+		</div>
+    <div class="inner-lower-part">
+	    <img src="images/Inner-LowerLeft.png" align="left"/>
+	    <img src="images/Inner-LowerRight.png" align="right"/>
+    </div>
+		</div>
+
+
+
+	</ui:define>
+</ui:composition>
+</html>

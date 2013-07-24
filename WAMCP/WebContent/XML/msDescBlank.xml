@@ -1,0 +1,86 @@
+<!--
+   Copyright 2013 Bibliotheca Alexandrina
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+	<teiHeader>
+		<fileDesc>
+			<titleStmt>
+				<title>Wellcome Library</title>
+			</titleStmt>
+			<publicationStmt>
+				<p>Wellcome Library; Bibliotheca Alexandrina; King's College London
+				</p>
+			</publicationStmt>
+			<sourceDesc>
+				<p>Born Digital</p>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<classDecl>
+				<taxonomy xml:id="LCSH">
+					<bibl>
+						Library of Congress Subject Headings
+						<ptr target="http://id.loc.gov/authorities/" />
+						<note>The reference to the
+							correct classification is made concatenating the URI of the Library of
+							Congress Subject Heading with each of the value contained within
+							the
+							@class attribute</note>
+					</bibl>
+				</taxonomy>
+			</classDecl>
+		</encodingDesc>
+		<revisionDesc />
+	</teiHeader>
+	<facsimile>
+	</facsimile>
+	<text>
+		<body>
+			<div>
+				<msDesc xml:id="WILL_BE_DERIVED_FROM_SHELFMARK" xml:lang="en">
+					<msIdentifier>
+						<country>UK</country>
+						<settlement>London</settlement>
+						<institution>Wellcome Trust</institution>
+						<repository>Wellcome Library</repository>
+						<collection type="main">
+							Asian Collection
+							<collection type="sub">Haddad</collection>
+						</collection>
+						<idno></idno>
+
+					</msIdentifier>
+					<physDesc>
+						<objectDesc form="codex" />
+					</physDesc>
+					<msPart>
+						<altIdentifier type="internal">
+							<idno>1</idno>
+						</altIdentifier>
+						<msContents>
+							<msItem>
+							</msItem>
+						</msContents>
+						<physDesc>
+							<objectDesc form="codex" />
+						</physDesc>
+					</msPart>
+				</msDesc>
+			</div>
+		</body>
+	</text>
+</TEI>

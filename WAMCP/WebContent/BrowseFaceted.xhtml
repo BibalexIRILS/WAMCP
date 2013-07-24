@@ -1,0 +1,148 @@
+<!--
+   Copyright 2013 Bibliotheca Alexandrina
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:c="http://java.sun.com/jstl/core">
+
+THIS PAGE USES FACELETS AND ALL THAT IS OUTSIDE COMPOSITION >>>> WILL BE
+IGNORED
+
+<ui:composition template="templates/layout.xhtml">
+	<ui:param name="reqBBean" value="#{uiActionListener}" />
+	<ui:define name="content">
+
+		<!--<ice:outputStyle href="/xmlhttp/css/rime/rime.css"/>-->
+
+		<div class="area">
+
+		<div class="inner-upper-part">
+			<img src="images/Inner-UpperLeft.png" align="left"/>
+            <img src="images/Inner-UpperRight.png" align="right"/>
+		</div>
+		<div class="content" style="min-height: 450px;">
+		<h3 class="Search-Results">Browsing manuscript descriptions by last modified date</h3>
+		<div style="margin: 2px 0pt 10px 35px; line-height: 20px;" class="areaText">
+		Last modified here doesn't refer to local modification done while the manuscript is Locked, but rather to the modifications the are made to the SVN version upon Unlocking the manuscript. <br/>
+		<ice:outputText value=" #{searchBBean.numResults} "/> manuscript descriptions exist
+		<span style="font-family:georgia;font-size:12px;padding-left:10px">
+		<em>'Click any manuscript to open it in its stage of development'</em></span><br/>
+<ui:include src="templates/wamcp/solrfacets.xhtml" />
+
+		
+		</div>
+		<div style="margin-left: 35px;"><!-- ************************************  -->
+			<div style="font-family:arial;font-size:small">
+			<ice:dataPaginator id="resultsSeriesStats"
+					        	for="resultsSeries"
+								rowsCountVar="rowsCount"
+					            displayedRowsCountVar="displayedRowsCount"
+					            firstRowIndexVar="firstRowIndex"
+					            lastRowIndexVar="lastRowIndex"
+					            pageCountVar="pageCount"
+					            pageIndexVar="pageIndex">
+	        
+		        <ice:outputFormat styleClass="standard" value="{0} results found, displaying {1} result(s), from {2} to {3}. Page {4} / {5}.">
+		            <f:param value="#{rowsCount}"/>
+		            <f:param value="#{displayedRowsCount}"/>
+		            <f:param value="#{firstRowIndex}"/>
+		            <f:param value="#{lastRowIndex}"/>
+		            <f:param value="#{pageIndex}"/>
+		            <f:param value="#{pageCount}"/>
+		        </ice:outputFormat>
+
+			</ice:dataPaginator>
+    	<!-- 10 --></div>
+	    	<ice:panelSeries rows="10" id="resultsSeries" var="res" value="#{searchBBean.results}" >
+
+				<div style="margin-bottom: 15px">
+					<div class="file-name Search-file" style="margin-bottom: 2px; margin-left: 0px">
+						<ice:commandLink value="#{res.name} (Revision: #{res.revision})" actionListener="#{uiActionListener.openFile}">
+							<f:attribute name="PARAM_MSDESC_FILENAME" value="#{res.name}" />
+							<f:attribute name="PARAM_OPEN_STEP" value="#{res.workflowStage}" />
+						</ice:commandLink>
+					</div>
+				
+					<c:forEach items="#{res.summaryKeys}" var="sKey">
+						<div class="file-name">
+							<b><ice:outputText value="#{sKey}"/>:</b>
+							&nbsp;
+							<ice:outputText value=" #{res.summaryValues[sKey]}"/>
+						</div>
+					</c:forEach>
+				
+					<div class="file-description" style="margin-left: 11px;">
+						in the stage of development:
+						&nbsp; 
+						<ice:outputText value=" #{res.workflowStage} " />
+					</div>
+				
+					<div class="file-description" style="margin-left: 11px;">
+						last modified by: &nbsp; 
+						<b><ice:outputText value=" #{res.lastModifiedBy} " /></b> 
+						<ice:outputText value="#{res.lastModifiedDate}" />
+					</div>
+				</div>
+				
+			</ice:panelSeries> 
+		
+		<center>
+			<ice:dataPaginator id="resultsSeriesPaginator" for="resultsSeries" fastStep="3" paginator="true" paginatorMaxPages="4">
+	 
+	                <f:facet name="first" >
+	                         <ice:graphicImage url="css-icefaces/rime/css-images/arrow-first.gif" style="border:none;"/>
+	                </f:facet>
+	 
+	                <f:facet name="last">
+	                        <ice:graphicImage url="css-icefaces/rime/css-images/arrow-last.gif" style="border:none;" />
+	                </f:facet>
+	 
+	                <f:facet name="previous">
+	                        <ice:graphicImage url="css-icefaces/rime/css-images/arrow-previous.gif" style="border:none;" />
+	                </f:facet>
+	 
+	                <f:facet name="next">
+	                        <ice:graphicImage url="css-icefaces/rime/css-images/arrow-next.gif" style="border:none;" />
+	                </f:facet>
+	 
+	                <f:facet name="fastforward">
+	                        <ice:graphicImage url="css-icefaces/rime/css-images/arrow-ff.gif" style="border:none;" />
+	                </f:facet>
+	 
+	                <f:facet name="fastrewind">
+	                        <ice:graphicImage url="css-icefaces/rime/css-images/arrow-fr.gif" style="border:none;" />
+	                </f:facet>
+	 
+	        </ice:dataPaginator>
+		</center>
+		<!--****************************************--></div>
+		</div>
+		<div class="inner-lower-part">
+			<img src="images/Inner-LowerLeft.png" align="left"/>
+            <img src="images/Inner-LowerRight.png" align="right"/>
+		</div>
+		</div>
+
+
+
+	</ui:define>
+</ui:composition>
+</html>
