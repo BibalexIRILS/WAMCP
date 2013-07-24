@@ -1,0 +1,62 @@
+<!--
+   Copyright 2013 Bibliotheca Alexandrina
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+
+THIS PAGE USES FACELETS AND ALL THAT IS OUTSIDE COMPOSITION >>>> WILL BE
+IGNORED
+
+<ui:composition template="templates/layout.xhtml">
+	<ui:param name="reqBBean" value="#{uiActionListener}" />
+	<ui:define name="menu">
+		
+		<ul>
+			<li>
+				<ice:commandLink id="btnAreas" value="Areas" actionListener="#{uiActionListener.goToAreas}" />
+			</li>
+
+			<li>
+				<ice:commandLink id="btnCommitToDomTree" value="Save" actionListener="#{uiActionListener.save}">
+					<f:attribute name="#{applicationScope.XSAConstants.PARAM_SAVE_MSG}" value="XML file saved in temp storage on server" />
+				</ice:commandLink>
+			</li>
+
+			<li>
+				<!-- Spacer -->
+			</li>
+			
+			<li>
+				<ice:commandLink id="btnClose" styleClass="close" value="Close" actionListener="#{uiActionListener.close}" />
+			</li>
+
+		</ul>
+
+	</ui:define>
+
+	<ui:define name="content">
+	
+		<ice:panelGroup binding="#{uiGenListener.container}" />
+
+	</ui:define>
+</ui:composition>
+</html>

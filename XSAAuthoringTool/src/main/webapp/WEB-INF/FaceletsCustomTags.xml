@@ -1,0 +1,28 @@
+<!--
+   Copyright 2013 Bibliotheca Alexandrina
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE facelet-taglib PUBLIC
+   "-//Sun Microsystems, Inc.//DTD Facelet Taglib 1.0//EN"
+   "http://java.sun.com/dtd/facelet-taglib_1_0.dtd">
+
+<facelet-taglib>
+	<namespace>http://www.bibalex.org/Facelets/CustomTags</namespace>
+	<tag>
+		<tag-name>idtXmlTree</tag-name>
+		<source>../templates/xsa/idtTree.xhtml</source>
+	</tag>
+</facelet-taglib>

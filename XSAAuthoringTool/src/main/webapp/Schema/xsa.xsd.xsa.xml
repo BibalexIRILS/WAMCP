@@ -1,0 +1,431 @@
+<!--
+   Copyright 2013 Bibliotheca Alexandrina
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<?xml version="1.0" encoding="UTF-8"?>
+<xsa:xsa xmlns:xsa="http://www.bibalex.org/xsa" xmlns:xsi="http://www.w3.org/2001/XMLSchema-xsa:instance" xsi:schemaLocation="http://www.bibalex.org/xsa xsa.xsd http://www.w3.org/XML/1998/namespace xml.xsd">
+  <xsa:authListDef xml:id="alYesNo"> yes | no</xsa:authListDef>
+  
+  <xsa:dataHolder locator="/xsa">
+    <xsa:instance mixed="no" repeat="no" xml:id="site">
+      <xsa:ui>site</xsa:ui>
+    </xsa:instance>
+  </xsa:dataHolder>
+  <xsa:dataHolder>
+    <xsa:instance mixed="no" repeat="no" xml:id="areaDHs" under="site">
+      <xsa:ui>area</xsa:ui>
+      <xsa:messages>
+        <xsa:label>Data Holders</xsa:label>
+        <xsa:help>Elements that hold data, and their hierarchy in XML and visually</xsa:help>
+      </xsa:messages>
+    </xsa:instance>
+  </xsa:dataHolder>
+  <xsa:dataHolder>
+    <xsa:instance mixed="no" repeat="no" xml:id="areaAutLists" under="site">
+      <xsa:ui>area</xsa:ui>
+<!--      <xsa:baseShift pattern="/xsa/authListDef[?Authority List Ix]"/>-->
+      <xsa:messages>
+        <xsa:label>Authority Lists</xsa:label>
+        <xsa:help>Lists of values to be allowed in certain fields</xsa:help>
+      </xsa:messages>
+    </xsa:instance>
+  </xsa:dataHolder>
+  
+  <xsa:dataHolder>
+    <xsa:instance mixed="no" repeat="no" xml:id="areaAnnotsGrps" under="site">
+      <xsa:ui>area</xsa:ui>
+      <xsa:messages>
+        <xsa:label>Annotators and Groups</xsa:label>
+        <xsa:help>Elements that are used to Annotate data in mixed content elements. Also Groupings of fields, for visually compressing long pages. Combined together in one Area to show using sections</xsa:help>
+      </xsa:messages>
+    </xsa:instance>
+
+<!--  <xsa:dataHolder>-->
+<!--    <xsa:instance mixed="no" repeat="no" xml:id="areaGroups" under="site">-->
+<!--      <xsa:ui>area</xsa:ui>-->
+<!--      <xsa:messages>-->
+<!--        <xsa:label>Groups</xsa:label>-->
+<!--        <xsa:help>Groupings of fields, for visually compressing long pages</xsa:help>-->
+<!--      </xsa:messages>-->
+<!--    </xsa:instance>-->
+<!--  </xsa:dataHolder>-->
+
+	<xsa:instance mixed="no" repeat="no" xml:id="secAnnots" under="areaAnnotsGrps">
+      <xsa:ui>section</xsa:ui>
+      <xsa:messages>
+        <xsa:label>Annotators</xsa:label>
+      </xsa:messages>
+    </xsa:instance>
+    
+   	<xsa:instance mixed="no" repeat="no" xml:id="secGroups" under="areaAnnotsGrps">
+      <xsa:ui>section</xsa:ui>
+      <xsa:messages>
+        <xsa:label>Groups</xsa:label>
+      </xsa:messages>
+    </xsa:instance>
+  </xsa:dataHolder>
+ 
+  
+  <xsa:dataHolder locator="/xsa/dataHolder">
+    <xsa:instance mixed="no" under="areaDHs" xml:id="cntDH">
+      <xsa:ui>container</xsa:ui>
+      <xsa:messages>
+        <xsa:label>Data Holder</xsa:label>
+      </xsa:messages>
+    </xsa:instance>
+  </xsa:dataHolder>
+  <xsa:dataHolder locator="/xsa/dataHolder/@locator">
+    <xsa:instance mixed="no" repeat="no" under="cntDH">
+      <xsa:responsible required="true" />
+      <xsa:ui>field</xsa:ui>
+      <xsa:messages>
+        <xsa:label>Locator String</xsa:label>
+      </xsa:messages>
+    </xsa:instance>
+  </xsa:dataHolder>
+  <xsa:dataHolder locator="/xsa/dataHolder/dataType">
+    <xsa:instance mixed="no" repeat="no" under="cntDH">
+      <xsa:ui>field</xsa:ui>
+      <xsa:messages>
+        <xsa:label>Data Type</xsa:label>
+      </xsa:messages>
+    </xsa:instance>
+  </xsa:dataHolder>
+  <xsa:dataHolder locator="/xsa/dataHolder/instance">
+    <xsa:instance mixed="no" under="cntDH" xml:id="cntInst">
+      <xsa:ui>container</xsa:ui>
+      <xsa:messages>
+        <xsa:label>Instance</xsa:label>
+      </xsa:messages>
+    </xsa:instance>
+  </xsa:dataHolder>
+  <xsa:dataHolder locator="/xsa/dataHolder/instance/attribute">
+    <xsa:instance mixed="no" under="cntInst" xml:id="cntAttr">
+      <xsa:ui>container</xsa:ui>
+      <xsa:messages>
+        <xsa:label>Attribute</xsa:label>
+      </xsa:messages>
+    </xsa:instance>
+  </xsa:dataHolder>
+  <xsa:dataHolder locator="/xsa/dataHolder/instance/attribute/@name">
+    <xsa:instance mixed="no" repeat="no" under="cntAttr">
+      <xsa:responsible required="true" />
+      <xsa:ui>field</xsa:ui>
+      <xsa:messages>
+        <xsa:label>Name</xsa:label>
+      </xsa:messages>
+    </xsa:instance>
+  </xsa:dataHolder>
+  <xsa:dataHolder locator="/xsa/dataHolder/instance/attribute/@value">
+    <xsa:instance mixed="no" repeat="no" under="cntAttr">
+      <xsa:responsible required="true" />
+      <xsa:ui>field</xsa:ui>
+      <xsa:messages>
+        <xsa:label>Value</xsa:label>
+      </xsa:messages>
+    </xsa:instance>
+  </xsa:dataHolder>
+  <xsa:dataHolder locator="/xsa/dataHolder/instance/attribute/@nsuri">
+    <xsa:instance mixed="no" repeat="no" under="cntAttr">
+      <xsa:responsible required="true" />
+      <xsa:ui>field</xsa:ui>
+      <xsa:messages>
+        <xsa:label>Name Space URI</xsa:label>
+      </xsa:messages>
+    </xsa:instance>
+  </xsa:dataHolder>
+  <xsa:dataHolder locator="/xsa/dataHolder/instance/@xml:id">
+    <xsa:instance mixed="no" repeat="no" under="cntInst">
+      <xsa:ui>field</xsa:ui>
+      <xsa:messages>
+        <xsa:label>Id in XSA.XML</xsa:label>
+      </xsa:messages>
+    </xsa:instance>
+  </xsa:dataHolder>
+  <xsa:dataHolder locator="/xsa/dataHolder/instance/messages/label">
+    <xsa:instance mixed="no" repeat="no" under="cntInst">
+      <xsa:ui>field</xsa:ui>
+      <xsa:messages>
+        <xsa:label>Label in UI</xsa:label>
+      </xsa:messages>
+    </xsa:instance>
+  </xsa:dataHolder>
+  <xsa:dataHolder locator="/xsa/dataHolder/instance/@under">
+    <xsa:instance mixed="no" repeat="no" under="cntInst">
+      <xsa:responsible required="true" />
+      <xsa:ui>field</xsa:ui>
+      <xsa:messages>
+        <xsa:label>Parent Instance</xsa:label>
+      </xsa:messages>
+    </xsa:instance>
+  </xsa:dataHolder>
+  <xsa:dataHolder locator="/xsa/dataHolder/instance/ui">
+    <xsa:instance mixed="no" repeat="no" under="cntInst">
+      <xsa:responsible required="true" />
+      <xsa:ui>field</xsa:ui>
+      <xsa:messages>
+        <xsa:label>UI</xsa:label>
+      </xsa:messages>
+    </xsa:instance>
+  </xsa:dataHolder>
+  <xsa:dataHolder locator="/xsa/dataHolder/instance/responsible/@required">
+    <xsa:instance mixed="no" repeat="no" under="cntInst">
+      <xsa:ui>field</xsa:ui>
+      <xsa:messages>
+        <xsa:label>Required</xsa:label>
+      </xsa:messages>
+    </xsa:instance>
+  </xsa:dataHolder>
+  <xsa:dataHolder locator="/xsa/dataHolder/instance/@repeat">
+    <xsa:instance mixed="no" repeat="no" under="cntInst" authorityList="alYesNo">
+      <xsa:ui>field</xsa:ui>
+      <xsa:defaultVal>no</xsa:defaultVal>
+      <xsa:messages>
+        <xsa:label>Repeat</xsa:label>
+      </xsa:messages>
+    </xsa:instance>
+  </xsa:dataHolder>
+  <xsa:dataHolder locator="/xsa/dataHolder/instance/@mixed">
+    <xsa:instance mixed="no" repeat="no" under="cntInst" authorityList="alYesNo">
+      <xsa:ui>field</xsa:ui>
+      <xsa:defaultVal>no</xsa:defaultVal>
+      <xsa:messages>
+        <xsa:label>Mixed</xsa:label>
+      </xsa:messages>
+    </xsa:instance>
+  </xsa:dataHolder>
+  <xsa:dataHolder locator="/xsa/dataHolder/instance/defaultVal">
+    <xsa:instance mixed="no" repeat="no" under="cntInst">
+      <xsa:ui>field</xsa:ui>
+      <xsa:messages>
+        <xsa:label>Default Value</xsa:label>
+      </xsa:messages>
+    </xsa:instance>
+  </xsa:dataHolder>
+<!--  <xsa:dataHolder locator="/xsa/dataHolder/instance/mixed">-->
+<!--    <xsa:instance mixed="no" repeat="no" under="cntInst">-->
+<!--      <xsa:ui>field</xsa:ui>-->
+<!--      <xsa:messages>-->
+<!--        <xsa:label>Default Value (Mixed)</xsa:label>-->
+<!--      </xsa:messages>-->
+<!--    </xsa:instance>-->
+<!--  </xsa:dataHolder>-->
+  <xsa:dataHolder locator="/xsa/dataHolder/instance/@authorityList">
+    <xsa:instance mixed="no" repeat="no" under="cntInst">
+      <xsa:ui>field</xsa:ui>
+      <xsa:messages>
+        <xsa:label>Authority List</xsa:label>
+      </xsa:messages>
+    </xsa:instance>
+  </xsa:dataHolder>
+  <xsa:dataHolder locator="/xsa/dataHolder/instance/readAccess">
+    <xsa:instance mixed="no" repeat="no" under="cntInst">
+      <xsa:ui>field</xsa:ui>
+      <xsa:messages>
+        <xsa:label>Read Access</xsa:label>
+      </xsa:messages>
+    </xsa:instance>
+  </xsa:dataHolder>
+  <xsa:dataHolder locator="/xsa/dataHolder/instance/writeAccess">
+    <xsa:instance mixed="no" repeat="no" under="cntInst">
+      <xsa:ui>field</xsa:ui>
+      <xsa:messages>
+        <xsa:label>Write access</xsa:label>
+      </xsa:messages>
+    </xsa:instance>
+  </xsa:dataHolder>
+  <xsa:dataHolder locator="/xsa/dataHolder/instance/@facs">
+    <xsa:instance mixed="no" repeat="no" under="cntInst">
+      <xsa:ui>field</xsa:ui>
+      <xsa:messages>
+        <xsa:label>Facsimilie</xsa:label>
+      </xsa:messages>
+    </xsa:instance>
+  </xsa:dataHolder>
+  <xsa:dataHolder locator="/xsa/dataHolder/instance/@group">
+    <xsa:instance mixed="no" repeat="no" under="cntInst">
+      <xsa:ui>field</xsa:ui>
+      <xsa:messages>
+        <xsa:label>Group</xsa:label>
+      </xsa:messages>
+    </xsa:instance>
+  </xsa:dataHolder>
+  <xsa:dataHolder locator="/xsa/dataHolder/instance/messages/help">
+    <xsa:instance mixed="no" repeat="no" under="cntInst">
+      <xsa:ui>field</xsa:ui>
+      <xsa:messages>
+        <xsa:label>Help Text</xsa:label>
+      </xsa:messages>
+    </xsa:instance>
+  </xsa:dataHolder>
+<!--  <xsa:dataHolder locator="/xsa/dataHolder/instance/messages/missing">-->
+<!--    <xsa:instance mixed="no" repeat="no" under="cntInst">-->
+<!--      <xsa:ui>field</xsa:ui>-->
+<!--      <xsa:messages>-->
+<!--        <xsa:label>Required Msg</xsa:label>-->
+<!--      </xsa:messages>-->
+<!--    </xsa:instance>-->
+<!--  </xsa:dataHolder>-->
+  <xsa:dataHolder locator="/xsa/dataHolder/instance/indexed">
+    <xsa:instance mixed="yes" repeat="no" under="cntInst" xml:id="cntIxed">
+      <xsa:ui>container</xsa:ui>
+      <xsa:messages>
+        <xsa:label>Index Field Name</xsa:label>
+        <xsa:help>The value in this field will be used both as the Solr Field name and as the Label of the values in the Summary</xsa:help>
+      </xsa:messages>
+    </xsa:instance>
+  </xsa:dataHolder>
+  <xsa:dataHolder locator="/xsa/dataHolder/instance/indexed/@summary">
+    <xsa:instance mixed="no" repeat="no" under="cntIxed" authorityList="alYesNo">
+      <xsa:ui>field</xsa:ui>
+      <xsa:messages>
+        <xsa:label>Show field in summar?</xsa:label>
+      </xsa:messages>
+    </xsa:instance>
+  </xsa:dataHolder>
+<!--  <xsa:dataHolder locator="/xsa/dataHolder/instance/messages/invalid">-->
+<!--    <xsa:instance mixed="no" under="cntInst">-->
+<!--      <xsa:ui>field</xsa:ui>-->
+<!--      <xsa:messages>-->
+<!--        <xsa:label>Invalid Msg (TODO)</xsa:label>-->
+<!--      </xsa:messages>-->
+<!--    </xsa:instance>-->
+<!--  </xsa:dataHolder>-->
+  <xsa:dataHolder locator="/xsa/dataHolder/instance/baseShift/@pattern">
+    <xsa:instance mixed="no" under="cntInst" repeat="no" >
+      <xsa:ui>field</xsa:ui>
+      <xsa:messages>
+        <xsa:label>Base Shift Pattern</xsa:label>
+      </xsa:messages>
+    </xsa:instance>
+  </xsa:dataHolder>
+  <xsa:dataHolder locator="/xsa/groupDef">
+    <xsa:instance mixed="no" xml:id="cntGrp" under="secGroups">
+      <xsa:ui>container</xsa:ui>
+    </xsa:instance>
+  </xsa:dataHolder>
+  <xsa:dataHolder locator="/xsa/groupDef/@xml:id">
+    <xsa:instance mixed="no" under="cntGrp">
+      <xsa:ui>field</xsa:ui>
+      <xsa:messages>
+        <xsa:label>Group Id</xsa:label>
+      </xsa:messages>
+    </xsa:instance>
+  </xsa:dataHolder>
+  
+  <xsa:dataHolder locator="/xsa/groupDef/messages/label">
+    <xsa:instance mixed="no" under="cntGrp">
+      <xsa:ui>field</xsa:ui>
+      <xsa:messages>
+        <xsa:label>Group Label</xsa:label>
+      </xsa:messages>
+    </xsa:instance>
+  </xsa:dataHolder>
+
+
+  <xsa:dataHolder locator="/xsa/groupDef/@ixInUi">
+    <xsa:dataType> decimal </xsa:dataType>
+    <xsa:instance mixed="no" under="cntGrp">
+      <xsa:ui>field</xsa:ui>
+      <xsa:messages>
+        <xsa:label>Group Index In UI</xsa:label>
+      </xsa:messages>
+    </xsa:instance>
+  </xsa:dataHolder>
+  
+  <xsa:dataHolder locator="/xsa/groupDef/messages/help">
+    <xsa:instance mixed="no" under="cntGrp">
+      <xsa:ui>field</xsa:ui>
+      <xsa:messages>
+        <xsa:label>Group Help</xsa:label>
+      </xsa:messages>
+    </xsa:instance>
+  </xsa:dataHolder>
+  
+
+  <xsa:dataHolder locator="/xsa/authListDef">
+    <xsa:instance mixed="yes" repeat="no" under="areaAutLists" xml:id="cntAuthList">
+      <xsa:ui>container</xsa:ui>
+      <xsa:messages>
+      <xsa:label>Pipe Delimited Values</xsa:label>
+      </xsa:messages>
+    </xsa:instance>
+  </xsa:dataHolder>
+  
+  <xsa:dataHolder locator="/xsa/authListDef/@xml:id">
+    <xsa:instance mixed="no" repeat="no" under="cntAuthList">
+      <xsa:ui>field</xsa:ui>
+      <xsa:messages>
+        <xsa:label>Authority List Id</xsa:label>
+      </xsa:messages>
+    </xsa:instance>
+  </xsa:dataHolder>
+  
+  <xsa:dataHolder locator="/xsa/annotator">
+    <xsa:instance mixed="no" under="secAnnots" xml:id="cntAnnot">
+      <xsa:ui>container</xsa:ui>
+      <xsa:messages>
+        <xsa:label>Annotator</xsa:label>
+      </xsa:messages>
+    </xsa:instance>
+  </xsa:dataHolder>
+  <xsa:dataHolder locator="/xsa/annotator/@eltName">
+    <xsa:instance mixed="no" under="cntAnnot">
+      <xsa:ui>field</xsa:ui>
+      <xsa:messages>
+        <xsa:label>Local Name of Annotator XML Element</xsa:label>
+      </xsa:messages>
+    </xsa:instance>
+  </xsa:dataHolder>
+  
+  <xsa:dataHolder locator="/xsa/annotator/attribute">
+    <xsa:instance mixed="no" under="cntAnnot" xml:id="cntAnnotAttr">
+      <xsa:ui>container</xsa:ui>
+      <xsa:messages>
+        <xsa:label>Preset Attribute</xsa:label>
+      </xsa:messages>
+    </xsa:instance>
+  </xsa:dataHolder>
+  <xsa:dataHolder locator="/xsa/annotator/attribute/@name">
+    <xsa:instance mixed="no" repeat="no" under="cntAnnotAttr">
+      <xsa:responsible required="true" />
+      <xsa:ui>field</xsa:ui>
+      <xsa:messages>
+        <xsa:label>Name</xsa:label>
+      </xsa:messages>
+    </xsa:instance>
+  </xsa:dataHolder>
+  <xsa:dataHolder locator="/xsa/annotator/attribute/@value">
+    <xsa:instance mixed="no" repeat="no" under="cntAnnotAttr">
+      <xsa:responsible required="true" />
+      <xsa:ui>field</xsa:ui>
+      <xsa:messages>
+        <xsa:label>Value</xsa:label>
+      </xsa:messages>
+    </xsa:instance>
+  </xsa:dataHolder>
+  <xsa:dataHolder locator="/xsa/annotator/attribute/@nsuri">
+    <xsa:instance mixed="no" repeat="no" under="cntAnnotAttr">
+      <xsa:responsible required="true" />
+      <xsa:ui>field</xsa:ui>
+      <xsa:messages>
+        <xsa:label>Name Space URI</xsa:label>
+      </xsa:messages>
+    </xsa:instance>
+  </xsa:dataHolder>
+  
+   
+</xsa:xsa>
+

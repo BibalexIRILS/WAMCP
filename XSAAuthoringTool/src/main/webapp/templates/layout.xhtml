@@ -1,0 +1,80 @@
+<!--
+   Copyright 2013 Bibliotheca Alexandrina
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=8"/> 
+<title><ui:insert name="title">XML Skeleton Annotations (XSA) Author</ui:insert></title>
+<ice:outputStyle href="Application.css" />
+<ice:outputStyle href="css-icefaces/rime/rime_datatable.css" />
+<ice:outputStyle href="css-icefaces/xp/xp_tabs.css" />
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+
+<f:view id="XSAAView">
+	<ice:form id="XSAAForm">
+		
+		<div class="header">
+			<div>
+<!--				<div style="float:left; height: 80px;">-->
+<!--TODO provide BA Logo					<img src="images/Banner.jpg" /> -->
+<!--				</div>-->
+				
+				<div class="clear"></div>
+			</div>
+	
+			<div class="main-menu">
+				<ui:insert name="menu" />
+			</div>
+			
+			<div class="clear" />
+		</div>
+
+		<div class="wrapper">
+			<div class="text-description" style="display: block; height: 16px;">
+				<c:if test="#{!empty reqBBean}">
+					<ice:outputText escape="false" styleClass="#{reqBBean.headerMsgStyle}" value="#{reqBBean.headerMsgText}" />
+				</c:if>
+			</div>
+			<div class="main-content">
+				<div class="upper-part">
+					<img src="images/Outer-UpperLeft-part.png" align="left"/>
+					<img src="images/Outer-UpperRight-part.png" align="right"/>
+				</div>
+				<div class="main-content-BG">
+					<ui:insert name="content" />
+				</div>
+				<div class="lower-part">
+					<img src="images/Outer-LowerLeft-part.png" align="left"/>
+					<img src="images/Outer-LowerRight-part.png" align="right"/>
+				</div>
+			</div>
+		</div>
+
+	</ice:form>
+</f:view>
+</body>
+</html>

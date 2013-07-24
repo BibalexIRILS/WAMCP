@@ -1,0 +1,220 @@
+/*
+   Copyright 2013 Bibliotheca Alexandrina, Wellcome Trust Library
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+
+
+/*
+----------- Data Table Component classes
+*/
+.iceDatTbl {
+/* was iceDataTblOutline */
+    background-color: #FFFFFF;
+    border-collapse: collapse;
+    border: none;
+    border-left: 1px solid #d9d9d9;
+    margin: 10px 0 0 0;
+}
+
+.iceDatTbl table {
+    border-collapse: collapse;
+}
+
+.iceDatTblColHdr, .iceDatTblColHdr1, .iceDatTblColHdr2, .iceDatTblColGrpHdrCol, .iceDatTblFtr {
+/* was iceTblHeader */
+    text-align: center;
+    font: 11px tahoma;
+    color: #484848;
+    padding: 5px;
+    font-weight: bold;
+    background: #FFF url( './css-images/table_col_header.gif' ) repeat-x bottom left;
+    border: 1px solid #d9d9d9;
+}
+
+.iceDatTblResHdlr {
+    margin:0px;; 
+    padding:0px;
+    border-width: 0px;
+    width:2px;
+    background-color:transparent;
+ 
+}
+
+.iceDatTblResBor {
+    margin:0px;; 
+    padding:0px;
+    background-color: #d9d9d9;
+    background-position: bottom;
+    background-repeat: repeat-x;
+    width:2px;   
+    border-top: 1px solid #CCCCCC; 
+}
+
+.iceDatTblBlkTd {
+    border-bottom: 1px solid #CCCCCC;   
+    background-color: #d9d9d9;   
+}
+/* data tables are rendered with alternating row colors */
+
+.iceDatTblRow1 {
+/* was iceTblRow1 */
+    background: #FFF;
+    border-left: 1px solid #d9d9d9;
+}
+
+.iceDatTblRow2 {
+/* was iceTblRow2 */
+    background: #F7F7F7;
+    border-left: 1px solid #d9d9d9;
+}
+
+/* set the common attributes for the column classes */
+.iceDatTblCol, .iceDatTblCol1, .iceDatTblCol2 {
+/*was column, column1, column2, column3*/
+    color: #000000;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-right: 1px solid #CCCCCC;
+    border-bottom: 1px solid #CCCCCC;
+    text-align: left;
+}
+
+.iceDatTblHdr {
+}
+
+/*was iceTblHeader */
+.iceDatTblFtr {
+	background: none;
+    border-top: 1px solid #d9d9d9; 	
+}
+
+.iceDatTblScrlSpr{ 
+    background: url( './css-images/table_col_header.gif' ) repeat-x bottom left; 
+    border-top: 1px solid #d9d9d9; 
+    border-right: 1px solid #d9d9d9;
+}
+
+.iceDatTblScrlSprFtr{ 
+    border-bottom: 1px solid #d9d9d9;
+    border-right: 1px solid #d9d9d9;        
+}
+
+.iceDatTblScrlSprFtr .iceDatTblFtr{ 
+    border-bottom: none;     
+}
+
+.iceDatTblScrlSpr .iceDatTblColHdr1, .iceDatTblScrlSpr .iceDatTblColHdr2 {
+    border-left-style: none;
+    border-top-style: none;
+}
+
+.iceDatTblActvSrtHdr{}
+/*was iceTblFooter */
+
+/*
+----- for datatable when cell content length exceeds-----
+*/
+
+.iceDatTbl td span.iceOutTxt {
+    overflow: hidden;
+    display: block;
+    padding: 2px 0px;
+}
+
+/* etc */
+
+/*
+----------- Data Scroller Component classes
+*/
+.iceDatPgrScrOut {
+/* the class for the outside table */
+    background-color: transparent;
+    margin: 10px;
+}
+
+.iceDatPgrScrBtn {
+/* the cells behind the scroll buttons */
+    background-color: transparent;
+    padding: 2px;
+}
+
+.iceDatPgrScrBtn .iceCmdLnk-dis {
+       border-bottom:none;
+}
+
+.iceDatPgrTbl {
+/* the container for the pagination*/
+    background-color: transparent;
+}
+
+/* set the common attributes for the pagination numbers */
+.iceDatPgrScrCol a, .iceDatPgrCol a {
+    text-decoration: none;
+    font-weight: normal;
+    background-color: #FFFFFF;
+    color: #656565;
+    display: block;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border: 1px solid #DBDBDB;
+}
+
+/** html .iceDatPgrCol a {*/
+    /*width: 1%;*/
+/*}*/
+
+/* override the attributes for the currently selected page */
+.iceDatPgrScrCol a {
+    color: #FFFFFF;
+    border: 1px solid #DBDBDB;
+    background-color: #FFA600;
+}
+
+/** html .iceDatPgrScrCol a {*/
+    /*width: 1%;*/
+/*}*/
+
+/* set the attributes for the mouseover on none-current pages */
+.iceDatPgrCol a:hover {
+    color: #000000;
+    border: 1px solid #FFA600;
+    text-decoration: none;
+    padding-bottom: 1px;
+}
+.iceDatPgrScrCol a:hover {
+    color: #000000;
+    border: 1px solid #DBDBDB;
+    text-decoration: none;
+    padding-bottom: 1px;
+}
+
+/*
+----------- commandSortHeader classes
+*/
+.iceCmdSrtHdrAsc, .iceCmdSrtHdrDesc{
+    background-repeat: no-repeat;
+    background-position: center;
+    width:10px;
+    height:10px;
+}
+.iceCmdSrtHdrAsc{
+    background-image: url('./css-images/column_sort_asc.gif');
+}
+.iceCmdSrtHdrDesc{
+    background-image: url('./css-images/column_sort_desc.gif');
+}

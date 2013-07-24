@@ -1,0 +1,85 @@
+<!--
+   Copyright 2013 Bibliotheca Alexandrina
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:c="http://java.sun.com/jstl/core">
+
+<!--	<ice:outputStyle href="/xmlhttp/css/rime/rime.css" />-->
+
+	<div style="display: block; min-width: 450px; max-height: 500px; overflow: auto">
+	<table>
+
+<!--		<ui:repeat value="#{xsaBindersBean.attrsPopupIds}" var="attrId">-->
+	<c:forEach items="#{xsaBindersBean.attrsPopupIds}" var="attrId" varStatus="status">
+<!--		<c:if test="#{status.index % 2 == 0}">-->
+<!--			<tr>-->
+<!--		</c:if>-->
+<tr>
+				<td><ice:panelGroup style="width: 100px;"
+					binding="#{xsaBindersBean.attrsPopupLabels[attrId]}" /></td>
+				<td><ice:panelGroup style="width: 300px;"
+					binding="#{xsaBindersBean.attrsPopupFields[attrId]}" /></td>
+					
+</tr>
+<!--		<c:if test="#{status.index % 2 == 0}">-->
+<!--			</tr>-->
+<!--		</c:if>-->
+	</c:forEach>
+<!--		</ui:repeat>-->
+
+	</table>
+	</div>
+
+		<div style="display: block;">
+		
+			<c:if test="#{!empty xsaBindersBean.dynComps[applicationScope.XSAConstants.ID_attrPopupCancel]}" >
+				<div style="float: left;" class="btnLink">
+		<ice:commandLink
+			binding="#{xsaBindersBean.dynComps[applicationScope.XSAConstants.ID_attrPopupCancel]}" />
+			</div>
+		</c:if>
+		
+				
+		<c:if test="#{!empty xsaBindersBean.dynComps[applicationScope.XSAConstants.ID_attrPopupClose]}" >
+		<div style="float: left;" class="btnLink">
+
+		<ice:commandLink
+			binding="#{xsaBindersBean.dynComps[applicationScope.XSAConstants.ID_attrPopupClose]}" />
+		
+		</div>
+		</c:if>
+
+		<c:if test="#{!empty xsaBindersBean.dynComps[applicationScope.XSAConstants.ID_pnlAppRevPopAttrs]}">
+				<div style="float: right;" class="btnLink"> 
+		<ice:panelGroup
+			binding="#{xsaBindersBean.dynComps[applicationScope.XSAConstants.ID_pnlAppRevPopAttrs]}" />\
+			</div>
+		</c:if>
+		<c:if test="#{!empty xsaBindersBean.dynComps[applicationScope.XSAConstants.ID_attrPopupOk]}" >
+				<div style="float: right;" class="btnLink">
+		<ice:commandLink
+			binding="#{xsaBindersBean.dynComps[applicationScope.XSAConstants.ID_attrPopupOk]}" />
+			</div>
+		</c:if>
+		
+		<div class="clear"></div>
+		</div>
+
+</ui:component>

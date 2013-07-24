@@ -1,0 +1,108 @@
+<!--
+   Copyright 2013 Bibliotheca Alexandrina
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns:sec="http://www.springframework.org/schema/security"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.2.xsd
+						http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+						http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd
+						http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+
+
+
+	<!-- *********************************** -->
+	<!--	Application Beans -->
+	<bean class="org.bibalex.sdxe.binding.SDXEMediatorBean" id="sdxeMediatorBean"
+		scope="session" />
+		
+		<bean class="org.bibalex.sdxe.xsa.application.XSASessionBBean" id="sessionBBean"
+		scope="session" />
+
+	<bean class="org.bibalex.sdxe.suggest.SugtnTreeBuilderCache" id="sugtnTreeBuilderCache"
+		scope="singleton" lazy-init="true" />
+		
+	<bean class="org.bibalex.xsa.sample.xsaauth.xsa.XSAAuthUiActionListener"
+		id="uiActionListener" scope="request" lazy-init="true">
+		
+		<constructor-arg value="/Schema/xsa.xsd"/>
+		<constructor-arg value="xsa"/>
+		<constructor-arg value="http://www.bibalex.org/xsa"/>
+		
+		<property name="storage" ref="storageBean" />
+		<property name="sdxeMediator" ref="sdxeMediatorBean" />
+		<property name="bindersBean" ref="xsaBindersBean" />
+		<property name="uiGenDomListener" ref="uiGenListener" />
+		<property name="sessionBBean" ref="sessionBBean"/>
+		<property name="jumpXMLTreeBBean" ref="jumpXMLTreeBBean"/>
+	</bean>
+
+	<bean class="org.bibalex.xsa.sample.xsaauth.xsa.XSAAuthUiGenDomListener"
+		id="uiGenListener" scope="session" lazy-init="true">
+		<constructor-arg value="/Schema/xsa.xsd"/>
+		<property name="sdxeMediator" ref="sdxeMediatorBean" />
+		<property name="bindersBean" ref="xsaBindersBean" />
+	</bean>
+	
+	
+	
+
+	<bean class="org.bibalex.sdxe.xsa.uigen.icefaces.XSAUiBindersBean"
+		id="xsaBindersBean" scope="session" lazy-init="true" />
+
+	<bean class="org.bibalex.sdxe.xsa.model.XSADocCache" id="xsaDocCache"
+		scope="singleton" lazy-init="true" />
+	
+	<bean class="org.bibalex.sdxe.xsa.model.XSAInstanceCache" id="xsaInstanceCache"
+		scope="singleton" lazy-init="true" />
+		
+	<bean class="org.bibalex.xsa.sample.xsaauth.storage.SessionDirStorage" id="storageBean"
+		scope="session" lazy-init="true" />
+
+	<bean class="org.bibalex.xsa.sample.xsaauth.pagebeans.CreateOpenBBean" id="createNewBBean"
+		scope="session" lazy-init="true">
+		<constructor-arg value="/XML/xsaBlank.xml"/>
+		<property name="importXMLTreeBBean" ref="importXMLTreeBBean" />
+		<property name="importBBean" ref="importBBean" />
+		<property name="storage" ref="storageBean" />
+		<property name="xsaUiActionListener" ref="uiActionListener" />
+	</bean>
+	
+	<bean class="org.bibalex.xsa.sample.xsaauth.pagebeans.ImportBBean" id="importBBean"
+		scope="session" lazy-init="true">
+		<constructor-arg value="/Schema/xsa.xsd"/>
+		<property name="storage" ref="storageBean" />
+		<property name="xsaUiActionListener" ref="uiActionListener" />
+	</bean>
+
+
+	<bean class="org.bibalex.icefaces.jdomtree.IDTBBean" id="importXMLTreeBBean"
+		scope="session" lazy-init="true" />
+
+	<bean class="org.bibalex.icefaces.jdomtree.IDTBBean" id="jumpXMLTreeBBean"
+		scope="session" lazy-init="true" />
+
+
+
+		
+	
+	<!-- *********************************** -->
+
+
+</beans>

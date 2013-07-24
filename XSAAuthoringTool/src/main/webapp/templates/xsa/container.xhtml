@@ -1,0 +1,143 @@
+<!--
+   Copyright 2013 Bibliotheca Alexandrina
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:ct="http://www.bibalex.org/Facelets/CustomTags">
+
+	<div class="Unit"><!--	<ice:panelGroup binding="#{xsaBindersBean.dynComps[applicationScope.XSAConstants.ID_contEditAttrsHldr]}" />-->
+
+	<ice:panelPopup id="PopUpJumpToBro-#{CONTAINER_ELT_ID}" draggable="false" modal="true" visible="false" rendered="false">
+		<f:facet name="header" >
+			<ice:panelGrid>
+				<ice:outputText value="Jump to a different container occurence"/>
+			</ice:panelGrid>
+		</f:facet>
+		<f:facet name="body">
+			<ice:panelGrid columns="1">
+			<ice:panelGroup  style="display:block; overflow: auto;max-height: 500px; max-width: 700px;">
+			<ice:tree value="#{jumpXMLTreeBBean.model}"
+                      var="item"
+                      hideRootNode="true"
+                      hideNavigation="false"
+                      imageDir="images/">
+            <ice:treeNode>
+                <f:facet name="content">
+                    <ice:panelGroup style="display: inline">
+                        <ice:commandLink actionListener="#{uiActionListener.moveContainerJump}" value="#{item.userObject.text}" >
+                        	<f:attribute name="IDT_PARAM_USEROBJECT" value="#{item.userObject}"/>
+                        </ice:commandLink>
+                    </ice:panelGroup>
+                </f:facet>
+            </ice:treeNode>
+                </ice:tree>
+                </ice:panelGroup>
+                <!--  The custom component doesn't work :(  -->
+<!--				<ct:idtXmlTree-->
+<!--						idtBBean="#{jumpXMLTreeBBean}"-->
+<!--						idtActionListener="#{uiActionListener}" />-->
+				
+				<ice:panelGroup><ice:panelGroup style="display:block; float: right;" styleClass="btnLink">
+				<ice:commandLink value="Cancel" actionListener="#{uiActionListener.hideBroSelector}"/></ice:panelGroup>
+				<ice:panelGroup style="clear:both"/> 
+				</ice:panelGroup>
+				
+			</ice:panelGrid>
+		</f:facet>
+	</ice:panelPopup>
+
+	<div class="Upper-blue-part"><img align="left"
+		src="images/Left-blue-corner.jpg" /> <ice:panelGroup
+		binding="#{xsaBindersBean.dynComps[applicationScope.XSAConstants.ID_contDesc]}"
+		styleClass="Title" />
+
+	
+	<table cellpadding="0" cellspacing="0" style="float:left">
+		<tr>
+			<td valign="middle" class="right-arrow">
+				<ice:commandLink binding="#{xsaBindersBean.dynComps[applicationScope.XSAConstants.ID_contPrev]}">
+					<img border="0" src="images/Small-L-Arrow.png" />
+				</ice:commandLink>
+			</td>
+			<td valign="middle" class="field-no">
+				<c:choose>
+					<c:when test="#{!empty xsaBindersBean.dynComps[applicationScope.XSAConstants.ID_contIx]}">
+						<ice:panelGroup binding="#{xsaBindersBean.dynComps[applicationScope.XSAConstants.ID_contIx]}" />
+					</c:when>
+					<c:otherwise>
+						<div>0 / 0</div>
+					</c:otherwise>
+				</c:choose>
+			</td>
+			<td valign="middle" class="left-arrow">
+				<ice:commandLink binding="#{xsaBindersBean.dynComps[applicationScope.XSAConstants.ID_contNext]}">
+					<img border="0" src="images/Small-R-Arrow.png" />
+				</ice:commandLink>
+			</td>
+			<td valign="middle">
+				<c:if test="#{!empty xsaBindersBean.dynComps[applicationScope.XSAConstants.ID_contJump]}">
+					<ice:commandLink binding="#{xsaBindersBean.dynComps[applicationScope.XSAConstants.ID_contJump]}">Jump</ice:commandLink>
+				</c:if>
+			</td>
+		</tr>
+	</table>
+	
+	<table cellpadding="0" cellspacing="0" class="upper-bar-link" style="float:right">
+		<tr>
+			<td valign="middle">
+				<c:if test="#{!empty xsaBindersBean.dynComps[applicationScope.XSAConstants.ID_contNew]}">
+					<span class="Add">
+						<ice:commandLink binding="#{xsaBindersBean.dynComps[applicationScope.XSAConstants.ID_contNew]}" />
+					</span>
+				</c:if>
+			</td>
+			<ice:panelGroup renderedOnUserRole="ROLE_ATTRIBUTES_EDITOR">
+				<td valign="middle" class="Edit">
+						<ice:commandLink binding="#{xsaBindersBean.dynComps[applicationScope.XSAConstants.ID_contEditAttrsLink]}" />
+				</td>
+			</ice:panelGroup>
+			<c:if test="#{!empty xsaBindersBean.dynComps[applicationScope.XSAConstants.ID_contDel]}">
+			<td valign="middle" class="Delete">
+				<ice:commandLink binding="#{xsaBindersBean.dynComps[applicationScope.XSAConstants.ID_contDel]}" />
+			</td>
+			</c:if>
+			<td valign="middle">
+				<img align="right" src="images/Right-blue-corner.jpg" />
+			</td>
+		</tr>
+	</table>
+	<div class="clear"></div>
+
+
+	</div>
+	<div class="content"><ice:panelGroup
+		binding="#{xsaBindersBean.dynComps[applicationScope.XSAConstants.ID_contMsg]}" />
+	<ice:panelGroup
+		binding="#{xsaBindersBean.dynComps[applicationScope.XSAConstants.ID_contFields]}" />
+	</div>
+
+<div class="inner-lower-part" style="background-position: 50% 0">
+                       		<img align="left" src="images/LL-corner.jpg"/>
+                            <img align="right" src="images/LR-corner.jpg"/>    
+	</div>
+	</div>
+
+</ui:component>
