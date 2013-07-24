@@ -1,0 +1,204 @@
+<!--
+   Copyright 2013 Bibliotheca Alexandrina
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:c="http://java.sun.com/jstl/core">
+
+	<ice:panelGroup style="width:100%; " styleClass="album">
+		<ice:panelGroup rendered="#{!albumBBean.isAlbumLoaded}">
+			<div style="text-align: center; vertical-align: middle; color: white; height: 9999px; overflow: hidden;">
+				<p>No manuscript loaded</p>
+			</div>
+		</ice:panelGroup>
+		
+		<ice:panelGroup  style="position:relative; left: 0px; top: 0px;">
+			<div style="text-align: center; height: 45px; display: block; margin: 5px 0; overflow: auto">
+				
+				<ice:commandLink immediate="true" actionListener="#{albumBBean.selectImageIx}" disabled="#{albumBBean.selectedIx == 0}">
+					<img src="images/First-page.png" border="0" />
+					<f:attribute name="PARAM_SELECTIMAGE_IX" value="#{0}" />
+				</ice:commandLink>
+				
+				<ice:commandLink immediate="true" actionListener="#{albumBBean.selectImageIx}" disabled="#{albumBBean.selectedIx == 0}">
+					<img src="images/Previous-page.png" border="0" />
+					<f:attribute name="PARAM_SELECTIMAGE_IX" value="#{albumBBean.selectedIx - 1}" />
+				</ice:commandLink> 
+				
+				<ice:outputText value="#{albumBBean.selectedIx + 1} / #{albumBBean.imagesCount}" />
+
+				<ice:commandLink immediate="true" actionListener="#{albumBBean.selectImageIx}" disabled="#{albumBBean.selectedIx == albumBBean.imagesCount - 1}">
+					<img src="images/Next-page.png" border="0" />
+					<f:attribute name="PARAM_SELECTIMAGE_IX" value="#{albumBBean.selectedIx + 1}" />
+				</ice:commandLink> 
+				
+				<ice:commandLink immediate="true" disabled="#{albumBBean.selectedIx == albumBBean.imagesCount - 1}" actionListener="#{albumBBean.selectImageIx}">
+					<img src="images/Last-page.png" border="0" />
+					<f:attribute name="PARAM_SELECTIMAGE_IX" value="#{albumBBean.imagesCount - 1}" />
+				</ice:commandLink> 
+				
+				<br />
+				
+				<!--Zoom multiplier: <ice:inputText style="width:30px; color:black;" value="#{albumBBean.zoomMultiplier}" required="true"/>  -->
+				
+				<ice:commandLink immediate="true" actionListener="#{albumBBean.zoomIn}">
+					<img src="images/zoom-in.png" border="0" title="Zooming In" />
+				</ice:commandLink> 
+				
+				<ice:commandLink immediate="true" actionListener="#{albumBBean.zoomOut}">
+					<img src="images/zoom-out.png" border="0" title="Zooming Out" />
+				</ice:commandLink> 
+				
+				<a href="javascript:void;" onclick="; toggleSelectMode();">
+					<img src="images/zoom-select.png" style="margin-left: 5px" border="0" title="Zooming Selection" />
+				</a>
+				
+				<ice:commandLink immediate="true" actionListener="#{albumBBean.zoomReset}">
+					<img src="images/reset-zooming.png" border="0" title="Zooming Reset" />
+				</ice:commandLink>
+			 	
+			 	<img src="images/menu-separator.png" border="0" /> 
+			 	
+			 	<ice:commandLink immediate="true" actionListener="#{albumBBean.rotateClockwise}">
+					<img src="images/rotate-left.png" border="0" title="Rotating Left" />
+				</ice:commandLink> 
+				
+				<ice:commandLink immediate="true" actionListener="#{albumBBean.rotateAntiClockwise}">
+					<img src="images/rotate-right.png" title="Rotating Right" border="0" />
+				</ice:commandLink> <img src="images/menu-separator.png" border="0" /> <!--Panning delta: <ice:inputText style="width:30px; color:black;" value="#{albumBBean.panningDelta}" required="true"/>  -->
+			
+				<ice:commandLink immediate="true" actionListener="#{albumBBean.panRight}">
+					<img src="images/right.png" border="0" title="Moving Right" />
+				</ice:commandLink> 
+				
+				<ice:commandLink immediate="true" actionListener="#{albumBBean.panLeft}">
+					<img src="images/left.png" border="0" title="Moving Left" />
+				</ice:commandLink> 
+				
+				<ice:commandLink immediate="true" actionListener="#{albumBBean.panUp}">
+					<img src="images/move-up.png" border="0" title="Moving Up" />
+				</ice:commandLink> 
+				
+				<ice:commandLink immediate="true" actionListener="#{albumBBean.panDown}">
+					<img src="images/move-down.png" border="0" title="Moving Down" />
+				</ice:commandLink>
+				
+			</div>
+		</ice:panelGroup>
+
+		<ice:panelDivider binding="#{albumBBean.horDivider}" id="albumHorDivider" orientation="horizontal" dividerPosition="60" style="height: 100%; text-align:center; width:100%;border:none">
+			<f:facet name="first">
+			
+				<!-- The child needed for the panel divider facet "first" -->
+				<ice:panelGroup>
+
+					<!--  The album view pane whose width and height are reported -->
+					<ice:panelGroup id="albumViewPane" style="width:100%;height:100%;overflow-x:hidden;overflow-y:scroll;">
+						<ice:panelGroup style="position:relative; top:0px; left:0px; width:100%;"> 
+
+							<div id="selectionDraggable" onmousedown=" ; startSelection(event);" onmousemove="; doSelect(event);" 
+								style="display: none; background-color: transparent; z-index:25; cursor:pointer; position:absolute; top:0px; left:0px; width:100%; height:100%; ">
+
+								<div id="selectionMarker" style="display: none; position:absolute; z-index: 21; opacity: 0.3; background-color: #E7E8E9; width: 0px; height: 0px" />
+
+							</div>
+								
+									<ice:panelGroup dropTarget="true" id="imageDropTarget"
+										style="background-color: transparent; z-index:14; overflow:hidden; position:relative; top:0px; left:0px; width:100%;">
+
+<!--											onmousedown="; hideZoomedImage();" -->
+<!--											onmouseup= ";showZoomedImage(); "-->
+
+<!-- style below cursor:#{albumBBean.imageDraggableCursor}; causes top and left to act strange -->
+										<ice:panelGroup id="imageDraggable"
+											style="background-color: transparent; z-index:15; position:relative; top:0px; left:0px; width:100%;cursor:move;"
+											draggable="true"
+											dragMask="hover_start, dragging, hover_end, drag_cancel"
+											dragOptions="solid"
+											dragListener="#{albumBBean.imageDragListener}">
+
+											<ice:panelGroup id="zoomedImageHolder"
+												style="display:inline; z-index:13; position:relative; top:0px; left:0px; width:100%;">
+<!--												value="#{albumBBean.image.zoomedBytes}"-->
+												<ice:graphicImage binding="#{albumBBean.imageComp}" value="#{albumBBean.imageBytes}"
+													style="width:100%;" id="albumViewPaneZoomedRegion"/>
+											</ice:panelGroup>
+
+											<ice:graphicImage url="#{albumBBean.image.lowResLocalUrl}"
+												id="albumViewPaneFloatingBG"
+												style="z-index:12; position:absolute; top:0px; left:0px; width:100%; " />
+
+										</ice:panelGroup>
+										<div class="clear"></div>
+
+							</ice:panelGroup>
+						</ice:panelGroup>
+					</ice:panelGroup>
+				</ice:panelGroup>
+
+			</f:facet>
+
+
+			<f:facet name="second">
+				<ice:panelGroup styleClass="album">
+					<center>
+						<ice:panelGroup rendered="#{albumBBean.isAlbumLoaded}">
+							
+        					
+						<ul class="album" style="margin: 15px">
+						<!--  rows="20"-->
+							<ice:panelSeries  id="thumbsSeries" value="#{albumBBean.thumbnails}" var="thumb">
+								<li>
+									<div id="Active">
+										<ice:panelGroup rendered="#{thumb.name == albumBBean.image.name}" style=" background-color:#E7E8E9;border:1px solid #BAC1C7">
+											<ui:decorate template="albumThumbnail.xhtml" />
+										</ice:panelGroup>
+									</div>
+									
+									<ice:panelGroup rendered="#{thumb.name != albumBBean.image.name}" style="border:1px solid #1b1b1b">
+										<ui:decorate template="albumThumbnail.xhtml" />
+									</ice:panelGroup>
+								
+								</li>			
+							</ice:panelSeries> 
+						</ul>
+
+				
+				<br/>
+			
+				<div class="clear"></div>
+				
+			
+			</ice:panelGroup>
+		</center>
+				</ice:panelGroup>
+			</f:facet>
+		</ice:panelDivider>
+		<!--  IE behaves very bad regarding window resize, so we will observe it only here -->
+	<script type="text/javascript">
+		Event.observe(window, "resize", fitAlbumViewerToWindow);
+
+		// IE cannot handle the continuos calling of a JS
+		function frequentlyCorrectViewPaneDimsProblems() {
+			reportViewPaneDims();
+			frequentlyCorrectViewPaneDimsProblemsTimer = frequentlyCorrectViewPaneDimsProblems.delay(2.5);
+		}	
+	</script>
+	</ice:panelGroup>
+</ui:fragment>

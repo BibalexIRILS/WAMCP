@@ -1,0 +1,52 @@
+<!--
+   Copyright 2013 Bibliotheca Alexandrina
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faces-config
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd"
+    version="1.2">
+	<application>
+		<view-handler>com.icesoft.faces.facelets.D2DFaceletViewHandler</view-handler>
+</application>
+	<managed-bean>
+		<managed-bean-name>galleryBBean</managed-bean-name>
+		<managed-bean-class>org.bibalex.gallery.icefaces.GalleryBBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>albumBBean</property-name>
+			<property-class>org.bibalex.gallery.icefaces.AlbumBBean</property-class>
+			<value>#{albumBBean}</value>
+		</managed-property>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>albumBBean</managed-bean-name>
+		<managed-bean-class>org.bibalex.gallery.icefaces.AlbumBBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>imageBBean</property-name>
+			<property-class>org.bibalex.gallery.icefaces.ImageBBean</property-class>
+			<value>#{imageBBean}</value>
+		</managed-property>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>imageBBean</managed-bean-name>
+		<managed-bean-class>org.bibalex.gallery.icefaces.ImageBBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+</faces-config>

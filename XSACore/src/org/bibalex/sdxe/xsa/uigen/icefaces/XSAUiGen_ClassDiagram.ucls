@@ -1,0 +1,196 @@
+<class-diagram version="1.0.1" icons="true" automaticImage="PNG" always-add-relationships="true" generalizations="true" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
+  <class id="1" corner="BOTTOM_RIGHT" language="java" name="org.bibalex.sdxe.xsa.uigen.icefaces.XSAUiGenBuilder" 
+    project="XSACore" file="/XSACore/src/org/bibalex/sdxe/xsa/uigen/icefaces/XSAUiGenBuilder.java" binary="false">    
+    <position x="451" y="368" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="true" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="2" corner="BOTTOM_RIGHT" language="java" name="org.bibalex.sdxe.xsa.uigen.icefaces.XSAUiGenFactoryAbstract" 
+    project="XSACore" file="/XSACore/src/org/bibalex/sdxe/xsa/uigen/icefaces/XSAUiGenFactoryAbstract.java" 
+    binary="false">    
+    <position x="1018" y="261" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="true" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="3" corner="BOTTOM_RIGHT" language="java" 
+    name="org.bibalex.sdxe.xsa.uigen.icefaces.XSAUiGenFactoryAbstract.FaceletViewHandlerEmulator" project="XSACore" 
+    file="/XSACore/src/org/bibalex/sdxe/xsa/uigen/icefaces/XSAUiGenFactoryAbstract.java" binary="false">    
+    <position x="800" y="674" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="true" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="4" corner="BOTTOM_RIGHT" language="java" name="org.bibalex.sdxe.xsa.uigen.icefaces.XSAUiGenFactoryDefault" 
+    project="XSACore" file="/XSACore/src/org/bibalex/sdxe/xsa/uigen/icefaces/XSAUiGenFactoryDefault.java" binary="false">    
+    <position x="1150" y="868" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="true" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="5" corner="BOTTOM_RIGHT" language="java" name="org.bibalex.uigen.icefaces.DoNothingCompsDecorator" 
+    project="XSACore" file="/XSACore/src/org/bibalex/uigen/icefaces/DoNothingCompsDecorator.java" binary="false">    
+    <position x="1692" y="234" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="true" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="6" corner="BOTTOM_RIGHT" language="java" name="org.bibalex.uigen.icefaces.IceCompsFactory" 
+    project="XSACore" file="/XSACore/src/org/bibalex/uigen/icefaces/IceCompsFactory.java" binary="false">    
+    <position x="1700" y="1149" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="true" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="7" corner="BOTTOM_RIGHT" language="java" name="org.bibalex.sdxe.xsa.uigen.icefaces.XSAUiGenDomListener" 
+    project="XSACore" file="/XSACore/src/org/bibalex/sdxe/xsa/uigen/icefaces/XSAUiGenDomListener.java" binary="false">    
+    <position x="49" y="307" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="true" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="8" corner="BOTTOM_RIGHT" language="java" name="org.bibalex.sdxe.xsa.uigen.icefaces.XSACompsDecorator" 
+    project="XSACore" file="/XSACore/src/org/bibalex/sdxe/xsa/uigen/icefaces/XSACompsDecorator.java" binary="false">    
+    <position x="1695" y="624" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="true" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <interface id="9" corner="BOTTOM_RIGHT" language="java" name="org.bibalex.sdxe.xsa.uigen.icefaces.IXSAUiGenFactory" 
+    project="XSACore" file="/XSACore/src/org/bibalex/sdxe/xsa/uigen/icefaces/IXSAUiGenFactory.java" binary="false">    
+    <position x="995" y="-183" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="true" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <interface id="10" corner="BOTTOM_RIGHT" language="java" 
+    name="org.bibalex.sdxe.xsa.uigen.icefaces.IXSASugtnCompsDecoratorFactory" project="XSACore" 
+    file="/XSACore/src/org/bibalex/sdxe/xsa/uigen/icefaces/IXSASugtnCompsDecoratorFactory.java" binary="false">    
+    <position x="1374" y="-196" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="true" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <class id="11" corner="BOTTOM_RIGHT" language="java" name="org.bibalex.sdxe.xsa.uigen.icefaces.XSAUiBindersBean" 
+    project="XSACore" file="/XSACore/src/org/bibalex/sdxe/xsa/uigen/icefaces/XSAUiBindersBean.java" binary="false">    
+    <position x="156" y="1070" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="true" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <interface id="12" corner="BOTTOM_RIGHT" language="java" name="org.bibalex.uigen.icefaces.IIceCompsDecorator" 
+    project="XSACore" file="/XSACore/src/org/bibalex/uigen/icefaces/IIceCompsDecorator.java" binary="false">    
+    <position x="1700" y="-136" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="true" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <class id="13" corner="BOTTOM_RIGHT" language="java" name="org.bibalex.sdxe.xsa.binding.DomXPathRelToActiveBinder" 
+    project="XSACore" file="/XSACore/src/org/bibalex/sdxe/xsa/binding/DomXPathRelToActiveBinder.java" binary="false">    
+    <position x="609" y="1128" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="true" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="14" corner="BOTTOM_RIGHT" language="java" 
+    name="org.bibalex.sdxe.xsa.binding.DomXPathRelMixedContainerBinder" project="XSACore" 
+    file="/XSACore/src/org/bibalex/sdxe/xsa/binding/DomXPathRelMixedContainerBinder.java" binary="false">    
+    <position x="623" y="1326" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="true" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="15" corner="BOTTOM_RIGHT" language="java" name="com.sun.facelets.compiler.UIInstructionsCrucial" 
+    project="XSACore" file="/XSACore/src/com/sun/facelets/compiler/UIInstructionsCrucial.java" binary="false">    
+    <position x="1182" y="1208" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="true" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <association>    
+    <end type="SOURCE" nodeId="6" navigable="false">      
+      <attribute name="decorator"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association>    
+    <end type="SOURCE" nodeId="7" navigable="false">      
+      <attribute name="bindersBean"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization>    
+    <end type="SOURCE" nodeId="8"/>    
+    <end type="TARGET" nodeId="5"/>  
+  </generalization>  
+  <realization>    
+    <end type="SOURCE" nodeId="2"/>    
+    <end type="TARGET" nodeId="9"/>  
+  </realization>  
+  <nesting>    
+    <end type="SOURCE" nodeId="2"/>    
+    <end type="TARGET" nodeId="3"/>  
+  </nesting>  
+  <generalization>    
+    <end type="SOURCE" nodeId="4"/>    
+    <end type="TARGET" nodeId="2"/>  
+  </generalization>  
+  <association>    
+    <end type="SOURCE" nodeId="2" navigable="false">      
+      <attribute name="bindersBean"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association>    
+    <end type="SOURCE" nodeId="2" navigable="false">      
+      <attribute name="compsDecoratorFactory"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization>    
+    <end type="SOURCE" nodeId="5"/>    
+    <end type="TARGET" nodeId="12"/>  
+  </realization>  
+  <association>    
+    <end type="SOURCE" nodeId="1" navigable="false">      
+      <attribute name="uiFactory"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization>    
+    <end type="SOURCE" nodeId="14"/>    
+    <end type="TARGET" nodeId="13"/>  
+  </generalization>  
+  <classifier-display autosize="true" package="true" initial-value="true" signature="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true"/>    
+    <operations public="true" package="true" protected="true" private="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

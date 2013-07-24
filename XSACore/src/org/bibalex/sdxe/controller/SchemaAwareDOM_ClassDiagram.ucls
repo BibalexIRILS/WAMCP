@@ -1,0 +1,261 @@
+<class-diagram version="1.0.1" icons="true" automaticImage="PNG" always-add-relationships="true" generalizations="true" 
+  realizations="true" associations="true" dependencies="true" nesting-relationships="true">  
+  <class id="1" corner="BOTTOM_RIGHT" language="java" name="org.bibalex.sdxe.controller.DomTreeController" 
+    project="XSACore" file="/XSACore/src/org/bibalex/sdxe/controller/DomTreeController.java" binary="false">    
+    <position x="561" y="483" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="true" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <interface id="2" corner="BOTTOM_RIGHT" language="java" name="org.bibalex.sdxe.controller.IDomObserver" 
+    project="XSACore" file="/XSACore/src/org/bibalex/sdxe/controller/IDomObserver.java" binary="false">    
+    <position x="190" y="-259" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="true" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <class id="3" corner="BOTTOM_RIGHT" language="java" name="org.bibalex.sdxe.controller.SDXEMediator" project="XSACore" 
+    file="/XSACore/src/org/bibalex/sdxe/controller/SDXEMediator.java" binary="false">    
+    <position x="928" y="-141" width="279" height="371"/>    
+    <display autosize="true" package="true" initial-value="true" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="4" corner="BOTTOM_RIGHT" language="java" name="org.bibalex.sdxe.controller.SugtnTreeController" 
+    project="XSACore" file="/XSACore/src/org/bibalex/sdxe/controller/SugtnTreeController.java" binary="false">    
+    <position x="1511" y="-54" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="true" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <interface id="5" corner="BOTTOM_RIGHT" language="java" name="org.bibalex.sdxe.controller.ISugtnObserver" 
+    project="XSACore" file="/XSACore/src/org/bibalex/sdxe/controller/ISugtnObserver.java" binary="false">    
+    <position x="1928" y="-4" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="true" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <interface id="6" corner="BOTTOM_RIGHT" language="java" name="org.bibalex.sdxe.controller.ISugtnTreeStylingListener" 
+    project="XSACore" file="/XSACore/src/org/bibalex/sdxe/controller/ISugtnTreeStylingListener.java" binary="false">    
+    <position x="1881" y="-249" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="true" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <class id="7" corner="BOTTOM_RIGHT" language="java" name="org.bibalex.sdxe.controller.SugtnTreeContollerCache" 
+    project="XSACore" file="/XSACore/src/org/bibalex/sdxe/controller/SugtnTreeContollerCache.java" binary="false">    
+    <position x="1928" y="203" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="true" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="8" corner="BOTTOM_RIGHT" language="java" name="org.bibalex.sdxe.xml.DomBuildEnforceVisitor" 
+    project="XSACore" file="/XSACore/src/org/bibalex/sdxe/xml/DomBuildEnforceVisitor.java" binary="false">    
+    <position x="1072" y="1127" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="true" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="9" corner="BOTTOM_RIGHT" language="java" name="org.bibalex.sdxe.xml.DomBuildVisitor.PendingParticles" 
+    project="XSACore" file="/XSACore/src/org/bibalex/sdxe/xml/DomBuildVisitor.java" binary="false">    
+    <position x="1486" y="675" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="true" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="10" corner="BOTTOM_RIGHT" language="java" name="org.bibalex.sdxe.xml.DomBuildVisitor" project="XSACore" 
+    file="/XSACore/src/org/bibalex/sdxe/xml/DomBuildVisitor.java" binary="false">    
+    <position x="1070" y="524" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="true" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="11" corner="BOTTOM_RIGHT" language="java" name="org.bibalex.sdxe.binding.SDXEMediatorBean" 
+    project="XSACore" file="/XSACore/src/org/bibalex/sdxe/binding/SDXEMediatorBean.java" binary="false">    
+    <position x="1039" y="-307" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="true" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="12" corner="BOTTOM_RIGHT" language="java" name="org.bibalex.sdxe.binding.DomActiveAttrBinder" 
+    project="XSACore" file="/XSACore/src/org/bibalex/sdxe/binding/DomActiveAttrBinder.java" binary="false">    
+    <position x="151" y="56" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="true" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="13" corner="BOTTOM_RIGHT" language="java" name="org.bibalex.sdxe.binding.DomActiveTextBinder" 
+    project="XSACore" file="/XSACore/src/org/bibalex/sdxe/binding/DomActiveTextBinder.java" binary="false">    
+    <position x="200" y="-79" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="true" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="14" corner="BOTTOM_RIGHT" language="java" name="org.bibalex.sdxe.binding.DomValueBinder" project="XSACore" 
+    file="/XSACore/src/org/bibalex/sdxe/binding/DomValueBinder.java" binary="false">    
+    <position x="183" y="343" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="true" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <interface id="15" corner="BOTTOM_RIGHT" language="java" 
+    name="org.bibalex.sdxe.suggest.model.particle.ISugtnParticleNodeVisitor" project="XSACore" 
+    file="/XSACore/src/org/bibalex/sdxe/suggest/model/particle/ISugtnParticleNodeVisitor.java" binary="false">    
+    <position x="1569" y="979" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="true" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <interface id="16" corner="BOTTOM_RIGHT" language="java" name="org.bibalex.sdxe.suggest.model.ISugtnTreeNodeVisitor" 
+    project="XSACore" file="/XSACore/src/org/bibalex/sdxe/suggest/model/ISugtnTreeNodeVisitor.java" binary="false">    
+    <position x="1629" y="839" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="true" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <generalization>    
+    <end type="SOURCE" nodeId="13"/>    
+    <end type="TARGET" nodeId="14"/>  
+  </generalization>  
+  <dependency>    
+    <end type="SOURCE" nodeId="13"/>    
+    <end type="TARGET" nodeId="1"/>  
+  </dependency>  
+  <realization>    
+    <end type="SOURCE" nodeId="8"/>    
+    <end type="TARGET" nodeId="15"/>  
+  </realization>  
+  <dependency>    
+    <end type="SOURCE" nodeId="11"/>    
+    <end type="TARGET" nodeId="4"/>  
+  </dependency>  
+  <association>    
+    <end type="SOURCE" nodeId="1" navigable="false">      
+      <attribute name="domObservers"/>      
+      <multiplicity minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" nodeId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization>    
+    <end type="SOURCE" nodeId="11"/>    
+    <end type="TARGET" nodeId="3"/>  
+  </generalization>  
+  <dependency>    
+    <end type="SOURCE" nodeId="1"/>    
+    <end type="TARGET" nodeId="8"/>  
+  </dependency>  
+  <association>    
+    <end type="SOURCE" nodeId="10" navigable="false">      
+      <attribute name="comingElementPendingParticles"/>      
+      <multiplicity minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" nodeId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency>    
+    <end type="SOURCE" nodeId="12"/>    
+    <end type="TARGET" nodeId="1"/>  
+  </dependency>  
+  <association>    
+    <end type="SOURCE" nodeId="3" navigable="false">      
+      <attribute name="sugtnTreeController"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization>    
+    <end type="SOURCE" nodeId="12"/>    
+    <end type="TARGET" nodeId="14"/>  
+  </generalization>  
+  <association>    
+    <end type="SOURCE" nodeId="14" navigable="false">      
+      <attribute name="domTarget"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization>    
+    <end type="SOURCE" nodeId="10"/>    
+    <end type="TARGET" nodeId="15"/>  
+  </realization>  
+  <generalization>    
+    <end type="SOURCE" nodeId="15"/>    
+    <end type="TARGET" nodeId="16"/>  
+  </generalization>  
+  <nesting>    
+    <end type="SOURCE" nodeId="10"/>    
+    <end type="TARGET" nodeId="9"/>  
+  </nesting>  
+  <association>    
+    <end type="SOURCE" nodeId="4" navigable="false">      
+      <attribute name="stylingListener"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association>    
+    <end type="SOURCE" nodeId="3" navigable="false">      
+      <attribute name="domTreeController"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency>    
+    <end type="SOURCE" nodeId="7"/>    
+    <end type="TARGET" nodeId="4"/>  
+  </dependency>  
+  <association>    
+    <end type="SOURCE" nodeId="1" navigable="false">      
+      <attribute name="domBuildVisitor"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association>    
+    <end type="SOURCE" nodeId="4" navigable="false">      
+      <attribute name="observers"/>      
+      <multiplicity minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" nodeId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency>    
+    <end type="SOURCE" nodeId="3"/>    
+    <end type="TARGET" nodeId="2"/>  
+  </dependency>  
+  <dependency>    
+    <end type="SOURCE" nodeId="10"/>    
+    <end type="TARGET" nodeId="8"/>  
+  </dependency>  
+  <dependency>    
+    <end type="SOURCE" nodeId="11"/>    
+    <end type="TARGET" nodeId="1"/>  
+  </dependency>  
+  <classifier-display autosize="true" package="true" initial-value="true" signature="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true"/>    
+    <operations public="true" package="true" protected="true" private="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

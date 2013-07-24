@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.bibalex.org/xsa"
+	xmlns:xsa="http://www.bibalex.org/xsa" elementFormDefault="qualified">
+	<import namespace="http://www.w3.org/XML/1998/namespace"
+		schemaLocation="xml.xsd" />
+	<!--
+		doesn't work behind proxy: "http://www.w3.org/2001/03/xml.xsd"/>
+	-->
+
+	<!-- Simple Types -->
+	<simpleType name="TStandardNsUris">
+		<restriction base="anyURI">
+			<enumeration value="http://www.w3.org/XML/1998/namespace" />
+		</restriction>
+	</simpleType>
+
+	<simpleType name="TNsUri">
+		<union memberTypes="xsa:TStandardNsUris anyURI"></union>
+	</simpleType>
+
+	<simpleType name="TUiDivisionsenum">
+		<restriction base="token">
+			<enumeration value="field" />
+			<enumeration value="container" />			
+			<enumeration value="section" />
+			<enumeration value="area" />
+			<enumeration value="site" />
+		</restriction>
+	</simpleType>
+
+	<simpleType name="TUsersList">
+		<list itemType="xsa:TValidUserName" />
+	</simpleType>
+
+	<simpleType name="TValidUserName">
+		<restriction base="string"></restriction>
+	</simpleType>
+
+	<simpleType name="TLocatorString">
+		<restriction base="string"></restriction>
+	</simpleType>
+
+	<simpleType name="TValuesList">
+		<list itemType="anySimpleType" />
+	</simpleType>
+
+	<!-- Complex Types -->
+
+	<complexType name="instanceType">
+		<sequence minOccurs="0" maxOccurs="unbounded">
+			<element ref="xsa:ui" minOccurs="1" maxOccurs="1" />
+
+			<element ref="xsa:readAccess" minOccurs="0" maxOccurs="unbounded" />
+			<!--
+				TODOL minOccurs 1
+			-->
+
+			<element ref="xsa:writeAccess" minOccurs="0" maxOccurs="unbounded" />
+			<!--
+				TODOL minOccurs 1
+			-->
+
+			<element ref="xsa:responsible" minOccurs="0" maxOccurs="1" />
+			<!--
+				TODOL minOccurs 1
+			-->
+
+			<element ref="xsa:messages" minOccurs="0" maxOccurs="1" />
+
+			<element ref="xsa:attribute" minOccurs="0" maxOccurs="unbounded" />
+
+			<choice minOccurs="0" maxOccurs="1">
+
+				<element ref="xsa:defaultVal" minOccurs="0" maxOccurs="1" />
+
+<!--				<element ref="xsa:mixed" minOccurs="0" maxOccurs="1" />-->
+			</choice>
+			
+			<element ref="xsa:indexed"/> 
+			
+			<element ref="xsa:baseShift"/>
+		</sequence>
+		
+		<attribute ref="xml:id" />
+		<attribute name="under" type="IDREF"></attribute>
+		<attribute name="repeat" type="xsa:TYesNo" default="no"
+			use="optional" />
+		<attribute name="mixed" type="xsa:TYesNo" default="no" use="optional" />
+		<attribute name="mixedContLabel" type="string" default="Text" use="optional" />
+		<attribute name="authorityList" type="IDREF" use="optional" />
+		<attribute name="group" type="IDREF" use="optional" />
+		<attribute name="facs" type="xsa:TYesNo" use="optional" default="no" />
+	</complexType>
+	
+	<simpleType name="TYesNo">
+		<restriction base="token">
+			<enumeration value="yes" />
+			<enumeration value="no" />
+			<enumeration value="optional" />
+		</restriction>
+	</simpleType>
+
+	<complexType name="dataHolderType">
+		
+			
+
+				<sequence minOccurs="0" maxOccurs="unbounded">
+
+					<element ref="xsa:dataType" minOccurs="0" maxOccurs="1" />
+					<element ref="xsa:instance" minOccurs="0" maxOccurs="unbounded" />
+				</sequence>
+				<attribute name="locator" type="xsa:TLocatorString" />
+			
+		
+	</complexType>
+
+	<complexType name="messagesType">
+		<sequence minOccurs="0" maxOccurs="1">
+			<element ref="xsa:label" minOccurs="0" maxOccurs="1" />
+			<element ref="xsa:help" minOccurs="0" maxOccurs="1" />
+<!--			<element ref="xsa:invalid" minOccurs="0" maxOccurs="1" />-->
+<!--			<element ref="xsa:missing" minOccurs="0" maxOccurs="1" />-->
+		</sequence>
+		<attribute name="locale" type="token" default="en" />
+	</complexType>
+
+
+
+	<complexType name="annotatorType">
+		<complexContent>
+			<extension base="xsa:instanceType">
+			<attribute name="eltName" use="required" type="token"/>
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<!--
+		<complexType name="elementTypeAbstract" abstract="true"> <choice
+		minOccurs="1" maxOccurs="1"> <element ref="xsa:dataHolderProps" />
+		<element ref="xsa:annotatorProps" /> </choice> </complexType>
+	-->
+
+	<!-- Elements -->
+	<element name="groupDef">
+		<complexType>
+			<choice minOccurs="1" maxOccurs="unbounded">
+				<element ref="xsa:messages" />
+			</choice>
+			<attribute ref="xml:id" use="required" />
+			<attribute name="ixInUi" use="optional" type="decimal" />
+			<attribute name="decorate" use="optional" type="xsa:TYesNo" default="no"/>
+			
+		</complexType>
+	</element>
+
+
+	<element name="readAccess" type="xsa:TUsersList" />
+
+	<element name="writeAccess" type="xsa:TUsersList" />
+
+	<element name="responsible">
+		<complexType>
+			<simpleContent>
+
+				<extension base="xsa:TValidUserName">
+					<attribute name="required" type="boolean" use="required" />
+				</extension>
+
+			</simpleContent>
+		</complexType>
+	</element>
+
+	<element name="label" type="string" />
+	<element name="help" type="string" />
+<!--	<element name="invalid" type="string" />-->
+<!--	<element name="missing" type="string" />-->
+
+	<element name="messages" type="xsa:messagesType" />
+
+	<element name="attribute">
+		<complexType>
+			<attribute name="name" type="Name" use="required" />
+			<attribute name="nsuri" type="xsa:TNsUri" use="required" />
+			<attribute name="value" type="string" use="required" />
+		</complexType>
+	</element>
+
+	<element name="defaultVal" type="string" />
+
+<!--	<element name="mixed">-->
+<!--		<complexType mixed="true">-->
+<!---->
+<!--			<simpleContent>-->
+<!--				<extension base="string"></extension>-->
+<!--			</simpleContent>-->
+<!---->
+<!--		</complexType>-->
+<!--	</element>-->
+
+	<element name="ui" type="xsa:TUiDivisionsenum" />
+
+	<element name="authListDef">
+		<complexType>
+			<simpleContent>
+				<extension base="string"> <!-- "xsa:TValuesList"> -->
+					<attribute ref="xml:id" use="required" />
+					<attribute name="grows" type="boolean" default="true"
+						use="optional" />
+				</extension>
+			</simpleContent>
+		</complexType>
+	</element>
+
+	<element name="instance" type="xsa:instanceType" />
+
+	<element name="dataType">
+		<complexType>
+			<simpleContent>
+				<extension base="string">
+					<attribute name="list" type="boolean" default="true" />
+				</extension>
+			</simpleContent>
+		</complexType>
+	</element>
+
+	<element name="dataHolder" type="xsa:dataHolderType" />
+
+	<element name="annotator" type="xsa:annotatorType" />
+	
+	<element name="indexed" >
+	<complexType>
+	<simpleContent>
+	<extension base="token">
+	<attribute name="summary" type="xsa:TYesNo"/>
+	<attribute name="key" type="xsa:TYesNo"/>
+	</extension>
+	</simpleContent>
+	</complexType>
+	</element>
+	
+	<element name="baseShift">
+		<complexType>
+		<simpleContent>
+		<extension base="anySimpleType">
+		<attribute name="pattern" use="required" type="string"/>
+		</extension>
+		</simpleContent>
+		</complexType>
+	</element>
+<!--	minOccurs="0" maxOccurs="1" -->
+	 
+<!--	<element name="ref" type="xsa:TLocatorString" />-->
+
+	<!--
+		<element name="element"> <complexType> <complexContent> <extension
+		base="xsa:elementTypeAbstract"> <attribute name="locator"
+		type="xsa:TLocatorString" use="required"></attribute> </extension>
+		</complexContent> </complexType> </element> <attribute name="locator"
+		type="xsa:TLocatorString" use="required"></attribute>
+	-->
+
+	<!-- Document -->
+	
+	<element name="xsa">
+		<complexType>
+			<sequence minOccurs="0" maxOccurs="unbounded">
+				<element ref="xsa:authListDef" minOccurs="0" maxOccurs="unbounded"></element>
+				<element ref="xsa:annotator" minOccurs="0" maxOccurs="unbounded" />
+				<element ref="xsa:dataHolder" minOccurs="0" maxOccurs="unbounded" />
+				<element ref="xsa:groupDef" minOccurs="0" maxOccurs="unbounded" />
+			</sequence>
+		</complexType>
+	</element>
+</schema>
